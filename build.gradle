@@ -1,8 +1,7 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'dev.architectury.loom' version '0.7.2-SNAPSHOT'
 }
 
-apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.0/ferry.gradle'
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
@@ -68,14 +67,7 @@ dependencies {
 	// Loads the Terrestria asset pack and data pack.
 	includeFabricApiModule "fabric-resource-loader-v0"
 
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-overworld-biome-extensions-api-v1:${project.terraform_overworld_biome_extensions_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+	modImplementaton ("com.github.Reforged-Mods.Terraform-Reforged:terraform:9a44204cbc")
 }
 
 repositories {

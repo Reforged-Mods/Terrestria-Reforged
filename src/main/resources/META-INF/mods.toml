@@ -1,0 +1,31 @@
+modLoader="javafml"
+license="LGPLv3"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/Trinsdar/Terrestria-Reforged/issues"
+
+[[mods]]
+modId="terrestria"
+version="${version}"
+displayName="Terrestria Reforged"
+displayURL="https://github.com/Trinsdar/Terrestria-Reforged"
+credits="TerraformersMC for creating the fabric version"
+authors="Trinsdar, coderbot16, NeusFear, TerraformersMC"
+description='''A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.'''
+[[dependencies.cinderscapes]]
+modId="forge"
+mandatory=true
+versionRange="[36.1.0,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.cinderscapes]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.5,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.cinderscapes]]
+modId="terraform"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"

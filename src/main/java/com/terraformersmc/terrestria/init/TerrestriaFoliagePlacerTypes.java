@@ -8,7 +8,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class TerrestriaFoliagePlacerTypes {
+	public static Map<Identifier, FoliagePlacerType<?>> FOILAGE_PLACER_TYPES = new LinkedHashMap<>();
 
 	public static FoliagePlacerType<CanopyFoliagePlacer> CANOPY;
 	public static FoliagePlacerType<DotShrubPlacer> DOT_SHRUB;
@@ -35,7 +39,9 @@ public class TerrestriaFoliagePlacerTypes {
 	}
 
 	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, Codec<P> codec) {
-		return PlacerTypes.registerFoliagePlacer(new Identifier(Terrestria.MOD_ID, name), codec);
+		FoliagePlacerType<P> type = new FoliagePlacerType<P>(codec);
+		FOILAGE_PLACER_TYPES.put(new Identifier(Terrestria.MOD_ID, name), type);
+		return type;
 	}
 
 }

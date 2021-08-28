@@ -31,14 +31,20 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.apache.commons.lang3.tuple.Triple;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaBlocks {
+	public static List<BurnWrapper> BURN_VALUES = new ArrayList<>();
+
 	public static QuarteredWoodBlocks REDWOOD;
 	public static QuarteredWoodBlocks HEMLOCK;
 	public static WoodBlocks RUBBER;
@@ -110,24 +116,23 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_ALOE_VERA;
 
 	public static void init() {
-		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
 
-		REDWOOD = QuarteredWoodBlocks.register("redwood", WoodColors.REDWOOD, flammable, true);
-		HEMLOCK = QuarteredWoodBlocks.register("hemlock", WoodColors.HEMLOCK, flammable, true);
-		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER, flammable);
-		CYPRESS = QuarteredWoodBlocks.register("cypress", WoodColors.CYPRESS, flammable);
-		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW, flammable);
-		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
-		RAINBOW_EUCALYPTUS = QuarteredWoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
-		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
-		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, flammable, WoodBlocks.LogSize.SMALL);
+		REDWOOD = QuarteredWoodBlocks.register("redwood", WoodColors.REDWOOD, true);
+		HEMLOCK = QuarteredWoodBlocks.register("hemlock", WoodColors.HEMLOCK, true);
+		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER);
+		CYPRESS = QuarteredWoodBlocks.register("cypress", WoodColors.CYPRESS);
+		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW);
+		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE);
+		RAINBOW_EUCALYPTUS = QuarteredWoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS);
+		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, WoodBlocks.LogSize.SMALL);
+		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, WoodBlocks.LogSize.SMALL);
 
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
 		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
 		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SaguaroCactusBlock(null, FabricBlockSettings.copyOf(Blocks.CACTUS)));
 
-		flammable.add(SMALL_OAK_LOG, 5, 5);
-		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
+		add(SMALL_OAK_LOG, 5, 5);
+		add(STRIPPED_SMALL_OAK_LOG, 5, 5);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).breakByTool(FabricToolTags.HOES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
@@ -139,10 +144,10 @@ public class TerrestriaBlocks {
 
 		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.025f, 0.1f).noCollision().sounds(BlockSoundGroup.GRASS).materialColor(MaterialColor.FOLIAGE).breakByTool(FabricToolTags.HOES)));
 
-		flammable.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
-		flammable.add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
-		flammable.add(JUNGLE_PALM_LEAVES, 30, 60);
-		flammable.add(SAKURA_LEAF_PILE, 30, 60);
+		add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
+		add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
+		add(JUNGLE_PALM_LEAVES, 30, 60);
+		add(SAKURA_LEAF_PILE, 30, 60);
 
 		TALL_CATTAIL = TerrestriaRegistry.register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
 		CATTAIL = TerrestriaRegistry.register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
@@ -214,5 +219,31 @@ public class TerrestriaBlocks {
 	}
 	public static Boolean canSpawnOnLeaves(BlockState state, BlockView world, BlockPos pos, EntityType<?> type) {
 		return type == EntityType.OCELOT || type == EntityType.PARROT;
+	}
+
+	public static void add(Block block, int burn, int spread){
+		BURN_VALUES.add(new BurnWrapper(block, burn, spread));
+	}
+
+	public static class BurnWrapper {
+		private final Block block;
+		private final int burn, spread;
+		public BurnWrapper(Block block, int burn, int spread){
+			this.block = block;
+			this.burn = burn;
+			this.spread = spread;
+		}
+
+		public Block getBlock() {
+			return block;
+		}
+
+		public int getBurn() {
+			return burn;
+		}
+
+		public int getSpread() {
+			return spread;
+		}
 	}
 }

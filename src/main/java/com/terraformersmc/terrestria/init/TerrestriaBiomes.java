@@ -10,8 +10,14 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraftforge.common.BiomeDictionary;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TerrestriaBiomes {
+	public static Map<Identifier, Biome> BIOMES = new LinkedHashMap<>();
+
 	public static RegistryKey<Biome> CALDERA;
 	public static RegistryKey<Biome> CALDERA_BEACH;
 	public static RegistryKey<Biome> CALDERA_FOOTHILLS;
@@ -87,11 +93,13 @@ public class TerrestriaBiomes {
 		OutbackBiomes.register();
 	}
 
-	public static RegistryKey<Biome> register(String name, Biome biome) {
+	public static RegistryKey<Biome> register(String name, Biome biome, BiomeDictionary.Type... types) {
 		Identifier identifier = new Identifier(Terrestria.MOD_ID, name);
 
-		BuiltinRegistries.add(BuiltinRegistries.BIOME, identifier, biome);
+		RegistryKey<Biome> key = RegistryKey.of(Registry.BIOME_KEY, identifier);
+		BiomeDictionary.addTypes(key, types);
+		BIOMES.put(identifier, biome);
 
-		return RegistryKey.of(Registry.BIOME_KEY, identifier);
+		return key;
 	}
 }

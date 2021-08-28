@@ -11,8 +11,11 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.tree.TreeDecorator;
 import net.minecraft.world.gen.tree.TreeDecoratorType;
 
-public class TerrestriaTreeDecorators {
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+public class TerrestriaTreeDecorators {
+	public static Map<Identifier, TreeDecoratorType<?>> TREE_DECORATOR_TYPES = new LinkedHashMap<>();
 	public static TreeDecoratorType<DanglingLeavesTreeDecorator> DANGLING_LEAVES;
 	public static TreeDecoratorType<SakuraTreeDecorator> SAKURA;
 
@@ -22,6 +25,8 @@ public class TerrestriaTreeDecorators {
 	}
 
 	private static <P extends TreeDecorator> TreeDecoratorType<P> register(String name, Codec<P> codec) {
-		return Registry.register(Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, name), TreeDecoratorTypeAccessor.createTreeDecoratorType(codec));
+		TreeDecoratorType<P> type = new TreeDecoratorType<>(codec);
+		TREE_DECORATOR_TYPES.put(new Identifier(Terrestria.MOD_ID, name), type);
+		return type;
 	}
 }

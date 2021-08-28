@@ -12,14 +12,17 @@ import com.terraformersmc.terrestria.surface.ThreeLayerOutlineSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.ThreeLayerOutlinedSurfaceConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 // This class exports public surface constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaSurfaces {
+	public static Map<Identifier, SurfaceBuilder<?>> SURFACE_BUILDERS = new LinkedHashMap<>();
 	public static ThreeLayerOutlineSurfaceBuilder THREE_LAYER_OUTLINE;
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
@@ -116,6 +119,7 @@ public class TerrestriaSurfaces {
 	}
 
 	public static <T extends SurfaceBuilder<SC>, SC extends SurfaceConfig> T register(String name, T surface) {
-		return Registry.register(Registry.SURFACE_BUILDER, new Identifier(Terrestria.MOD_ID, name), surface);
+		SURFACE_BUILDERS.put(new Identifier(Terrestria.MOD_ID, name), surface);
+		return surface;
 	}
 }

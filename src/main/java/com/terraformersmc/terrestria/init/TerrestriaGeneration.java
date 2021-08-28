@@ -13,6 +13,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraftforge.common.BiomeManager;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 

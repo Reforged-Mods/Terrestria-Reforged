@@ -12,7 +12,12 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 public class TerrestriaEntities {
+	public static Map<Identifier, EntityType<?>> ENTITIES = new LinkedHashMap<>();
 	public static EntityType<TerraformBoatEntity> REDWOOD_BOAT;
 	public static EntityType<TerraformBoatEntity> HEMLOCK_BOAT;
 	public static EntityType<TerraformBoatEntity> RUBBER_BOAT;
@@ -43,7 +48,7 @@ public class TerrestriaEntities {
 			SpawnGroup.MISC, (entity, world) -> new TerraformBoatEntity(entity, world, boat))
 			.dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
 			.build();
-
-		return Registry.register(Registry.ENTITY_TYPE, new Identifier(Terrestria.MOD_ID, name + "_boat"), type);
+		ENTITIES.put(new Identifier(Terrestria.MOD_ID, name + "_boat"), type);
+		return type;
 	}
 }

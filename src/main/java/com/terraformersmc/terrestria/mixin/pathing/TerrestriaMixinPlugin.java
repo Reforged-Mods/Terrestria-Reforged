@@ -3,11 +3,11 @@ package com.terraformersmc.terrestria.mixin.pathing;
 import java.util.List;
 import java.util.Set;
 
+import net.minecraftforge.fml.ModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import net.fabricmc.loader.api.FabricLoader;
 
 public class TerrestriaMixinPlugin implements IMixinConfigPlugin {
 	@Override
@@ -23,7 +23,7 @@ public class TerrestriaMixinPlugin implements IMixinConfigPlugin {
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
 		// If Lithium is loaded, disable our pathing mixin
-		if (FabricLoader.getInstance().isModLoaded("lithium") && mixinClassName.contains("LandPathNodeMaker")) {
+		if (ModList.get().isLoaded("lithium") && mixinClassName.contains("LandPathNodeMaker")) {
 			return false;
 		}
 

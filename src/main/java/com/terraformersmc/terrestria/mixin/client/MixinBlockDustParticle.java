@@ -1,6 +1,8 @@
 package com.terraformersmc.terrestria.mixin.client;
 
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,11 +15,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.BlockDustParticle;
 import net.minecraft.util.math.BlockPos;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 @Mixin(BlockDustParticle.class)
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class MixinBlockDustParticle {
 	@Shadow
 	@Final

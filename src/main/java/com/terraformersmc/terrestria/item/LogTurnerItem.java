@@ -2,8 +2,6 @@ package com.terraformersmc.terrestria.item;
 
 import com.terraformersmc.terraform.wood.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.client.item.TooltipContext;
@@ -18,6 +16,8 @@ import net.minecraft.util.Language;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class LogTurnerItem extends Item {
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
 

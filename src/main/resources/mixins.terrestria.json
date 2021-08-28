@@ -3,10 +3,13 @@
   "package": "com.terraformersmc.terrestria.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractBlockAccessor",
+    "AbstractBlockSettingsAccessor",
     "MixinDefaultBiomeCreator",
     "MixinFluidBlock",
     "MixinSugarCaneBlock",
-    "TreeDecoratorTypeAccessor"
+    "TreeDecoratorTypeAccessor",
+    "VillagerTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

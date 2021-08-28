@@ -53,7 +53,7 @@ public class TerrestriaRegistry {
 		return block;
 	}
 
-	static AbstractBlock.Settings copy(Block block, MaterialColor color){
+	public static AbstractBlock.Settings copy(Block block, MaterialColor color){
 		AbstractBlock.Settings setting = AbstractBlock.Settings.of(block.getDefaultState().getMaterial(), color);
 		AbstractBlockSettingsAccessor thisAccessor = (AbstractBlockSettingsAccessor) setting;
 		AbstractBlockSettingsAccessor otherAccessor = (AbstractBlockSettingsAccessor) ((AbstractBlockAccessor)block).getSettings();

@@ -15,7 +15,7 @@ dependencies {
 	forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 	// === Passive modules: While we don't use the public APIs of these modules (if any), they provide important ===
 	// === functions just by being loaded in the first place. ===
-
+	modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:d40e6ec1d1") //d7bc649383
 	modImplementation ("com.github.Reforged-Mods.Terraform-Reforged:terraform:9a44204cbc")
 }
 

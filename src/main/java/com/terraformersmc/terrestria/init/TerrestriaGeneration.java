@@ -14,6 +14,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
@@ -120,7 +121,7 @@ public class TerrestriaGeneration {
 		if (OUTBACK != null) {
 			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK_ULURU, 1);
 			OverworldBiomesExt.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
-				Biome.Category category = BuiltinRegistries.BIOME.get(b).getCategory();
+				Biome.Category category = ForgeRegistries.BIOMES.getValue(b.getValue()).getCategory();
 				return category != Biome.Category.DESERT && category != Biome.Category.SAVANNA && category != Biome.Category.PLAINS && category != Biome.Category.MESA;
 			});
 		}

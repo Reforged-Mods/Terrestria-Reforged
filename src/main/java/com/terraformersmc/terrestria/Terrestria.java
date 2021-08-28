@@ -1,8 +1,11 @@
 package com.terraformersmc.terrestria;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
+import com.terraformersmc.terrestria.feature.StructureBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
@@ -19,6 +22,8 @@ import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import com.terraformersmc.terrestria.init.TerrestriaVillagerTypes;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
+import com.terraformersmc.terrestria.mixin.StructureFeatureAccessor;
+import com.terraformersmc.terrestria.mixin.StructuresConfigAccesor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
@@ -27,7 +32,10 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.chunk.StructureConfig;
+import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.tree.TreeDecoratorType;
@@ -72,9 +80,7 @@ public class Terrestria {
 			}
 		};
 		biomeConfigHandler = new BiomeConfigHandler(MOD_ID);
-		BiomeConfig config = biomeConfigHandler.getBiomeConfig();
 
-		Set<String> enabledBiomes = new HashSet<>();
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();
 		TerrestriaEntities.init();
@@ -87,10 +93,7 @@ public class Terrestria {
 		TerrestriaStructures.init();
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
-		TerrestriaGeneration.init(config, enabledBiomes);
 		TerrestriaVillagerTypes.init();
-
-		biomeConfigHandler.save();
 
 		TerrestriaRegistry.ITEMS.put(new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(itemGroup)));
 	}
@@ -101,6 +104,19 @@ public class Terrestria {
 	}
 
 	private void setup(final FMLCommonSetupEvent e) {
+		BiomeConfig config = biomeConfigHandler.getBiomeConfig();
+		Set<String> enabledBiomes = new HashSet<>();
+		TerrestriaGeneration.init(config, enabledBiomes);
+		biomeConfigHandler.save();
+		StructuresConfigAccesor.setDefaults(
+				ImmutableMap.<StructureFeature<?>, StructureConfig>builder()
+				.putAll(StructuresConfig.DEFAULT_STRUCTURES)
+				.putAll(StructureBuilder.STRUCTURE_TO_CONFIG_MAP)
+				.build());
+		StructureFeatureAccessor.setSurfaceAdjustingStructures(ImmutableList.<StructureFeature<?>>builder()
+				.addAll(StructureFeature.JIGSAW_STRUCTURES)
+				.addAll(StructureBuilder.ADJUSTS_SURFACE_LIST)
+				.build());
 	}
 
 	private static final TerrestriaConfigManager CONFIG_MANAGER = new TerrestriaConfigManager();
@@ -114,6 +130,15 @@ public class Terrestria {
 		if (event.getRegistry() == ForgeRegistries.FEATURES){
 			for (Identifier id : TerrestriaFeatures.FEATURES.keySet()){
 				Feature<?> feature = TerrestriaFeatures.FEATURES.get(id);
+				if (feature.getRegistryName() == null){
+					feature.setRegistryName(id);
+				}
+				((IForgeRegistry)event.getRegistry()).register(feature);
+			}
+		}
+		if (event.getRegistry() == ForgeRegistries.STRUCTURE_FEATURES){
+			for (Identifier id : StructureBuilder.STRUCTURE_FEATURES.keySet()){
+				StructureFeature<?> feature = StructureBuilder.STRUCTURE_FEATURES.get(id);
 				if (feature.getRegistryName() == null){
 					feature.setRegistryName(id);
 				}

@@ -5,10 +5,12 @@
   "mixins": [
     "AbstractBlockAccessor",
     "AbstractBlockSettingsAccessor",
+    "FlatChunkGeneratorConfigAccessor",
     "MixinDefaultBiomeCreator",
     "MixinFluidBlock",
     "MixinSugarCaneBlock",
-    "TreeDecoratorTypeAccessor",
+    "StructureFeatureAccessor",
+    "StructuresConfigAccessor",
     "VillagerTypeAccessor"
   ],
   "injectors": {

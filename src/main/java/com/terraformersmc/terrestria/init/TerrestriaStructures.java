@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.feature.StructureBuilder;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoFeatureConfig;
@@ -14,12 +15,11 @@ import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.chunk.StructureConfig;
+import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-
-import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 
 public class TerrestriaStructures {
 
@@ -65,7 +65,9 @@ public class TerrestriaStructures {
 	private static <FC extends FeatureConfig, F extends StructureFeature<FC>> ConfiguredStructureFeature<FC, F> registerStructure(String id, ConfiguredStructureFeature<FC, F> configured, int spacing, int separation) {
 		Identifier identifier = new Identifier(Terrestria.MOD_ID, id);
 
-		FabricStructureBuilder
+		StructuresConfig.DEFAULT_STRUCTURES.size();
+
+		StructureBuilder
 				.create(identifier, configured.feature)
 				.step(GenerationStep.Feature.SURFACE_STRUCTURES)
 				.defaultConfig(new StructureConfig(spacing, separation, 21345))

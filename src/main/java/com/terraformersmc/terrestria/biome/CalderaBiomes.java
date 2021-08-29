@@ -11,6 +11,8 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -39,7 +41,7 @@ public class CalderaBiomes {
 				.scale(0.05F)
 				.temperature(0.7F)
 				.downfall(0.7F)
-				.build());
+				.build(), Type.OVERWORLD, Type.WATER, Type.MOUNTAIN);
 
 		TerrestriaBiomes.CALDERA_BEACH = TerrestriaBiomes.register("caldera_beach", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.CALDERA, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
@@ -48,7 +50,7 @@ public class CalderaBiomes {
 				.scale(0F)
 				.temperature(0.7F)
 				.downfall(0.7F)
-				.build());
+				.build(), Type.OVERWORLD, Type.BEACH, Type.MOUNTAIN);
 
 		TerrestriaBiomes.CALDERA_FOOTHILLS = TerrestriaBiomes.register("caldera_foothills", template.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.MOUNTAIN, SurfaceBuilder.GRASS_CONFIG)
@@ -65,7 +67,7 @@ public class CalderaBiomes {
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_REDWOOD_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_HEMLOCK_TREES)
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
-				.build());
+				.build(), Type.OVERWORLD, Type.HILLS, Type.COLD);
 
 		TerrestriaBiomes.CALDERA_RIDGE = TerrestriaBiomes.register("caldera_ridge", template.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
@@ -80,6 +82,6 @@ public class CalderaBiomes {
 				)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_REDWOOD_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_HEMLOCK_TREES)
-				.build());
+				.build(), Type.OVERWORLD, Type.MOUNTAIN, Type.COLD);
 	}
 }

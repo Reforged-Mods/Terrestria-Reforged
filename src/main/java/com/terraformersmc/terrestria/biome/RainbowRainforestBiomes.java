@@ -10,6 +10,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -42,16 +43,16 @@ public class RainbowRainforestBiomes {
 				.depth(0.4F)
 				.scale(0.4F)
 				.playerSpawnFriendly()
-				.build());
+				.build(), BiomeDictionary.Type.HOT, BiomeDictionary.Type.WET, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.OVERWORLD);
 
 		TerrestriaBiomes.RAINBOW_RAINFOREST_MOUNTAINS = TerrestriaBiomes.register("rainbow_rainforest_mountains", template.builder()
 				.depth(1.0F)
 				.scale(0.5F)
-				.build());
+				.build(), BiomeDictionary.Type.HOT, BiomeDictionary.Type.WET, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.RARE, BiomeDictionary.Type.OVERWORLD);
 
 		TerrestriaBiomes.RAINBOW_RAINFOREST_LAKE = TerrestriaBiomes.register("rainbow_rainforest_lake", template.builder()
 				.depth(-0.2F)
 				.scale(0.0F)
-				.build());
+				.build(), BiomeDictionary.Type.HOT, BiomeDictionary.Type.WET, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.WATER, BiomeDictionary.Type.OVERWORLD);
 	}
 }

@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
@@ -14,6 +15,7 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -43,11 +45,11 @@ public class SakuraForestBiomes {
 		TerrestriaBiomes.SAKURA_FOREST = TerrestriaBiomes.register("sakura_forest", template.builder()
 				.depth(0.05F)
 				.scale(0.1F)
-				.build());
+				.build(), BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
 
 		TerrestriaBiomes.WOODED_SAKURA_HILLS = TerrestriaBiomes.register("wooded_sakura_hills", template.builder()
 				.depth(0.4F)
 				.scale(0.3F)
-				.build());
+				.build(), BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.OVERWORLD);
 	}
 }

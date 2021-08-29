@@ -10,6 +10,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -42,11 +43,11 @@ public class JapaneseMapleForestBiomes {
 		TerrestriaBiomes.JAPANESE_MAPLE_FOREST = TerrestriaBiomes.register("japanese_maple_forest", template.builder()
 				.depth(0.05F)
 				.scale(0.2F)
-				.build());
+				.build(), BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
 
 		TerrestriaBiomes.WOODED_JAPANESE_MAPLE_HILLS = TerrestriaBiomes.register("wooded_japanese_maple_hills", template.builder()
 				.depth(0.45F)
 				.scale(0.5F)
-				.build());
+				.build(), BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.OVERWORLD);
 	}
 }

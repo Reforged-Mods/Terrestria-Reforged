@@ -10,6 +10,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -38,11 +39,11 @@ public class CypressForestBiomes {
 				.depth(0.1F)
 				.scale(0.2F)
 				.playerSpawnFriendly()
-				.build());
+				.build(), BiomeDictionary.Type.FOREST, BiomeDictionary.Type.OVERWORLD);
 
 		TerrestriaBiomes.WOODED_CYPRESS_HILLS = TerrestriaBiomes.register("wooded_cypress_hills", template.builder()
 				.depth(0.45F)
 				.scale(0.3F)
-				.build());
+				.build(), BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.OVERWORLD);
 	}
 }

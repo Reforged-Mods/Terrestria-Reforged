@@ -11,6 +11,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -45,7 +46,7 @@ public class CypressSwampBiomes {
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4))
-				.build());
+				.build(), BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.WET, BiomeDictionary.Type.OVERWORLD);
 
 		TerraformSlimeSpawnBiomes.addSlimeSpawnBiome(TerrestriaBiomes.CYPRESS_SWAMP);
 	}

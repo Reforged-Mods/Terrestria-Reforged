@@ -9,6 +9,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -42,7 +44,7 @@ public class VolcanicIslandBiomes {
 				.scale(0.2F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSER_JUNGLE_PALM_TREES)
 				.addStructureFeature(TerrestriaStructures.VOLCANO)
-				.build());
+				.build(), Type.HOT, Type.SPARSE, Type.MOUNTAIN, Type.LUSH, Type.OVERWORLD);
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", template.builder()
 				.depth(0.05F)
@@ -50,7 +52,7 @@ public class VolcanicIslandBiomes {
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_DUM_DUM_HEADS)
 				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
-				.build());
+				.build(), Type.HOT, Type.SPARSE, Type.BEACH, Type.LUSH, Type.OVERWORLD);
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_BEACH, TerrestriaSurfaces.BASALT_CONFIG)
@@ -58,6 +60,6 @@ public class VolcanicIslandBiomes {
 				.scale(0.05F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
 				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
-				.build());
+				.build(), Type.HOT, Type.SPARSE, Type.BEACH, Type.LUSH, Type.OVERWORLD);
 	}
 }

@@ -11,6 +11,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
@@ -35,13 +37,13 @@ public class DunesBiomes {
 		TerrestriaBiomes.DUNES = TerrestriaBiomes.register("dunes", template.builder()
 			.depth(0.3F)
 			.scale(0.0F)
-			.build()
+			.build(), Type.OVERWORLD, Type.DRY, Type.HOT, Type.SANDY, Type.HILLS
 		);
 
 		TerrestriaBiomes.DUNES_EDGE = TerrestriaBiomes.register("dunes_edge", template.builder()
 			.depth(-1F)
 			.scale(0.0F)
-			.build()
+			.build(), Type.OVERWORLD, Type.DRY, Type.HOT, Type.SANDY, Type.HILLS, Type.RARE
 		);
 	}
 }

@@ -12,6 +12,8 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
@@ -52,7 +54,7 @@ public class LushDesertBiomes {
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_LUSH_DESERT_VEGETATION)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_YUCCA_PALM_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SAGUARO_CACTUSES)
-				.build()
+				.build(), Type.WET, Type.SANDY, Type.HOT, Type.OVERWORLD
 		);
 
 		TerrestriaBiomes.OASIS = TerrestriaBiomes.register("oasis", template.builder()
@@ -61,7 +63,7 @@ public class LushDesertBiomes {
 				.scale(0.07F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_OASIS_VEGETATION)
-				.build()
+				.build(), Type.WET, Type.SANDY, Type.HOT, Type.WATER, Type.OVERWORLD
 		);
 	}
 }

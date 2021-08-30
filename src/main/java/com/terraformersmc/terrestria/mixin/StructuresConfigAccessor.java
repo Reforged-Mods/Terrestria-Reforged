@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(StructuresConfig.class)
-public interface StructuresConfigAccesor {
+public interface StructuresConfigAccessor {
 
 	@Accessor("DEFAULT_STRUCTURES")
 	static void setDefaults(ImmutableMap<StructureFeature<?>, StructureConfig> newMap) {

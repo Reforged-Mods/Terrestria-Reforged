@@ -5,9 +5,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.terraformersmc.terrestria.Terrestria;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.loader.api.FabricLoader;
 
+import net.minecraft.resource.FileResourcePackProvider;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -24,7 +27,7 @@ public class TerrestriaConfigManager {
 	private static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
 	public TerrestriaConfigManager() {
-		Path configDirectory = FabricLoader.getInstance().getConfigDir().resolve(Terrestria.MOD_ID);
+		Path configDirectory = new File(".", "config/terrestria").toPath();
 
 		try {
 			Files.createDirectories(configDirectory);
@@ -32,7 +35,7 @@ public class TerrestriaConfigManager {
 			Terrestria.LOGGER.error("Failed to create config directory at " + configDirectory, e);
 		}
 
-		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+		if (FMLEnvironment.dist.isClient()) {
 			clientConfigPath = configDirectory.resolve("client.json");
 			clientConfigBackupPath = configDirectory.resolve("client-invalid-syntax.json");
 		} else {
@@ -114,7 +117,7 @@ public class TerrestriaConfigManager {
 	}
 
 	public TerrestriaClientConfig getClientConfig() {
-		if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) {
+		if (FMLEnvironment.dist.isDedicatedServer()) {
 			throw new UnsupportedOperationException("Cannot get the Terrestria client configuration when not on the client.");
 		}
 

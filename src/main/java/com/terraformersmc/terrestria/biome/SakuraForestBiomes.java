@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;

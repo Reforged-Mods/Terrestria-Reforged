@@ -4,7 +4,6 @@ import com.terraformersmc.terraform.boat.TerraformBoat;
 import com.terraformersmc.terraform.boat.TerraformBoatEntity;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -44,10 +43,10 @@ public class TerrestriaEntities {
 		Identifier skin = new Identifier(Terrestria.MOD_ID, "textures/entity/boat/" + name + ".png");
 		TerraformBoat boat = new TerraformBoat(wood.boat, wood.planks, skin, vanilla);
 
-		EntityType<TerraformBoatEntity> type = FabricEntityTypeBuilder.<TerraformBoatEntity>create(
-			SpawnGroup.MISC, (entity, world) -> new TerraformBoatEntity(entity, world, boat))
-			.dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
-			.build();
+		EntityType<TerraformBoatEntity> type = EntityType.Builder.<TerraformBoatEntity>create(
+				(entity, world) -> new TerraformBoatEntity(entity, world, boat), SpawnGroup.MISC)
+			.setDimensions(1.375F, 0.5625F)
+			.build(new Identifier(Terrestria.MOD_ID, name + "_boat").toString());
 		ENTITIES.put(new Identifier(Terrestria.MOD_ID, name + "_boat"), type);
 		return type;
 	}

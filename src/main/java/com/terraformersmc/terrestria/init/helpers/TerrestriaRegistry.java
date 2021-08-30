@@ -64,7 +64,6 @@ public class TerrestriaRegistry {
 		((AbstractBlockSettingsAccessor) setting).setCollidable(otherAccessor.getCollidable());
 		thisAccessor.setRandomTicks(otherAccessor.getRandomTicks());
 		setting.luminance(otherAccessor.getLuminance());
-		thisAccessor.setMaterialColorFactory(otherAccessor.getMaterialColorFactory());
 		setting.sounds(otherAccessor.getSoundGroup());
 		setting.slipperiness(otherAccessor.getSlipperiness());
 		setting.velocityMultiplier(otherAccessor.getVelocityMultiplier());

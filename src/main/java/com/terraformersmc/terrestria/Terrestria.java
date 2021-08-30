@@ -23,7 +23,7 @@ import com.terraformersmc.terrestria.init.TerrestriaVillagerTypes;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
 import com.terraformersmc.terrestria.mixin.StructureFeatureAccessor;
-import com.terraformersmc.terrestria.mixin.StructuresConfigAccesor;
+import com.terraformersmc.terrestria.mixin.StructuresConfigAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
@@ -108,7 +108,7 @@ public class Terrestria {
 		Set<String> enabledBiomes = new HashSet<>();
 		TerrestriaGeneration.init(config, enabledBiomes);
 		biomeConfigHandler.save();
-		StructuresConfigAccesor.setDefaults(
+		StructuresConfigAccessor.setDefaults(
 				ImmutableMap.<StructureFeature<?>, StructureConfig>builder()
 				.putAll(StructuresConfig.DEFAULT_STRUCTURES)
 				.putAll(StructureBuilder.STRUCTURE_TO_CONFIG_MAP)

@@ -89,6 +89,18 @@ public class ProxyClient implements IProxy {
 				TerrestriaItems.ANDISOL_GRASS_BLOCK
 		);
 
+		addSigns(
+				TerrestriaBlocks.REDWOOD.sign,
+				TerrestriaBlocks.HEMLOCK.sign,
+				TerrestriaBlocks.RUBBER.sign,
+				TerrestriaBlocks.CYPRESS.sign,
+				TerrestriaBlocks.WILLOW.sign,
+				TerrestriaBlocks.JAPANESE_MAPLE.sign,
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.sign,
+				TerrestriaBlocks.SAKURA.sign,
+				TerrestriaBlocks.YUCCA_PALM.sign
+		);
+
 	}
 
 	public static void setup(FMLClientSetupEvent event) {
@@ -168,20 +180,6 @@ public class ProxyClient implements IProxy {
 				TerrestriaBlocks.POTTED_TINY_CACTUS,
 				TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING,
 				TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING
-		);
-
-
-
-		addSigns(
-				TerrestriaBlocks.REDWOOD.sign,
-				TerrestriaBlocks.HEMLOCK.sign,
-				TerrestriaBlocks.RUBBER.sign,
-				TerrestriaBlocks.CYPRESS.sign,
-				TerrestriaBlocks.WILLOW.sign,
-				TerrestriaBlocks.JAPANESE_MAPLE.sign,
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.sign,
-				TerrestriaBlocks.SAKURA.sign,
-				TerrestriaBlocks.YUCCA_PALM.sign
 		);
 
 		//RenderLayers.setRenderLayer(TerrestriaItems.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());

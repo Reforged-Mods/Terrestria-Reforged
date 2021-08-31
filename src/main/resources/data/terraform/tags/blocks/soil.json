@@ -1,7 +1,7 @@
 {
   "values": [
-    "terrestria:basalt_dirt",
-    "terrestria:basalt_grass_block",
-    "terrestria:basalt_podzol"
+    "terrestria:andisol_dirt",
+    "terrestria:andisol_grass_block",
+    "terrestria:andisol_podzol"
   ]
 }

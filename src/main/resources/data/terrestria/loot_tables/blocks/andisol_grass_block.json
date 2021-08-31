@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "terrestria:basalt_grass_block"
+              "name": "terrestria:andisol_grass_block"
             },
             {
               "type": "minecraft:item",
@@ -33,7 +33,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "terrestria:basalt_dirt"
+              "name": "terrestria:andisol_dirt"
             }
           ]
         }

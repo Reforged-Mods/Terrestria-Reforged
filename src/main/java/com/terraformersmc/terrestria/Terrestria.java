@@ -24,6 +24,9 @@ import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
 import com.terraformersmc.terrestria.mixin.StructureFeatureAccessor;
 import com.terraformersmc.terrestria.mixin.StructuresConfigAccessor;
+import com.terraformersmc.terrestria.proxy.IProxy;
+import com.terraformersmc.terrestria.proxy.ProxyClient;
+import com.terraformersmc.terrestria.proxy.ProxyCommon;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
@@ -44,6 +47,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -62,14 +66,14 @@ public class Terrestria {
 	public static ItemGroup itemGroup;
 	public static BiomeConfigHandler biomeConfigHandler;
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+	IProxy PROXY;
 	public Terrestria(){
 		// Load the general config if it hasn't been loaded already
 		CONFIG_MANAGER.getGeneralConfig();
+		PROXY = DistExecutor.runForDist(() -> ProxyClient::new, () -> ProxyCommon::new); // todo: scheduled to change in new Forge
 
 
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		eventBus.addListener(TerrestriaClient::onItemColorHandler);
-		eventBus.addListener(TerrestriaClient::onBlockColorHandler);
 		eventBus.addListener(this::setup);
 		eventBus.addListener(this::clientSetup);
 		eventBus.register(this);
@@ -94,13 +98,14 @@ public class Terrestria {
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
+		PROXY.onConstruction();
 
 		TerrestriaRegistry.ITEMS.put(new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(itemGroup)));
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	private void clientSetup(final FMLClientSetupEvent e){
-		TerrestriaClient.onInitializeClient(e);
+		ProxyClient.setup(e);
 	}
 
 	private void setup(final FMLCommonSetupEvent e) {

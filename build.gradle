@@ -16,7 +16,9 @@ dependencies {
 	// === Passive modules: While we don't use the public APIs of these modules (if any), they provide important ===
 	// === functions just by being loaded in the first place. ===
 	modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:f33e5b") //d7bc649383
-	modImplementation ("com.github.Reforged-Mods.Terraform-Reforged:terraform:065740adcd")
+	modImplementation ("com.github.Reforged-Mods.Terraform-Reforged:terraform:158551e7aa")
+	modCompileOnly("curse.maven:traverse-reforged-267769:3157857")
+	//modRuntime ("curse.maven:traverse-reforged-267769:3157857")
 }
 
 repositories {
@@ -36,6 +38,12 @@ repositories {
 	maven {
 		name = 'TerraformersMC'
 		url = 'https://maven.terraformersmc.com/'
+	}
+	maven {
+		url = "https://www.cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
 	}
 	maven { url 'https://jitpack.io' }
 }

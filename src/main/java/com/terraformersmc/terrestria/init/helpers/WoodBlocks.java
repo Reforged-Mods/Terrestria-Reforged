@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init.helpers;
 
 import com.terraformersmc.terraform.leaves.block.TransparentLeavesBlock;
+import com.terraformersmc.terraform.utils.TerraformUtils;
 import com.terraformersmc.terraform.wood.block.*;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
@@ -40,25 +41,25 @@ public class WoodBlocks {
 			if (size.equals(LogSize.SMALL)) {
 				throw new IllegalArgumentException("Small log trees are not compatible with extended leaves, I'm not sure how you even did this...");
 			}
-			blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new TerrestriaOptiLeavesBlock(TerrestriaRegistry.copy(Blocks.OAK_LEAVES, colors.leaves).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+			blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new TerrestriaOptiLeavesBlock(TerraformUtils.copy(Blocks.OAK_LEAVES, colors.leaves).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 		} else {
 			if (size.equals(LogSize.SMALL)) {
-				blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new TransparentLeavesBlock(TerrestriaRegistry.copy(Blocks.OAK_LEAVES, colors.leaves).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+				blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new TransparentLeavesBlock(TerraformUtils.copy(Blocks.OAK_LEAVES, colors.leaves).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 			} else {
-				blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new LeavesBlock(TerrestriaRegistry.copy(Blocks.OAK_LEAVES, colors.leaves).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+				blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new LeavesBlock(TerraformUtils.copy(Blocks.OAK_LEAVES, colors.leaves).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 			}
 		}
 
 		if (size.equals(LogSize.SMALL)) {
-			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, TerrestriaRegistry.copy(Blocks.OAK_LOG, colors.planks)));
+			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, TerraformUtils.copy(Blocks.OAK_LOG, colors.planks)));
 			blocks.strippedWood = blocks.strippedLog; //No need for a stripped wood type
-			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, TerrestriaRegistry.copy(Blocks.OAK_LOG, colors.bark)));
+			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, TerraformUtils.copy(Blocks.OAK_LOG, colors.bark)));
 			blocks.wood = blocks.log; //No need for a stripped wood type
 		} else {
-			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new PillarBlock(TerrestriaRegistry.copy(Blocks.OAK_LOG, colors.planks)));
-			blocks.strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", new PillarBlock(TerrestriaRegistry.copy(Blocks.OAK_LOG, colors.planks)));
-			blocks.log = TerrestriaRegistry.register(name + "_log", new StrippableLogBlock(() -> blocks.strippedLog, colors.planks, TerrestriaRegistry.copy(Blocks.OAK_LOG, colors.bark)));
-			blocks.wood = TerrestriaRegistry.register(name + "_wood", new StrippableLogBlock(() -> blocks.strippedWood, colors.bark, TerrestriaRegistry.copy(Blocks.OAK_LOG, colors.bark)));
+			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new PillarBlock(TerraformUtils.copy(Blocks.OAK_LOG, colors.planks)));
+			blocks.strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", new PillarBlock(TerraformUtils.copy(Blocks.OAK_LOG, colors.planks)));
+			blocks.log = TerrestriaRegistry.register(name + "_log", new StrippableLogBlock(() -> blocks.strippedLog, colors.planks, TerraformUtils.copy(Blocks.OAK_LOG, colors.bark)));
+			blocks.wood = TerrestriaRegistry.register(name + "_wood", new StrippableLogBlock(() -> blocks.strippedWood, colors.bark, TerraformUtils.copy(Blocks.OAK_LOG, colors.bark)));
 		}
 
 		blocks.addTreeFireInfo();
@@ -79,20 +80,20 @@ public class WoodBlocks {
 		blocks.name = name;
 		blocks.colors = colors;
 
-		blocks.planks = TerrestriaRegistry.register(name + "_planks", new Block(TerrestriaRegistry.copy(Blocks.OAK_PLANKS, colors.planks)));
-		blocks.slab = TerrestriaRegistry.register(name + "_slab", new SlabBlock(TerrestriaRegistry.copy(Blocks.OAK_SLAB, colors.planks)));
-		blocks.stairs = TerrestriaRegistry.register(name + "_stairs", new TerraformStairsBlock(blocks.planks, TerrestriaRegistry.copy(Blocks.OAK_STAIRS, colors.planks)));
-		blocks.fence = TerrestriaRegistry.register(name + "_fence", new FenceBlock(TerrestriaRegistry.copy(Blocks.OAK_FENCE, colors.planks)));
-		blocks.fenceGate = TerrestriaRegistry.register(name + "_fence_gate", new FenceGateBlock(TerrestriaRegistry.copy(Blocks.OAK_FENCE_GATE, colors.planks)));
-		blocks.door = TerrestriaRegistry.register(name + "_door", new TerraformDoorBlock(TerrestriaRegistry.copy(Blocks.OAK_DOOR, colors.planks)));
-		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformButtonBlock(TerrestriaRegistry.copy(Blocks.OAK_BUTTON, colors.planks)));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(TerrestriaRegistry.copy(Blocks.OAK_PRESSURE_PLATE, colors.planks)));
-		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TerraformTrapdoorBlock(TerrestriaRegistry.copy(Blocks.OAK_TRAPDOOR, colors.planks)));
+		blocks.planks = TerrestriaRegistry.register(name + "_planks", new Block(TerraformUtils.copy(Blocks.OAK_PLANKS, colors.planks)));
+		blocks.slab = TerrestriaRegistry.register(name + "_slab", new SlabBlock(TerraformUtils.copy(Blocks.OAK_SLAB, colors.planks)));
+		blocks.stairs = TerrestriaRegistry.register(name + "_stairs", new TerraformStairsBlock(blocks.planks, TerraformUtils.copy(Blocks.OAK_STAIRS, colors.planks)));
+		blocks.fence = TerrestriaRegistry.register(name + "_fence", new FenceBlock(TerraformUtils.copy(Blocks.OAK_FENCE, colors.planks)));
+		blocks.fenceGate = TerrestriaRegistry.register(name + "_fence_gate", new FenceGateBlock(TerraformUtils.copy(Blocks.OAK_FENCE_GATE, colors.planks)));
+		blocks.door = TerrestriaRegistry.register(name + "_door", new TerraformDoorBlock(TerraformUtils.copy(Blocks.OAK_DOOR, colors.planks)));
+		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformButtonBlock(TerraformUtils.copy(Blocks.OAK_BUTTON, colors.planks)));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(TerraformUtils.copy(Blocks.OAK_PRESSURE_PLATE, colors.planks)));
+		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TerraformTrapdoorBlock(TerraformUtils.copy(Blocks.OAK_TRAPDOOR, colors.planks)));
 
 		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "entity/signs/" + name);
 
-		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, TerrestriaRegistry.copy(Blocks.OAK_SIGN, colors.planks)));
-		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, TerrestriaRegistry.copy(Blocks.OAK_WALL_SIGN, colors.planks)));
+		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, TerraformUtils.copy(Blocks.OAK_SIGN, colors.planks)));
+		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, TerraformUtils.copy(Blocks.OAK_WALL_SIGN, colors.planks)));
 
 		blocks.addManufacturedFireInfo();
 

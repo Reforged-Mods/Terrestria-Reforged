@@ -1,8 +1,8 @@
 {
   "parent": "block/template_farmland",
   "textures": {
-    "particle": "terrestria:block/basalt_dirt",
-    "dirt": "terrestria:block/basalt_dirt",
+    "particle": "terrestria:block/andisol_dirt",
+    "dirt": "terrestria:block/andisol_dirt",
     "top": "terrestria:block/andisol_farmland_moist"
   }
 }

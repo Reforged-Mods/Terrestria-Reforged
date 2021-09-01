@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terraform.utils.TerraformUtils;
 import com.terraformersmc.terraform.wood.block.TerraformPressurePlateBlock;
 import com.terraformersmc.terraform.wood.block.TerraformStoneButtonBlock;
 import net.minecraft.block.Block;
@@ -33,10 +34,10 @@ public class StoneBlocks {
 		blocks.bricks = StoneVariantBlocks.register(name + "_bricks", name + "_brick", color);
 		blocks.mossyBricks = StoneVariantBlocks.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", color);
 
-		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformStoneButtonBlock(TerrestriaRegistry.copy(Blocks.STONE, color)));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, TerrestriaRegistry.copy(Blocks.STONE, color)));
-		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(TerrestriaRegistry.copy(Blocks.STONE, color)));
-		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(TerrestriaRegistry.copy(Blocks.STONE, color)));
+		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformStoneButtonBlock(TerraformUtils.copy(Blocks.STONE, color)));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, TerraformUtils.copy(Blocks.STONE, color)));
+		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(TerraformUtils.copy(Blocks.STONE, color)));
+		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(TerraformUtils.copy(Blocks.STONE, color)));
 
 		return blocks;
 	}

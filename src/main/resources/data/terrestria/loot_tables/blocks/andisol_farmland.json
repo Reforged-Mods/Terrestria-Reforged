@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terrestria:basalt_dirt"
+          "name": "terrestria:andisol_dirt"
         }
       ],
       "conditions": [

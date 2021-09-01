@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terraform.utils.TerraformUtils;
 import com.terraformersmc.terraform.wood.block.TerraformStairsBlock;
 import net.minecraft.block.*;
 
@@ -18,10 +19,10 @@ public class StoneVariantBlocks {
 	public static StoneVariantBlocks register(String name, String shapedName, MaterialColor color) {
 		StoneVariantBlocks blocks = new StoneVariantBlocks();
 
-		blocks.full = TerrestriaRegistry.register(name, new Block(TerrestriaRegistry.copy(Blocks.COBBLESTONE, color)));
-		blocks.slab = TerrestriaRegistry.register(shapedName + "_slab", new SlabBlock(TerrestriaRegistry.copy(Blocks.COBBLESTONE_STAIRS, color)));
-		blocks.stairs = TerrestriaRegistry.register(shapedName + "_stairs", new TerraformStairsBlock(blocks.full, TerrestriaRegistry.copy(Blocks.COBBLESTONE_STAIRS, color)));
-		blocks.wall = TerrestriaRegistry.register(shapedName + "_wall", new WallBlock(TerrestriaRegistry.copy(Blocks.COBBLESTONE_WALL, color)));
+		blocks.full = TerrestriaRegistry.register(name, new Block(TerraformUtils.copy(Blocks.COBBLESTONE, color)));
+		blocks.slab = TerrestriaRegistry.register(shapedName + "_slab", new SlabBlock(TerraformUtils.copy(Blocks.COBBLESTONE_STAIRS, color)));
+		blocks.stairs = TerrestriaRegistry.register(shapedName + "_stairs", new TerraformStairsBlock(blocks.full, TerraformUtils.copy(Blocks.COBBLESTONE_STAIRS, color)));
+		blocks.wall = TerrestriaRegistry.register(shapedName + "_wall", new WallBlock(TerraformUtils.copy(Blocks.COBBLESTONE_WALL, color)));
 
 		return blocks;
 	}

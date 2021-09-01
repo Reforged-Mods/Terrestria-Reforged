@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
+import com.terraformersmc.terraform.utils.TerraformUtils;
 import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.leaves.block.LeafPileBlock;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
@@ -135,7 +136,7 @@ public class TerrestriaBlocks {
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(Settings.copy(Blocks.OAK_LEAVES).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves",
-				new LeavesBlock(TerrestriaRegistry.copy(Blocks.OAK_LEAVES, MaterialColor.RED_TERRACOTTA).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never))
+				new LeavesBlock(TerraformUtils.copy(Blocks.OAK_LEAVES, MaterialColor.RED_TERRACOTTA).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never))
 		);
 
 		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", new LeavesBlock(Settings.copy(Blocks.OAK_LEAVES).harvestTool(ToolType.HOE).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
@@ -170,15 +171,15 @@ public class TerrestriaBlocks {
 
 		// Volcanic Island Blocks
 
-		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, TerrestriaRegistry.copy(Blocks.SAND, MaterialColor.BLACK).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
+		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, TerraformUtils.copy(Blocks.SAND, MaterialColor.BLACK).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
 
-		Block andisolDirt = TerrestriaRegistry.register("andisol_dirt", new Block(TerrestriaRegistry.copy(Blocks.DIRT, MaterialColor.BLACK).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
+		Block andisolDirt = TerrestriaRegistry.register("andisol_dirt", new Block(TerraformUtils.copy(Blocks.DIRT, MaterialColor.BLACK).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
 		ANDISOL = TerraformDirtRegistry.register(new DirtBlocks (
 			andisolDirt,
 			TerrestriaRegistry.register("andisol_grass_block", new BasaltGrassBlock(andisolDirt, () -> ANDISOL.getGrassPath(), Settings.copy(Blocks.GRASS_BLOCK).harvestTool(ToolType.SHOVEL).harvestLevel(0))),
 			TerrestriaRegistry.register("andisol_grass_path", new TerraformGrassPathBlock(andisolDirt, Settings.copy(Blocks.GRASS_PATH).harvestTool(ToolType.SHOVEL).harvestLevel(0))),
 			TerrestriaRegistry.register("andisol_podzol", new TerraformSnowyBlock(Settings.copy(Blocks.PODZOL).harvestTool(ToolType.SHOVEL).harvestLevel(0))),
-			TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(TerrestriaRegistry.copy(Blocks.FARMLAND, MaterialColor.BLACK).harvestTool(ToolType.SHOVEL).harvestLevel(0)))
+			TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(TerraformUtils.copy(Blocks.FARMLAND, MaterialColor.BLACK).harvestTool(ToolType.SHOVEL).harvestLevel(0)))
 		));
 		VOLCANIC_ROCK = StoneBlocks.register("basalt", MaterialColor.BLACK);
 

@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terraform.leaves.ComposterRecipes;
+import com.terraformersmc.terrestria.compat.TerraforgedCompat;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.StructureBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
@@ -50,6 +51,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -125,6 +127,9 @@ public class Terrestria {
 				.addAll(StructureBuilder.ADJUSTS_SURFACE_LIST)
 				.build());
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(TerrestriaBlocks.SAGUARO_CACTUS, 0.25F);
+		if (ModList.get().isLoaded("terraforged")){
+			TerraforgedCompat.initBiomesAdd();
+		}
 	}
 
 	private static final TerrestriaConfigManager CONFIG_MANAGER = new TerrestriaConfigManager();

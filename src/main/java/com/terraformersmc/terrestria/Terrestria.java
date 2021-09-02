@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
+import com.terraformersmc.terraform.leaves.ComposterRecipes;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.StructureBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
@@ -28,6 +29,7 @@ import com.terraformersmc.terrestria.proxy.IProxy;
 import com.terraformersmc.terrestria.proxy.ProxyClient;
 import com.terraformersmc.terrestria.proxy.ProxyCommon;
 import net.minecraft.block.Block;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -122,6 +124,7 @@ public class Terrestria {
 				.addAll(StructureFeature.JIGSAW_STRUCTURES)
 				.addAll(StructureBuilder.ADJUSTS_SURFACE_LIST)
 				.build());
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(TerrestriaBlocks.SAGUARO_CACTUS, 0.25F);
 	}
 
 	private static final TerrestriaConfigManager CONFIG_MANAGER = new TerrestriaConfigManager();

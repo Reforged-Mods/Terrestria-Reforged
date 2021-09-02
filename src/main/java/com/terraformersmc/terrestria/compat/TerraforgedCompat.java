@@ -21,10 +21,10 @@ public class TerraforgedCompat {
 		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "savanna_scrub")), OverworldClimate.TEMPERATE, 2);
 		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "shattered_savanna_scrub")), OverworldClimate.TEMPERATE, 0.4);
 		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "snowy_fir_forest")), OverworldClimate.SNOWY, 1);
-		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "snowy_tiaga_scrub")), OverworldClimate.SNOWY, 1);
+		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "snowy_taiga_scrub")), OverworldClimate.SNOWY, 1);
 		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "steppe")), OverworldClimate.TEMPERATE, 0.4);
 		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "stone_forest")), OverworldClimate.TEMPERATE, 0.4);
-		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "tiaga_scrub")), OverworldClimate.COOL, 1);
+		OverworldBiomes.addContinentalBiome(RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "taiga_scrub")), OverworldClimate.COOL, 1);
 		OverworldBiomes.addBiomeVariant(BiomeKeys.BEACH, RegistryKey.of(Registry.BIOME_KEY, new Identifier("terraforged", "warm_beach")), 0.33, OverworldClimate.TEMPERATE);
 	}
 }

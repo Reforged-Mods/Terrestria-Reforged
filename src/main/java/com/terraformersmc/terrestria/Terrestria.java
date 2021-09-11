@@ -106,7 +106,7 @@ public class Terrestria {
 
 		TerrestriaRegistry.ITEMS.put(new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(itemGroup)));
 	}
-	
+
 	private void clientSetup(final FMLClientSetupEvent e){
 		ProxyClient.setup(e);
 	}

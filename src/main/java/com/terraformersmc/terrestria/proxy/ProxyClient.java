@@ -109,6 +109,10 @@ public class ProxyClient implements IProxy {
 
 
 
+		addArrayToLayer(GRASS_BLOCK_LAYER,
+				TerrestriaBlocks.ANDISOL.getGrassBlock(),
+				TerrestriaBlocks.ANDISOL.getGrassPath(),
+				TerrestriaBlocks.ANDISOL.getPodzol());
 
 		RenderLayers.setRenderLayer(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
 
@@ -208,7 +212,6 @@ public class ProxyClient implements IProxy {
 	}
 
 	private static void addColoredGrass(Block grass) {
-		RenderLayers.setRenderLayer(grass, GRASS_BLOCK_LAYER);
 		COLOR_PROVIDERS.put(grass, GRASS_BLOCK_COLORS);
 	}
 

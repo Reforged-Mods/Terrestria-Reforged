@@ -16,5 +16,6 @@
   },
   "client": [
     "client.MixinBlockDustParticle"
-  ]
+  ],
+  "minVersion": "0.8"
 }

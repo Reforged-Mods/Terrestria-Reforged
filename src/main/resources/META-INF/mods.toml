@@ -11,19 +11,19 @@ displayURL="https://github.com/Trinsdar/Terrestria-Reforged"
 credits="TerraformersMC for creating the fabric version"
 authors="Trinsdar, coderbot16, NeusFear, TerraformersMC"
 description='''A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.'''
-[[dependencies.cinderscapes]]
+[[dependencies.terrestria]]
 modId="forge"
 mandatory=true
 versionRange="[36.1.0,)"
 ordering="AFTER"
 side="BOTH"
-[[dependencies.cinderscapes]]
+[[dependencies.terrestria]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.16.5,)"
 ordering="AFTER"
 side="BOTH"
-[[dependencies.cinderscapes]]
+[[dependencies.terrestria]]
 modId="terraform"
 mandatory=true
 versionRange="[1.0.0,)"

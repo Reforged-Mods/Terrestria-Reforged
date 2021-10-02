@@ -29,3 +29,9 @@ mandatory=true
 versionRange="[1.0.0,)"
 ordering="AFTER"
 side="BOTH"
+[[dependencies.terrestria]]
+modId="fabric-biome-api"
+mandatory=true
+versionRange="[1.0.5,)"
+ordering="AFTER"
+side="BOTH"

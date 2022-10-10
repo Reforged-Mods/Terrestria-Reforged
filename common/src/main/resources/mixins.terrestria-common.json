@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.terraformersmc.terrestria.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "FlatChunkGeneratorConfigAccessor",
+    "MixinDefaultBiomeCreator",
+    "MixinFluidBlock",
+    "MixinSlimeEntity",
+    "MixinSugarCaneBlock",
+    "MixinWaterCreatureEntity",
+    "TreeDecoratorTypeAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

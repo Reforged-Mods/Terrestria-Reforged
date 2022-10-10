@@ -1,0 +1,8 @@
+archivesBaseName = "terrestria-client"
+
+loom {
+}
+
+dependencies {
+	implementation project(path: ':common')
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "terrestria-common",
+  "version": "${version}",
+  "name": "Terrestria: Common",
+  "license": "LGPL-3.0-only",
+  "icon": "assets/terrestria/icon.png",
+  "environment": "*",
+  "mixins": [
+    "mixins.terrestria-common.json",
+    "mixins.terrestria-common.pathing.json",
+    "mixins.terrestria-common.bugfix.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.terraformersmc.terrestria.Terrestria"
+    ],
+    "terraform-biome-remapper": [
+      "com.terraformersmc.terrestria.init.helpers.TerrestriaBiomeRemappings"
+    ],
+    "fabric-datagen": [
+      "com.terraformersmc.terrestria.data.TerrestriaDatagen"
+    ]
+  },
+  "custom": {
+    "extrapieces:piecepack": "extrapieces.terrestria.json",
+    "modmenu": {
+      "parent": "terrestria"
+    }
+  }
+}

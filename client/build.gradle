@@ -1,6 +1,9 @@
 archivesBaseName = "terrestria-client"
 
 loom {
+	forge {
+		mixinConfigs = ["mixins.terrestria-client.json"]
+	}
 }
 
 dependencies {

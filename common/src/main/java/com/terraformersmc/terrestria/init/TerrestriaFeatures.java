@@ -13,6 +13,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,7 +21,6 @@ import java.util.Map;
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
-	public static Map<Identifier, Feature<?>> FEATURES = new LinkedHashMap<>();
 
 	public static CattailFeature CATTAIL;
 	public static Feature<DefaultFeatureConfig> DUM_DUM_HEAD;
@@ -36,7 +36,7 @@ public class TerrestriaFeatures {
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
-		FEATURES.put(new Identifier(Terrestria.MOD_ID, name), feature);
+		ForgeRegistries.FEATURES.register(feature.setRegistryName(new Identifier(Terrestria.MOD_ID, name)));
 		return feature;
 	}
 }

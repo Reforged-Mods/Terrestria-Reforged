@@ -1,18 +1,17 @@
 package com.terraformersmc.terrestria.init;
 
 import com.mojang.serialization.Codec;
-import com.terraformersmc.terraform.tree.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TerrestriaFoliagePlacerTypes {
-	public static Map<Identifier, FoliagePlacerType<?>> FOILAGE_PLACER_TYPES = new LinkedHashMap<>();
 
 	public static FoliagePlacerType<CanopyFoliagePlacer> CANOPY;
 	public static FoliagePlacerType<DotShrubPlacer> DOT_SHRUB;
@@ -40,7 +39,8 @@ public class TerrestriaFoliagePlacerTypes {
 
 	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, Codec<P> codec) {
 		FoliagePlacerType<P> type = new FoliagePlacerType<P>(codec);
-		FOILAGE_PLACER_TYPES.put(new Identifier(Terrestria.MOD_ID, name), type);
+		type.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
+		ForgeRegistries.FOLIAGE_PLACER_TYPES.register(type);
 		return type;
 	}
 

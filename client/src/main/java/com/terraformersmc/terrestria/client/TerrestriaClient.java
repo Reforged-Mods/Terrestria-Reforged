@@ -56,6 +56,7 @@ public class TerrestriaClient {
 		eventBus.addListener(TerrestriaClient::onItemColorHandler);
 		eventBus.addListener(TerrestriaClient::onBlockColorHandler);
 		eventBus.addListener(this::clientSetup);
+		registerEntityRenderers();
 	}
 
 	private void clientSetup(FMLClientSetupEvent event){
@@ -182,7 +183,6 @@ public class TerrestriaClient {
 				GRASS_ITEM_COLORS,
 				TerrestriaItems.ANDISOL_GRASS_BLOCK
 		);
-		registerEntityRenderers();
 	}
 
 	private void registerEntityRenderers() {

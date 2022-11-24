@@ -8,12 +8,12 @@ import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecor
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TerrestriaTreeDecorators {
-	public static Map<Identifier, TreeDecoratorType<?>> TREE_DECORATOR_TYPES = new LinkedHashMap<>();
 	public static TreeDecoratorType<DanglingLeavesTreeDecorator> DANGLING_LEAVES;
 	public static TreeDecoratorType<SakuraTreeDecorator> SAKURA;
 
@@ -24,7 +24,8 @@ public class TerrestriaTreeDecorators {
 
 	private static <P extends TreeDecorator> TreeDecoratorType<P> register(String name, Codec<P> codec) {
 		TreeDecoratorType<P> type = new TreeDecoratorType<>(codec);
-		TREE_DECORATOR_TYPES.put(new Identifier(Terrestria.MOD_ID, name), type);
+		type.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
+		ForgeRegistries.TREE_DECORATOR_TYPES.register(type);
 		return type;
 	}
 }

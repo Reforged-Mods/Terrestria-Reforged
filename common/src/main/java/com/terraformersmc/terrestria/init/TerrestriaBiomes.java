@@ -14,6 +14,7 @@ import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -123,6 +124,7 @@ public class TerrestriaBiomes {
 
 		biome.setRegistryName(identifier);
 		//BuiltinRegistries.add(BuiltinRegistries.BIOME, identifier, biome);
+		ForgeRegistries.BIOMES.register(biome);
 		biomes.put(name, biomeKey);
 
 		return biomeKey;

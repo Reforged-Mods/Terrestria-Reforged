@@ -16,10 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TerrestriaRegistry {
-
-	public static Map<Identifier, Block> BLOCKS = new LinkedHashMap<>();
-	public static Map<Identifier, BlockItem> ITEM_BLOCKS = new LinkedHashMap<>();
-	public static Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
 	public static BlockItem registerBuildingBlockItem(String name, Block block) {
 		return registerBlockItem(name, block, ItemGroup.BUILDING_BLOCKS);
 	}
@@ -38,23 +34,27 @@ public class TerrestriaRegistry {
 
 		ComposterRecipes.registerCompostableBlock(block);
 
-		ITEM_BLOCKS.put(new Identifier(Terrestria.MOD_ID, name), item);
+		item.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
+		ForgeRegistries.ITEMS.register(item);
 		return item;
 	}
 
 	public static SignItem registerSignItem(String name, Block standing, Block wall) {
 		SignItem item = new SignItem(new Item.Settings().group(Terrestria.itemGroup).maxCount(16), standing, wall);
-		ITEMS.put(new Identifier(Terrestria.MOD_ID, name), item);
+		item.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
+		ForgeRegistries.ITEMS.register(item);
 		return item;
 	}
 
 	public static <I extends Item> I registerItem(String name, I item) {
-		ITEMS.put(new Identifier(Terrestria.MOD_ID, name), item);
+		item.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
+		ForgeRegistries.ITEMS.register(item);
 		return item;
 	}
 
 	public static <T extends Block> T register(String name, T block) {
-		BLOCKS.put(new Identifier(Terrestria.MOD_ID, name), block);
+		block.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
+		ForgeRegistries.BLOCKS.register(block);
 		return block;
 	}
 }

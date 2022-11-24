@@ -7,15 +7,20 @@ import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.devtech.arrp.json.tags.JTag;
 import net.minecraft.block.Block;
 import net.minecraft.block.SandBlock;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.TagKey;
 
+import java.util.Map;
+
 import static com.terraformersmc.terrestria.data.TerrestriaDatagen.RUNTIME_RESOURCE_PACK;
 
 public class TerrestriaBlockTagProvider {
+
+	private static Map<TagKey<Block>, JTag> TAG_MAP = new Object2ObjectOpenHashMap<>();
 
 	public static void init() {
 		// basic block tags
@@ -114,47 +119,48 @@ public class TerrestriaBlockTagProvider {
 			.tag(TerrestriaBlockTags.SMALL_OAK_LOGS.id())
 			.tag(TerrestriaBlockTags.WILLOW_LOGS.id())
 			.tag(TerrestriaBlockTags.YUCCA_PALM_LOGS.id()));
+		TAG_MAP.forEach((k, v) -> RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(k), v));
 	}
 
 	private static void addDirt(DirtBlocks dirtBlock) {
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.DIRT), JTag.tag()
+		TAG_MAP.computeIfAbsent(BlockTags.DIRT, t -> JTag.tag())
 			.add(dirtBlock.getDirt().getRegistryName())
 			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName()));
+			.add(dirtBlock.getPodzol().getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.ENDERMAN_HOLDABLE), JTag.tag()
+		TAG_MAP.computeIfAbsent(BlockTags.ENDERMAN_HOLDABLE, t -> JTag.tag())
 			.add(dirtBlock.getDirt().getRegistryName())
 			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName()));
+			.add(dirtBlock.getPodzol().getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.MUSHROOM_GROW_BLOCK), JTag.tag()
-			.add(dirtBlock.getPodzol().getRegistryName()));
+		TAG_MAP.computeIfAbsent(BlockTags.MUSHROOM_GROW_BLOCK, t -> JTag.tag())
+			.add(dirtBlock.getPodzol().getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.SHOVEL_MINEABLE), JTag.tag()
+		TAG_MAP.computeIfAbsent(BlockTags.SHOVEL_MINEABLE, t -> JTag.tag())
 			.add(dirtBlock.getDirt().getRegistryName())
 			.add(dirtBlock.getDirtPath().getRegistryName())
 			.add(dirtBlock.getFarmland().getRegistryName())
 			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName()));
+			.add(dirtBlock.getPodzol().getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.VALID_SPAWN), JTag.tag()
+		TAG_MAP.computeIfAbsent(BlockTags.VALID_SPAWN, t -> JTag.tag())
 			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName()));
+			.add(dirtBlock.getPodzol().getRegistryName());
 
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaBlockTags.FARMLAND), JTag.tag()
-			.add(dirtBlock.getFarmland().getRegistryName()));
+		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.FARMLAND, t -> JTag.tag())
+			.add(dirtBlock.getFarmland().getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaBlockTags.GRASS_BLOCKS), JTag.tag()
-			.add(dirtBlock.getGrassBlock().getRegistryName()));
+		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.GRASS_BLOCKS, t -> JTag.tag())
+			.add(dirtBlock.getGrassBlock().getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaBlockTags.PODZOL), JTag.tag()
-			.add(dirtBlock.getPodzol().getRegistryName()));
+		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.PODZOL, t -> JTag.tag())
+			.add(dirtBlock.getPodzol().getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaBlockTags.SOIL), JTag.tag()
+		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.SOIL, t -> JTag.tag())
 			.add(dirtBlock.getDirt().getRegistryName())
 			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName()));
+			.add(dirtBlock.getPodzol().getRegistryName());
 	}
 
 	private static void addSand(SandBlock sandBlock) {
@@ -165,7 +171,7 @@ public class TerrestriaBlockTagProvider {
 
 	private static void addStone(TagKey<Block> stoneTag, StoneBlocks stoneBlock) {
 
-		JTag stoneBuilder = JTag.tag();
+		JTag stoneBuilder = TAG_MAP.computeIfAbsent(stoneTag, t -> JTag.tag());
 		if (stoneBlock.bricks != null) {
 			stoneBuilder.add(stoneBlock.bricks.full.getRegistryName());
 			addStoneVariant(stoneBlock.bricks);
@@ -196,10 +202,9 @@ public class TerrestriaBlockTagProvider {
 			stoneBuilder.add(stoneBlock.smooth.full.getRegistryName());
 			addStoneVariant(stoneBlock.smooth);
 		}
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(stoneTag), stoneBuilder);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.BUTTONS), JTag.tag().add(stoneBlock.button.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.PRESSURE_PLATES), JTag.tag().add(stoneBlock.pressurePlate.getRegistryName()));
+		TAG_MAP.computeIfAbsent(BlockTags.BUTTONS, t -> JTag.tag()).add(stoneBlock.button.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.PRESSURE_PLATES, t -> JTag.tag()).add(stoneBlock.pressurePlate.getRegistryName());
 	}
 
 	private static void addStoneVariant(StoneVariantBlocks stoneVariantBlock) {
@@ -215,7 +220,7 @@ public class TerrestriaBlockTagProvider {
 	}
 
 	private static void addWood(TagKey<Block> logTag, WoodBlocks woodBlock) {
-		JTag woodBuilder = JTag.tag();
+		JTag woodBuilder = TAG_MAP.computeIfAbsent(logTag, t -> JTag.tag());
 		woodBuilder
 			.add(woodBlock.log.getRegistryName())
 			.add(woodBlock.strippedLog.getRegistryName());
@@ -230,7 +235,6 @@ public class TerrestriaBlockTagProvider {
 				.add(((QuarteredWoodBlocks) woodBlock).quarterLog.getRegistryName())
 				.add(((QuarteredWoodBlocks) woodBlock).strippedQuarterLog.getRegistryName());
 		}
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(logTag), woodBuilder);
 
 		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.FENCE_GATES), JTag.tag().add(woodBlock.fenceGate.getRegistryName()));
 		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.LEAVES), JTag.tag().add(woodBlock.leaves.getRegistryName()));

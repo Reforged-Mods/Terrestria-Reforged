@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
-public class TerrestriaTerraBlenderGeneration extends Region implements Runnable, TerraBlenderApi {
+public class TerrestriaTerraBlenderGeneration extends Region implements Runnable {
 	TerrestriaBiomeConfig BIOME_CONFIG;
 
 	public TerrestriaTerraBlenderGeneration() {
@@ -73,11 +73,10 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		this.addBiomeSimilar(mapper, BiomeKeys.MUSHROOM_FIELDS, BiomeKeys.MUSHROOM_FIELDS);
 	}
 
-	@Override
-	public void onTerraBlenderInitialized() {
+	public static void onTerraBlenderInitialized() {
 		// We can't do registration stuff until both Terrestria and TerraBlender are ready.
 		// The run() method below will be called when Terrestria is done initializing.
-		Terrestria.callbackWhenInitialized(this);
+		Terrestria.callbackWhenInitialized(new TerrestriaTerraBlenderGeneration());
 	}
 
 	// Initialize TerraBlender as our biome placement provider.

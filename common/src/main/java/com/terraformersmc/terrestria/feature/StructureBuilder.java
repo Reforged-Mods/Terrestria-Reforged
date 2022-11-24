@@ -1,3 +1,4 @@
+/*
 package com.terraformersmc.terrestria.feature;
 
 import com.google.common.collect.ImmutableList;
@@ -6,9 +7,6 @@ import com.terraformersmc.terrestria.mixin.StructureFeatureAccessor;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.FlatChunkGeneratorConfig;
-import net.minecraft.world.gen.chunk.StructureConfig;
-import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -36,19 +34,22 @@ public class StructureBuilder<FC extends FeatureConfig, S extends StructureFeatu
 		this.structure = structure;
 	}
 
-	/**
+	*/
+/**
 	 * Creates a new {@code StructureBuilder} for registering a structure.
 	 *
 	 * @param id The structure ID.
 	 * @param structure The {@linkplain StructureFeature} you want to register.
-	 */
+	 *//*
+
 	public static <FC extends FeatureConfig, S extends StructureFeature<FC>> StructureBuilder<FC, S> create(Identifier id, S structure) {
 		Objects.requireNonNull(id, "id must not be null");
 		Objects.requireNonNull(structure, "structure must not be null");
 		return new StructureBuilder<>(id, structure);
 	}
 
-	/**
+	*/
+/**
 	 * Sets the generation step of this structure. The generation step specifies when the structure is generated, to
 	 * ensure they are generated in the correct order to reduce the amount of floating blocks.
 	 *
@@ -57,26 +58,30 @@ public class StructureBuilder<FC extends FeatureConfig, S extends StructureFeatu
 	 * {@linkplain GenerationStep.Feature} enum may be used.</p>
 	 *
 	 * <p>This is a required option.</p>
-	 */
+	 *//*
+
 	public StructureBuilder<FC, S> step(GenerationStep.Feature step) {
 		Objects.requireNonNull(step, "step must not be null");
 		this.step = step;
 		return this;
 	}
 
-	/**
+	*/
+/**
 	 * Sets the default {@linkplain StructureConfig} for this structure. See the alternative
 	 * {@linkplain #defaultConfig(int, int, int)} for details.
 	 *
 	 * <p>This is a required option.</p>
-	 */
+	 *//*
+
 	public StructureBuilder<FC, S> defaultConfig(StructureConfig config) {
 		Objects.requireNonNull(config, "config must not be null");
 		this.defaultConfig = config;
 		return this;
 	}
 
-	/**
+	*/
+/**
 	 * Sets the default {@linkplain StructureConfig} for this structure. This sets the default configuration of where in
 	 * the world to place structures.
 	 *
@@ -92,45 +97,54 @@ public class StructureBuilder<FC extends FeatureConfig, S extends StructureFeatu
 	 *                structure must have an unique {@code salt} in order to spawn in different places.
 	 *
 	 * @see #defaultConfig(StructureConfig)
-	 */
+	 *//*
+
 	public StructureBuilder<FC, S> defaultConfig(int spacing, int separation, int salt) {
 		return defaultConfig(new StructureConfig(spacing, separation, salt));
 	}
 
-	/**
+	*/
+/**
 	 * Sets the structure configuration which spawns in superflat worlds. If unset, this structure will not spawn in
 	 * superflat worlds.
 	 *
 	 * @see #superflatFeature(FeatureConfig)
-	 */
+	 *//*
+
 	public StructureBuilder<FC, S> superflatFeature(ConfiguredStructureFeature<FC, ? extends StructureFeature<FC>> superflatFeature) {
 		Objects.requireNonNull(superflatFeature, "superflatFeature must not be null");
 		this.superflatFeature = superflatFeature;
 		return this;
 	}
 
-	/**
+	*/
+/**
 	 * Sets the structure configuration which spawns in superflat worlds. If unset, this structure will not spawn in
 	 * superflat worlds.
 	 *
 	 * @see #superflatFeature(ConfiguredStructureFeature)
-	 */
+	 *//*
+
 	public StructureBuilder<FC, S> superflatFeature(FC config) {
 		return superflatFeature(structure.configure(config));
 	}
 
-	/**
+	*/
+/**
 	 * Causes structure pieces of this structure to adjust the surface of the world to fit them, so that they don't
 	 * stick out of or into the ground.
-	 */
+	 *//*
+
 	public StructureBuilder<FC, S> adjustsSurface() {
 		this.adjustsSurface = true;
 		return this;
 	}
 
-	/**
+	*/
+/**
 	 * Registers this structure and applies the other changes from the {@linkplain StructureBuilder}.
-	 */
+	 *//*
+
 	public S register() {
 		Objects.requireNonNull(step, "Structure \"" + id + "\" is missing a generation step");
 		Objects.requireNonNull(defaultConfig, "Structure \"" + id + "\" is missing a default config");
@@ -160,3 +174,4 @@ public class StructureBuilder<FC extends FeatureConfig, S extends StructureFeatu
 		return structure;
 	}
 }
+*/

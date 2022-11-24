@@ -9,10 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SignItem;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class TerrestriaRegistry {
 
@@ -47,8 +48,7 @@ public class TerrestriaRegistry {
 		return item;
 	}
 
-	public static TerraformBoatItem registerBoatItem(String name, Supplier<EntityType<TerraformBoatEntity>> boatType) {
-		TerraformBoatItem item = new TerraformBoatItem(boatType, new Item.Settings().group(Terrestria.itemGroup).maxCount(1));
+	public static <I extends Item> I registerItem(String name, I item) {
 		ITEMS.put(new Identifier(Terrestria.MOD_ID, name), item);
 		return item;
 	}

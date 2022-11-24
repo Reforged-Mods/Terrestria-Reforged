@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraftforge.fml.ModList;
+import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 
-public class TerrestriaMixinPlugin /*implements IMixinConfigPlugin*/ {
-	/*@Override
+public class TerrestriaMixinPlugin implements IMixinConfigPlugin {
+	@Override
 	public void onLoad(String mixinPackage) {
 
 	}
@@ -47,5 +48,5 @@ public class TerrestriaMixinPlugin /*implements IMixinConfigPlugin*/ {
 	@Override
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 
-	}*/
+	}
 }

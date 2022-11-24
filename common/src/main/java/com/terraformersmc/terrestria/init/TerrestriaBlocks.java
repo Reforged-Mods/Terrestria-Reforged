@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.dirt.block.TerraformDirtPathBlock;
+import com.terraformersmc.terraform.utils.TerraformBlockSettings;
 import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.leaves.block.LeafPileBlock;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
@@ -33,7 +34,6 @@ import net.minecraft.sound.BlockSoundGroup;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraftforge.common.ToolType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,15 +132,15 @@ public class TerrestriaBlocks {
 		add(SMALL_OAK_LOG, 5, 5);
 		add(STRIPPED_SMALL_OAK_LOG, 5, 5);
 
-		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(TerraformBlockSettings.copy(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves",
-				new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never))
+				new LeavesBlock(TerraformBlockSettings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never))
 		);
 
-		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", new LeavesBlock(TerraformBlockSettings.copy(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
-		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.025f, 0.1f).noCollision().sounds(BlockSoundGroup.GRASS).mapColor(MapColor.PINK)));
+		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(TerraformBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.025f, 0.1f).noCollision().sounds(BlockSoundGroup.GRASS).mapColor(MapColor.PINK)));
 
 		add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
 		add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
@@ -170,15 +170,15 @@ public class TerrestriaBlocks {
 
 		// Volcanic Island Blocks
 
-		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.BLACK)));
+		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, TerraformBlockSettings.copy(Blocks.SAND).mapColor(MapColor.BLACK)));
 
-		Block andisolDirt = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copyOf(Blocks.DIRT).mapColor(MapColor.BLACK)));
+		Block andisolDirt = TerrestriaRegistry.register("basalt_dirt", new Block(TerraformBlockSettings.copy(Blocks.DIRT).mapColor(MapColor.BLACK)));
 		ANDISOL = TerraformDirtRegistry.register(new DirtBlocks (
 			andisolDirt,
-			TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(andisolDirt, () -> ANDISOL.getDirtPath(), FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK))),
-			TerrestriaRegistry.register("basalt_grass_path", new TerraformDirtPathBlock(andisolDirt, FabricBlockSettings.copyOf(Blocks.DIRT_PATH))),
-			TerrestriaRegistry.register("basalt_podzol", new TerraformSnowyBlock(FabricBlockSettings.copyOf(Blocks.PODZOL))),
-			TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copyOf(Blocks.FARMLAND).mapColor(MapColor.BLACK)))
+			TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(andisolDirt, () -> ANDISOL.getDirtPath(), TerraformBlockSettings.copy(Blocks.GRASS_BLOCK))),
+			TerrestriaRegistry.register("basalt_grass_path", new TerraformDirtPathBlock(andisolDirt, TerraformBlockSettings.copy(Blocks.DIRT_PATH))),
+			TerrestriaRegistry.register("basalt_podzol", new TerraformSnowyBlock(TerraformBlockSettings.copy(Blocks.PODZOL))),
+			TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(TerraformBlockSettings.copy(Blocks.FARMLAND).mapColor(MapColor.BLACK)))
 		));
 		VOLCANIC_ROCK = StoneBlocks.register("basalt", MapColor.BLACK);
 

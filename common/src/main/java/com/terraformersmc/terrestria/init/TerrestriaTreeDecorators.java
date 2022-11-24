@@ -6,8 +6,8 @@ import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesT
 import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecorator;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.tree.TreeDecorator;
-import net.minecraft.world.gen.tree.TreeDecoratorType;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

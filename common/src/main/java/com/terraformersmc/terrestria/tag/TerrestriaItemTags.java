@@ -18,9 +18,9 @@ public final class TerrestriaItemTags {
 	public static final TagKey<Item> WILLOW_LOGS = TerrestriaItemTags.of("willow_logs");
 	public static final TagKey<Item> YUCCA_PALM_LOGS = TerrestriaItemTags.of("yucca_palm_logs");
 
-	public static final TagKey<Item> BASALT = TerrestriaItemTags.of(new Identifier("c", "basalt"));
-	public static final TagKey<Item> BLACK_SAND = TerrestriaItemTags.of(new Identifier("c", "black_sand"));
-	public static final TagKey<Item> PLANKS_THAT_BURN = TerrestriaItemTags.of(new Identifier("c", "planks_that_burn"));
+	public static final TagKey<Item> BASALT = TerrestriaItemTags.of(new Identifier("forge", "basalt"));
+	public static final TagKey<Item> BLACK_SAND = TerrestriaItemTags.of(new Identifier("forge", "black_sand"));
+	public static final TagKey<Item> PLANKS_THAT_BURN = TerrestriaItemTags.of(new Identifier("forge", "planks_that_burn"));
 
 	private TerrestriaItemTags() {
 		return;

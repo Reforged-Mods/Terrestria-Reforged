@@ -6,6 +6,10 @@ loom {
 	}
 }
 
+dependencies {
+	modImplementation("com.github.Reforged-Mods:ARRP-forge:0.5.7")
+}
+
 sourceSets {
 	main {
 		resources {

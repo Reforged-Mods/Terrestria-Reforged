@@ -10,6 +10,7 @@ import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.gen.feature.*;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class TerrestriaStructures {
 	public static final StructurePieceType CANYON_ARCH_PIECE = registerStructurePiece("canyon_arch", CanyonArchGenerator::new);
@@ -26,6 +27,8 @@ public class TerrestriaStructures {
 	}
 
 	private static <T extends FeatureConfig> StructureFeature<T> registerStructureFeature(String id, StructureFeature<T> feature) {
-		return Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, id), feature);
+		feature.setRegistryName(new Identifier(Terrestria.MOD_ID, id));
+		ForgeRegistries.STRUCTURE_FEATURES.register(feature);
+		return feature;
 	}
 }

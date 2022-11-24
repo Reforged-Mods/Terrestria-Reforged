@@ -1,17 +1,23 @@
 package com.terraformersmc.terrestria;
 
+import com.terraformersmc.terrestria.biomegen.TerrestriaTerraBlenderGeneration;
 import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
 
-public class TerrestriaWorldgen implements ModInitializer {
+@Mod("terrestria_worldgen")
+public class TerrestriaWorldgen {
 
-	@Override
+	public TerrestriaWorldgen(){
+		onInitialize();
+	}
+
 	public void onInitialize() {
 		Terrestria.callbackWhenInitialized(TerrestriaSurfaceBuilders::init);
 
-		if (FabricLoader.getInstance().isModLoaded("terrablender")) {
+		if (ModList.get().isLoaded("terrablender")) {
 			Terrestria.LOGGER.info("Enabling Terrestria's TerraBlender worldgen module.");
+			TerrestriaTerraBlenderGeneration.onTerraBlenderInitialized();
 		} else {
 			Terrestria.LOGGER.warn("Terrestria world generation disabled; TerraBlender is not present.");
 		}

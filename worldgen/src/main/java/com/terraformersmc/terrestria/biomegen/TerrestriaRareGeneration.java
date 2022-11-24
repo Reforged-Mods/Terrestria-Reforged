@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
-public class TerrestriaRareGeneration extends Region implements TerraBlenderApi {
+public class TerrestriaRareGeneration extends Region {
 	TerrestriaBiomeConfig BIOME_CONFIG = Terrestria.getConfigManager().getBiomeConfig();
 
 	public TerrestriaRareGeneration() {

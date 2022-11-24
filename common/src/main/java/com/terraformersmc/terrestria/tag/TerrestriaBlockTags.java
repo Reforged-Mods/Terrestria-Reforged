@@ -7,8 +7,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public final class TerrestriaBlockTags {
-	public static final TagKey<Block> BASALT = TerrestriaBlockTags.of(new Identifier("c", "basalt"));
-	public static final TagKey<Block> BLACK_SAND = TerrestriaBlockTags.of(new Identifier("c", "black_sand"));
+	public static final TagKey<Block> BASALT = TerrestriaBlockTags.of(new Identifier("forge", "basalt"));
+	public static final TagKey<Block> BLACK_SAND = TerrestriaBlockTags.of(new Identifier("forge", "sand/black"));
 
 	public static final TagKey<Block> FARMLAND = TerrestriaBlockTags.of(new Identifier("terraform", "farmland"));
 	public static final TagKey<Block> GRASS_BLOCKS = TerrestriaBlockTags.of(new Identifier("terraform", "grass_blocks"));

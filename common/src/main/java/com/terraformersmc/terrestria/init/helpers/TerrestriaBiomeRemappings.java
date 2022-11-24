@@ -1,10 +1,12 @@
 package com.terraformersmc.terrestria.init.helpers;
 
 import com.google.common.collect.ImmutableMap;
+import com.terraformersmc.terraform.biomeremapper.api.BiomeRemapper;
 import com.terraformersmc.terraform.biomeremapper.api.BiomeRemapperApi;
 import com.terraformersmc.terraform.biomeremapper.api.DataVersions;
 import com.terraformersmc.terrestria.Terrestria;
 
+@BiomeRemapper
 public class TerrestriaBiomeRemappings implements BiomeRemapperApi {
 	public void init() {
 		register(Terrestria.MOD_ID, DataVersions.V_1_18_2, ImmutableMap.<String, String>builder()

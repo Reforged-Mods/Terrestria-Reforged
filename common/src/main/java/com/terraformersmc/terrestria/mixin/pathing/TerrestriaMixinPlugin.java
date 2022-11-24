@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -23,7 +24,7 @@ public class TerrestriaMixinPlugin implements IMixinConfigPlugin {
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
 		// If Lithium is loaded, disable our pathing mixin
-		if (ModList.get().isLoaded("lithium") && mixinClassName.contains("LandPathNodeMaker")) {
+		if (LoadingModList.get().getMods().stream().anyMatch(m -> m.getModId().equals("lithium")) && mixinClassName.contains("LandPathNodeMaker")) {
 			return false;
 		}
 

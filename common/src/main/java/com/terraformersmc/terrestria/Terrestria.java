@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria;
 
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
+import com.terraformersmc.terrestria.data.TerrestriaDatagen;
 import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
@@ -186,6 +187,7 @@ public class Terrestria {
 
 	private void commonLoad(FMLCommonSetupEvent event){
 		runnables.forEach(event::enqueueWork);
+		TerrestriaDatagen.onInitializeDataGenerator();
 	}
 
 	public static void callbackWhenInitialized(Runnable callback) {

@@ -11,7 +11,7 @@
   ],
   "entrypoints": {
     "client": [
-      "com.terraformersmc.terrestria.TerrestriaClient"
+      "com.terraformersmc.terrestria.client.TerrestriaClient"
     ]
   },
   "custom": {

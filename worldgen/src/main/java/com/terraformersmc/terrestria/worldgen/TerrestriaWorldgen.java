@@ -1,5 +1,6 @@
-package com.terraformersmc.terrestria;
+package com.terraformersmc.terrestria.worldgen;
 
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.biomegen.TerrestriaTerraBlenderGeneration;
 import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;
 import net.minecraftforge.fml.ModList;

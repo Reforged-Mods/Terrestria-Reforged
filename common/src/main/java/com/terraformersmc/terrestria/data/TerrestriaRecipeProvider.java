@@ -6,8 +6,6 @@ import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -23,13 +21,9 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.function.Consumer;
 
-public class TerrestriaRecipeProvider extends FabricRecipeProvider {
-	public TerrestriaRecipeProvider(FabricDataGenerator dataGenerator) {
-		super(dataGenerator);
-	}
+public class TerrestriaRecipeProvider {
 
-	@Override
-	protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+	/*protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
 		// misc. recipes
 		new ShapelessRecipeJsonBuilder(TerrestriaItems.BRYCE_SAPLING, 1)
 				.input(Items.OAK_SAPLING)
@@ -226,5 +220,5 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 	@Override
 	protected Identifier getRecipeIdentifier(Identifier identifier) {
 		return new Identifier(Terrestria.MOD_ID, identifier.getPath());
-	}
+	}*/
 }

@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.mixin;
+package com.terraformersmc.terrestria.mixin.worldgen;
 
 import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilder;
 import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;

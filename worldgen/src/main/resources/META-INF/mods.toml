@@ -1,25 +1,31 @@
 modLoader="javafml"
 license="LGPLv3"
-loaderVersion="[31,)"
+loaderVersion="[40,)"
 issueTrackerURL="https://github.com/Trinsdar/Terrestria-Reforged/issues"
 
 [[mods]]
-modId="terrestria"
+modId="terrestria_worldgen"
 version="${version}"
-displayName="Terrestria Reforged"
+displayName="Terrestria Reforged: World Generation"
 displayURL="https://github.com/Trinsdar/Terrestria-Reforged"
 credits="TerraformersMC for creating the fabric version"
-authors="Trinsdar, coderbot16, NeusFear, TerraformersMC"
+authors="Trinsdar, Vaerian, NeusFear, TerraformersMC"
 description='''A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.'''
-[[dependencies.terrestria]]
+[[dependencies.terrestria_worldgen]]
 modId="forge"
 mandatory=true
-versionRange="[40.1.73,)"
+versionRange="[40.1.0,)"
 ordering="AFTER"
 side="BOTH"
-[[dependencies.terrestria]]
+[[dependencies.terrestria_worldgen]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.18.2,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.terrestria_worldgen]]
+modId="terrablender"
+mandatory=true
+versionRange="[1.1.0,)"
 ordering="AFTER"
 side="BOTH"

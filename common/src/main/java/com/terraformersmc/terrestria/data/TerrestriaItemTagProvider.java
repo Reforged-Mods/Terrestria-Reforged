@@ -9,74 +9,72 @@ import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.devtech.arrp.json.tags.JTag;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
-import net.minecraftforge.common.Tags;
 
 import static com.terraformersmc.terrestria.data.TerrestriaDatagen.RUNTIME_RESOURCE_PACK;
 
 public class TerrestriaItemTagProvider {
 
-	@Override
-	protected void generateTags() {
-		RUNTIME_RESOURCE_PACK.addTag(ItemTags.BOATS)
-			.add(TerrestriaBoats.CYPRESS_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.HEMLOCK_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.JAPANESE_MAPLE_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.RAINBOW_EUCALYPTUS_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.REDWOOD_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.RUBBER_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.SAKURA_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.WILLOW_BOAT_TYPE.getItem())
-			.add(TerrestriaBoats.YUCCA_PALM_BOAT_TYPE.getItem()));
 
-		RUNTIME_RESOURCE_PACK.addTag(ItemTags.LEAVES)
-			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_LEAVES)
-			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES)
-			.add(TerrestriaItems.JUNGLE_PALM_LEAVES));
+	public static void init() {
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.BOATS), JTag.tag()
+			.add(TerrestriaBoats.CYPRESS_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.HEMLOCK_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.JAPANESE_MAPLE_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.RAINBOW_EUCALYPTUS_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.REDWOOD_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.RUBBER_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.SAKURA_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.WILLOW_BOAT_TYPE.item().getRegistryName())
+			.add(TerrestriaBoats.YUCCA_PALM_BOAT_TYPE.item().getRegistryName()));
 
-		RUNTIME_RESOURCE_PACK.addTag(ItemTags.OAK_LOGS)
-			.addTag(TerrestriaItemTags.SMALL_OAK_LOGS));
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.LEAVES), JTag.tag()
+			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_LEAVES.getRegistryName())
+			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES.getRegistryName())
+			.add(TerrestriaItems.JUNGLE_PALM_LEAVES.getRegistryName()));
 
-		RUNTIME_RESOURCE_PACK.addTag(ItemTags.SAPLINGS)
-			.add(TerrestriaItems.BRYCE_SAPLING)
-			.add(TerrestriaItems.CYPRESS_SAPLING)
-			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_SAPLING)
-			.add(TerrestriaItems.HEMLOCK_SAPLING)
-			.add(TerrestriaItems.JAPANESE_MAPLE_SAPLING)
-			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_SAPLING)
-			.add(TerrestriaItems.JUNGLE_PALM_SAPLING)
-			.add(TerrestriaItems.RAINBOW_EUCALYPTUS_SAPLING)
-			.add(TerrestriaItems.REDWOOD_SAPLING)
-			.add(TerrestriaItems.RUBBER_SAPLING)
-			.add(TerrestriaItems.SAKURA_SAPLING)
-			.add(TerrestriaItems.SAGUARO_CACTUS_SAPLING)
-			.add(TerrestriaItems.WILLOW_SAPLING)
-			.add(TerrestriaItems.YUCCA_PALM_SAPLING));
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.OAK_LOGS), JTag.tag()
+			.tag(TerrestriaItemTags.SMALL_OAK_LOGS.id()));
 
-		RUNTIME_RESOURCE_PACK.addTag(ItemTags.SMALL_FLOWERS)
-			.add(TerrestriaItems.INDIAN_PAINTBRUSH)
-			.add(TerrestriaItems.MONSTERAS));
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.SAPLINGS), JTag.tag()
+			.add(TerrestriaItems.BRYCE_SAPLING.getRegistryName())
+			.add(TerrestriaItems.CYPRESS_SAPLING.getRegistryName())
+			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_SAPLING.getRegistryName())
+			.add(TerrestriaItems.HEMLOCK_SAPLING.getRegistryName())
+			.add(TerrestriaItems.JAPANESE_MAPLE_SAPLING.getRegistryName())
+			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_SAPLING.getRegistryName())
+			.add(TerrestriaItems.JUNGLE_PALM_SAPLING.getRegistryName())
+			.add(TerrestriaItems.RAINBOW_EUCALYPTUS_SAPLING.getRegistryName())
+			.add(TerrestriaItems.REDWOOD_SAPLING.getRegistryName())
+			.add(TerrestriaItems.RUBBER_SAPLING.getRegistryName())
+			.add(TerrestriaItems.SAKURA_SAPLING.getRegistryName())
+			.add(TerrestriaItems.SAGUARO_CACTUS_SAPLING.getRegistryName())
+			.add(TerrestriaItems.WILLOW_SAPLING.getRegistryName())
+			.add(TerrestriaItems.YUCCA_PALM_SAPLING.getRegistryName()));
+
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.SMALL_FLOWERS), JTag.tag()
+			.add(TerrestriaItems.INDIAN_PAINTBRUSH.getRegistryName())
+			.add(TerrestriaItems.MONSTERAS.getRegistryName()));
 
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaItemTags.BLACK_SAND)
-			.add(TerrestriaItems.BLACK_SAND));
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaItemTags.BLACK_SAND), JTag.tag()
+			.add(TerrestriaItems.BLACK_SAND.getRegistryName()));
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaItemTags.PLANKS_THAT_BURN)
-			.add(TerrestriaItems.CYPRESS.planks)
-			.add(TerrestriaItems.HEMLOCK.planks)
-			.add(TerrestriaItems.JAPANESE_MAPLE.planks)
-			.add(TerrestriaItems.RAINBOW_EUCALYPTUS.planks)
-			.add(TerrestriaItems.REDWOOD.planks)
-			.add(TerrestriaItems.RUBBER.planks)
-			.add(TerrestriaItems.SAKURA.planks)
-			.add(TerrestriaItems.WILLOW.planks)
-			.add(TerrestriaItems.YUCCA_PALM.planks));
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaItemTags.PLANKS_THAT_BURN), JTag.tag()
+			.add(TerrestriaItems.CYPRESS.planks.getRegistryName())
+			.add(TerrestriaItems.HEMLOCK.planks.getRegistryName())
+			.add(TerrestriaItems.JAPANESE_MAPLE.planks.getRegistryName())
+			.add(TerrestriaItems.RAINBOW_EUCALYPTUS.planks.getRegistryName())
+			.add(TerrestriaItems.REDWOOD.planks.getRegistryName())
+			.add(TerrestriaItems.RUBBER.planks.getRegistryName())
+			.add(TerrestriaItems.SAKURA.planks.getRegistryName())
+			.add(TerrestriaItems.WILLOW.planks.getRegistryName())
+			.add(TerrestriaItems.YUCCA_PALM.planks.getRegistryName()));
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaItemTags.SMALL_OAK_LOGS)
-			.add(TerrestriaItems.SMALL_OAK_LOG)
-			.add(TerrestriaItems.STRIPPED_SMALL_OAK_LOG));
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaItemTags.SMALL_OAK_LOGS), JTag.tag()
+			.add(TerrestriaItems.SMALL_OAK_LOG.getRegistryName())
+			.add(TerrestriaItems.STRIPPED_SMALL_OAK_LOG.getRegistryName()));
 
 
 		// custom dirt item tags (no nice convenient item container?)
@@ -99,31 +97,31 @@ public class TerrestriaItemTagProvider {
 		addWood(TerrestriaItemTags.WILLOW_LOGS, TerrestriaItems.WILLOW);
 		addWood(TerrestriaItemTags.YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM);
 
-		RUNTIME_RESOURCE_PACK.addTag(ItemTags.LOGS_THAT_BURN)
-			.addTag(TerrestriaItemTags.CYPRESS_LOGS)
-			.addTag(TerrestriaItemTags.HEMLOCK_LOGS)
-			.addTag(TerrestriaItemTags.JAPANESE_MAPLE_LOGS)
-			.addTag(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS)
-			.addTag(TerrestriaItemTags.REDWOOD_LOGS)
-			.addTag(TerrestriaItemTags.RUBBER_LOGS)
-			.addTag(TerrestriaItemTags.SAKURA_LOGS)
-			.addTag(TerrestriaItemTags.SMALL_OAK_LOGS)
-			.addTag(TerrestriaItemTags.WILLOW_LOGS)
-			.addTag(TerrestriaItemTags.YUCCA_PALM_LOGS));
+		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.LOGS_THAT_BURN), JTag.tag()
+			.tag(TerrestriaItemTags.CYPRESS_LOGS.id())
+			.tag(TerrestriaItemTags.HEMLOCK_LOGS.id())
+			.tag(TerrestriaItemTags.JAPANESE_MAPLE_LOGS.id())
+			.tag(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS.id())
+			.tag(TerrestriaItemTags.REDWOOD_LOGS.id())
+			.tag(TerrestriaItemTags.RUBBER_LOGS.id())
+			.tag(TerrestriaItemTags.SAKURA_LOGS.id())
+			.tag(TerrestriaItemTags.SMALL_OAK_LOGS.id())
+			.tag(TerrestriaItemTags.WILLOW_LOGS.id())
+			.tag(TerrestriaItemTags.YUCCA_PALM_LOGS.id()));
 	}
 
-	private void addDirt(DirtBlocks dirtBlock) {
+	private static void addDirt(DirtBlocks dirtBlock) {
 		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.DIRT), JTag.tag()
 				.add(dirtBlock.getDirt().getRegistryName())
 				.add(dirtBlock.getGrassBlock().getRegistryName())
 				.add(dirtBlock.getPodzol().getRegistryName()));
 	}
 
-	private void addSand(BlockItem sandItem) {
+	private static void addSand(BlockItem sandItem) {
 		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.SAND), JTag.tag().add(sandItem.getRegistryName()));
 	}
 
-	private void addStone(TagKey<Item> stoneTag, StoneItems stoneItem) {
+	private static void addStone(TagKey<Item> stoneTag, StoneItems stoneItem) {
 		JTag stoneBuilder = JTag.tag();
 		if (stoneItem.bricks != null) {
 			stoneBuilder

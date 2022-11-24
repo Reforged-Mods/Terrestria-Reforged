@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.mixin;
+package com.terraformersmc.terrestria.mixin.client;
 
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraftforge.api.distmarker.Dist;

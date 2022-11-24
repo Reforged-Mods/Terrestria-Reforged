@@ -8,7 +8,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.terraformersmc.terrestria.TerrestriaWorldgen"
+      "com.terraformersmc.terrestria.worldgen.TerrestriaWorldgen"
     ],
     "terrablender": [
       "com.terraformersmc.terrestria.biomegen.TerrestriaTerraBlenderGeneration"

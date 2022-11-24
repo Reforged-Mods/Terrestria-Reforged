@@ -167,13 +167,14 @@ public class TerrestriaBlockTagProvider {
 
 		JTag stoneBuilder = JTag.tag();
 		if (stoneBlock.bricks != null) {
-			stoneBuilder
-				.add(stoneBlock.bricks.full.getRegistryName())
-
-				.add(stoneBlock.chiseledBricks.getRegistryName())
-				.add(stoneBlock.crackedBricks.getRegistryName());
-
+			stoneBuilder.add(stoneBlock.bricks.full.getRegistryName());
 			addStoneVariant(stoneBlock.bricks);
+
+			stoneBuilder.add(stoneBlock.chiseledBricks.getRegistryName());
+			RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.PICKAXE_MINEABLE), JTag.tag().add(stoneBlock.chiseledBricks.getRegistryName()));
+
+			stoneBuilder.add(stoneBlock.crackedBricks.getRegistryName());
+			RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.PICKAXE_MINEABLE), JTag.tag().add(stoneBlock.crackedBricks.getRegistryName()));
 		}
 		if (stoneBlock.cobblestone != null) {
 			stoneBuilder.add(stoneBlock.cobblestone.full.getRegistryName());

@@ -164,9 +164,9 @@ public class TerrestriaBlockTagProvider {
 	}
 
 	private static void addSand(SandBlock sandBlock) {
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.ENDERMAN_HOLDABLE), JTag.tag().add(sandBlock.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.SAND), JTag.tag().add(sandBlock.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.SHOVEL_MINEABLE), JTag.tag().add(sandBlock.getRegistryName()));
+		TAG_MAP.computeIfAbsent(BlockTags.ENDERMAN_HOLDABLE, t -> JTag.tag()).add(sandBlock.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.SAND, t -> JTag.tag()).add(sandBlock.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.SHOVEL_MINEABLE, t -> JTag.tag()).add(sandBlock.getRegistryName());
 	}
 
 	private static void addStone(TagKey<Block> stoneTag, StoneBlocks stoneBlock) {
@@ -208,14 +208,14 @@ public class TerrestriaBlockTagProvider {
 	}
 
 	private static void addStoneVariant(StoneVariantBlocks stoneVariantBlock) {
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.SLABS), JTag.tag().add(stoneVariantBlock.slab.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.STAIRS), JTag.tag().add(stoneVariantBlock.stairs.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WALLS), JTag.tag().add(stoneVariantBlock.wall.getRegistryName()));
+		TAG_MAP.computeIfAbsent(BlockTags.SLABS, t -> JTag.tag()).add(stoneVariantBlock.slab.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.STAIRS, t -> JTag.tag()).add(stoneVariantBlock.stairs.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WALLS, t -> JTag.tag()).add(stoneVariantBlock.wall.getRegistryName());
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.PICKAXE_MINEABLE), JTag.tag()
+		TAG_MAP.computeIfAbsent(BlockTags.PICKAXE_MINEABLE, t ->JTag.tag())
 				.add(stoneVariantBlock.full.getRegistryName())
 				.add(stoneVariantBlock.slab.getRegistryName())
-				.add(stoneVariantBlock.stairs.getRegistryName()));
+				.add(stoneVariantBlock.stairs.getRegistryName());
 				// Adding to WALLS does this for PICKAXE_MINEABLE.
 	}
 
@@ -236,22 +236,22 @@ public class TerrestriaBlockTagProvider {
 				.add(((QuarteredWoodBlocks) woodBlock).strippedQuarterLog.getRegistryName());
 		}
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.FENCE_GATES), JTag.tag().add(woodBlock.fenceGate.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.LEAVES), JTag.tag().add(woodBlock.leaves.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.PLANKS), JTag.tag().add(woodBlock.planks.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.SLABS), JTag.tag().add(woodBlock.slab.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.STAIRS), JTag.tag().add(woodBlock.stairs.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.STANDING_SIGNS), JTag.tag().add(woodBlock.sign.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WALL_SIGNS), JTag.tag().add(woodBlock.wallSign.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WOODEN_BUTTONS), JTag.tag().add(woodBlock.button.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WOODEN_DOORS), JTag.tag().add(woodBlock.door.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WOODEN_FENCES), JTag.tag().add(woodBlock.fence.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WOODEN_PRESSURE_PLATES), JTag.tag().add(woodBlock.pressurePlate.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WOODEN_SLABS), JTag.tag().add(woodBlock.slab.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WOODEN_STAIRS), JTag.tag().add(woodBlock.stairs.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.WOODEN_TRAPDOORS), JTag.tag().add(woodBlock.trapdoor.getRegistryName()));
+		TAG_MAP.computeIfAbsent(BlockTags.FENCE_GATES, t -> JTag.tag()).add(woodBlock.fenceGate.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.LEAVES, t -> JTag.tag()).add(woodBlock.leaves.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.PLANKS, t -> JTag.tag()).add(woodBlock.planks.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.SLABS, t -> JTag.tag()).add(woodBlock.slab.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.STAIRS, t -> JTag.tag()).add(woodBlock.stairs.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.STANDING_SIGNS, t -> JTag.tag()).add(woodBlock.sign.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WALL_SIGNS, t -> JTag.tag()).add(woodBlock.wallSign.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_BUTTONS, t -> JTag.tag()).add(woodBlock.button.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_DOORS, t -> JTag.tag()).add(woodBlock.door.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_FENCES, t -> JTag.tag()).add(woodBlock.fence.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_PRESSURE_PLATES, t -> JTag.tag()).add(woodBlock.pressurePlate.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_SLABS, t -> JTag.tag()).add(woodBlock.slab.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_STAIRS, t -> JTag.tag()).add(woodBlock.stairs.getRegistryName());
+		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_TRAPDOORS, t -> JTag.tag()).add(woodBlock.trapdoor.getRegistryName());
 
 		// Adding to FENCE_GATES or any WOODEN tag does this for AXE_MINEABLE.
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.HOE_MINEABLE), JTag.tag().add(woodBlock.leaves.getRegistryName()));
+		TAG_MAP.computeIfAbsent(BlockTags.HOE_MINEABLE, t -> JTag.tag()).add(woodBlock.leaves.getRegistryName());
 	}
 }

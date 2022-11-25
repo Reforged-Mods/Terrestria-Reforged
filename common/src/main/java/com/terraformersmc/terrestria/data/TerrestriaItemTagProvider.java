@@ -6,15 +6,20 @@ import com.terraformersmc.terrestria.init.TerrestriaBoats;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.*;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.devtech.arrp.json.tags.JTag;
+import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 
+import java.util.Map;
+
 import static com.terraformersmc.terrestria.data.TerrestriaDatagen.RUNTIME_RESOURCE_PACK;
 
 public class TerrestriaItemTagProvider {
+	private static Map<TagKey<Item>, JTag> TAG_MAP = new Object2ObjectOpenHashMap<>();
 
 
 	public static void init() {

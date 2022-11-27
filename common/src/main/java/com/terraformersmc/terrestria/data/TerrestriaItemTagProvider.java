@@ -113,21 +113,22 @@ public class TerrestriaItemTagProvider {
 			.tag(TerrestriaItemTags.SMALL_OAK_LOGS.id())
 			.tag(TerrestriaItemTags.WILLOW_LOGS.id())
 			.tag(TerrestriaItemTags.YUCCA_PALM_LOGS.id()));
+		TAG_MAP.forEach((t, j) -> RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(t), j));
 	}
 
 	private static void addDirt(DirtBlocks dirtBlock) {
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.DIRT), JTag.tag()
+		TAG_MAP.computeIfAbsent(ItemTags.DIRT, t -> JTag.tag())
 				.add(dirtBlock.getDirt().getRegistryName())
 				.add(dirtBlock.getGrassBlock().getRegistryName())
-				.add(dirtBlock.getPodzol().getRegistryName()));
+				.add(dirtBlock.getPodzol().getRegistryName());
 	}
 
 	private static void addSand(BlockItem sandItem) {
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.SAND), JTag.tag().add(sandItem.getRegistryName()));
+		TAG_MAP.computeIfAbsent(ItemTags.SAND, t -> JTag.tag()).add(sandItem.getRegistryName());
 	}
 
 	private static void addStone(TagKey<Item> stoneTag, StoneItems stoneItem) {
-		JTag stoneBuilder = JTag.tag();
+		JTag stoneBuilder = TAG_MAP.computeIfAbsent(stoneTag, t -> JTag.tag());
 		if (stoneItem.bricks != null) {
 			stoneBuilder
 					.add(stoneItem.bricks.full.getRegistryName())
@@ -157,20 +158,19 @@ public class TerrestriaItemTagProvider {
 			stoneBuilder.add(stoneItem.smooth.full.getRegistryName());
 			addStoneVariant(stoneItem.smooth);
 		}
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(stoneTag), stoneBuilder);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.BUTTONS), JTag.tag().add(stoneItem.button.getRegistryName()));
+		TAG_MAP.computeIfAbsent(ItemTags.BUTTONS, t -> JTag.tag()).add(stoneItem.button.getRegistryName());
 		// There is no item tag for stone pressure plates...
 	}
 
 	private static void addStoneVariant(StoneVariantItems stoneVariantItem) {
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.SLABS), JTag.tag().add(stoneVariantItem.slab.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.STAIRS), JTag.tag().add(stoneVariantItem.stairs.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WALLS), JTag.tag().add(stoneVariantItem.wall.getRegistryName()));
+		TAG_MAP.computeIfAbsent(ItemTags.SLABS, t -> JTag.tag()).add(stoneVariantItem.slab.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.STAIRS, t -> JTag.tag()).add(stoneVariantItem.stairs.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WALLS, t -> JTag.tag()).add(stoneVariantItem.wall.getRegistryName());
 	}
 
 	private static void addWood(TagKey<Item> logTag, WoodItems woodItem, Item... extra) {
-		JTag woodBuilder = JTag.tag();
+		JTag woodBuilder = TAG_MAP.computeIfAbsent(logTag, t -> JTag.tag());
 		woodBuilder
 				.add(woodItem.log.getRegistryName())
 				.add(woodItem.strippedLog.getRegistryName());
@@ -183,20 +183,19 @@ public class TerrestriaItemTagProvider {
 		for (Item item : extra) {
 			woodBuilder.add(item.getRegistryName());
 		}
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(logTag), woodBuilder);
 
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.LEAVES), JTag.tag().add(woodItem.leaves.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.PLANKS), JTag.tag().add(woodItem.planks.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.SLABS), JTag.tag().add(woodItem.slab.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.STAIRS), JTag.tag().add(woodItem.stairs.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.SIGNS), JTag.tag().add(woodItem.sign.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WOODEN_BUTTONS), JTag.tag().add(woodItem.button.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WOODEN_DOORS), JTag.tag().add(woodItem.door.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WOODEN_FENCES), JTag.tag().add(woodItem.fence.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WOODEN_PRESSURE_PLATES), JTag.tag().add(woodItem.pressurePlate.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WOODEN_SLABS), JTag.tag().add(woodItem.slab.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WOODEN_STAIRS), JTag.tag().add(woodItem.stairs.getRegistryName()));
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(ItemTags.WOODEN_TRAPDOORS), JTag.tag().add(woodItem.trapdoor.getRegistryName()));
+		TAG_MAP.computeIfAbsent(ItemTags.LEAVES, t -> JTag.tag()).add(woodItem.leaves.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.PLANKS, t -> JTag.tag()).add(woodItem.planks.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.SLABS, t -> JTag.tag()).add(woodItem.slab.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.STAIRS, t -> JTag.tag()).add(woodItem.stairs.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.SIGNS, t -> JTag.tag()).add(woodItem.sign.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WOODEN_BUTTONS, t -> JTag.tag()).add(woodItem.button.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WOODEN_DOORS, t -> JTag.tag()).add(woodItem.door.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WOODEN_FENCES, t -> JTag.tag()).add(woodItem.fence.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WOODEN_PRESSURE_PLATES, t -> JTag.tag()).add(woodItem.pressurePlate.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WOODEN_SLABS, t -> JTag.tag()).add(woodItem.slab.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WOODEN_STAIRS, t -> JTag.tag()).add(woodItem.stairs.getRegistryName());
+		TAG_MAP.computeIfAbsent(ItemTags.WOODEN_TRAPDOORS, t -> JTag.tag()).add(woodItem.trapdoor.getRegistryName());
 	}
 }

@@ -203,13 +203,13 @@ public class TerrestriaBlockLootTableProvider {
 		addDrop(woodBlock.log);
 		addDrop(woodBlock.planks);
 		addDrop(woodBlock.pressurePlate);
-		addDrop(woodBlock.sign);
+		addDrop(woodBlock.sign, woodBlock.sign);
 		addSlabDrop(woodBlock.slab);
 		addDrop(woodBlock.stairs);
 		addDrop(woodBlock.strippedLog);
 		addDrop(woodBlock.strippedWood);
 		addDrop(woodBlock.trapdoor);
-		addDrop(woodBlock.wallSign);
+		addDrop(woodBlock.wallSign, woodBlock.sign);
 		addDrop(woodBlock.wood);
 
 		if (woodBlock instanceof QuarteredWoodBlocks) {
@@ -235,12 +235,12 @@ public class TerrestriaBlockLootTableProvider {
 								.type("minecraft:alternatives")
 								.child(entry()
 										.type("minecraft:item")
-										.condition(new JCondition("minecraft:alternatives")
+										.condition(new JCondition("minecraft:alternative")
 												.parameter("terms", leafCondition()))
 										.name(blockID.toString()))
 								.child(entry()
 										.type("minecraft:item")
-										.condition("minecraft:survives_explosions")
+										.condition("minecraft:survives_explosion")
 										.condition(new JCondition("minecraft:table_bonus")
 												.parameter("enchantment", "minecraft:fortune")
 												.parameter("chances", chances(chances)))
@@ -313,14 +313,14 @@ public class TerrestriaBlockLootTableProvider {
 		);
 	}
 
-	private static void addDrop(Block block, Block drop){
+	private static void addDrop(Block block, ItemConvertible drop){
 		Identifier blockID = block.getRegistryName();
 		RUNTIME_RESOURCE_PACK.addLootTable(blockTableID(blockID), JLootTable.loot("minecraft:block")
 				.pool(pool()
 						.rolls(1)
 						.entry(entry()
 								.type("minecraft:item")
-								.name(drop.getRegistryName().toString()))
+								.name(drop.asItem().getRegistryName().toString()))
 						.condition(condition("minecraft:survives_explosion")))
 		);
 	}

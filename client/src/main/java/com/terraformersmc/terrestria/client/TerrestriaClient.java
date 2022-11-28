@@ -63,10 +63,7 @@ public class TerrestriaClient {
 		onInitializeClient();
 	}
 
-	public void onInitializeClient() {
-		// Load the client config if it hasn't been loaded already
-		Terrestria.getConfigManager().getClientConfig();
-
+	public static void addColors(){
 		addArrayToColors(
 				FOLIAGE_BLOCK_COLORS,
 				TerrestriaBlocks.RUBBER.leaves,
@@ -79,6 +76,26 @@ public class TerrestriaClient {
 				TerrestriaBlocks.SMALL_OAK_LOG,
 				TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG
 		);
+		addItemArrayToColors(
+				FOLIAGE_ITEM_COLORS,
+				TerrestriaItems.RUBBER.leaves,
+				TerrestriaItems.CYPRESS.leaves,
+				TerrestriaItems.WILLOW.leaves,
+				TerrestriaItems.RAINBOW_EUCALYPTUS.leaves,
+				TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES,
+				TerrestriaItems.REDWOOD.leaves,
+				TerrestriaItems.HEMLOCK.leaves
+		);
+		addItemArrayToColors(
+				GRASS_ITEM_COLORS,
+				TerrestriaItems.ANDISOL_GRASS_BLOCK
+		);
+		addColoredGrass(TerrestriaBlocks.ANDISOL.getGrassBlock());
+	}
+
+	public void onInitializeClient() {
+		// Load the client config if it hasn't been loaded already
+		Terrestria.getConfigManager().getClientConfig();
 
 		RenderLayers.setRenderLayer(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
 
@@ -152,7 +169,7 @@ public class TerrestriaClient {
 				TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING
 		);
 
-		addColoredGrass(TerrestriaBlocks.ANDISOL.getGrassBlock());
+		RenderLayers.setRenderLayer(TerrestriaBlocks.ANDISOL.getGrassBlock(), GRASS_BLOCK_LAYER);
 
 		addSigns(
 				TerrestriaBlocks.REDWOOD.sign,
@@ -166,23 +183,7 @@ public class TerrestriaClient {
 				TerrestriaBlocks.YUCCA_PALM.sign
 		);
 
-		addItemArrayToColors(
-				FOLIAGE_ITEM_COLORS,
-				TerrestriaItems.RUBBER.leaves,
-				TerrestriaItems.CYPRESS.leaves,
-				TerrestriaItems.WILLOW.leaves,
-				TerrestriaItems.RAINBOW_EUCALYPTUS.leaves,
-				TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES,
-				TerrestriaItems.REDWOOD.leaves,
-				TerrestriaItems.HEMLOCK.leaves
-		);
-
 		//RenderLayers.setRenderLayer(TerrestriaItems.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
-
-		addItemArrayToColors(
-				GRASS_ITEM_COLORS,
-				TerrestriaItems.ANDISOL_GRASS_BLOCK
-		);
 	}
 
 	private void registerEntityRenderers() {
@@ -217,8 +218,7 @@ public class TerrestriaClient {
 		}
 	}
 
-	private void addColoredGrass(Block grass) {
-		RenderLayers.setRenderLayer(grass, GRASS_BLOCK_LAYER);
+	private static void addColoredGrass(Block grass) {
 		addArrayToColors(GRASS_BLOCK_COLORS, grass);
 	}
 
@@ -241,6 +241,7 @@ public class TerrestriaClient {
 	}
 
 	public static void onBlockColorHandler(ColorHandlerEvent.Block e) {
+		addColors();
 		for (Block block : COLOR_PROVIDERS.keySet()) {
 			e.getBlockColors().registerColorProvider(COLOR_PROVIDERS.get(block), block);
 		}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bricks",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "terrestria:basalt"
+    }
+  },
+  "result": {
+    "item": "terrestria:basalt_bricks",
+    "count": 4
+  }
+}

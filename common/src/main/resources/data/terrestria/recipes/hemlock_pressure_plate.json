@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "terrestria:hemlock_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:hemlock_pressure_plate"
+  }
+}

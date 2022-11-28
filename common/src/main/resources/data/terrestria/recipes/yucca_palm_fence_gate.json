@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "terrestria:yucca_palm_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:yucca_palm_fence_gate"
+  }
+}

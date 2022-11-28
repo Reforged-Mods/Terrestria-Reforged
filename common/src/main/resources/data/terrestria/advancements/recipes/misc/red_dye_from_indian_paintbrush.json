@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:red_dye_from_indian_paintbrush"
+    ]
+  },
+  "criteria": {
+    "has_indian_paintbrush": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "terrestria:indian_paintbrush"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:red_dye_from_indian_paintbrush"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_indian_paintbrush",
+      "has_the_recipe"
+    ]
+  ]
+}

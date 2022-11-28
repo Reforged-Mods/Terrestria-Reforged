@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "terrestria:sakura_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:sakura_pressure_plate"
+  }
+}

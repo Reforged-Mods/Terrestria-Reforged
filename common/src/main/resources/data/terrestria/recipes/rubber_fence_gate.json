@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "terrestria:rubber_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:rubber_fence_gate"
+  }
+}

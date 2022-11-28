@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "terrestria:cypress_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:cypress_fence_gate"
+  }
+}

@@ -1,21 +1,15 @@
 archivesBaseName = "terrestria-common"
 
 loom {
-	forge {
-		mixinConfigs = ["mixins.terrestria-common.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-common.bugfix.json"]
-	}
-}
-
-dependencies {
-	modImplementation("com.github.Reforged-Mods:ARRP-forge:0.5.7")
-}
-
-sourceSets {
-	main {
-		resources {
-			srcDirs += [
-					"src/main/generated"
-			]
+	runs {
+		data {
+			data()
 		}
+	}
+	forge {
+		dataGen {
+			mod "terrestria_common"
+		}
+		mixinConfigs = ["mixins.terrestria-common.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-common.bugfix.json"]
 	}
 }

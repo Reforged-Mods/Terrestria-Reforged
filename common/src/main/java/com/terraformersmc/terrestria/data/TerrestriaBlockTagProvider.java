@@ -1,91 +1,92 @@
 package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terraform.dirt.DirtBlocks;
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.devtech.arrp.json.tags.JTag;
 import net.minecraft.block.Block;
 import net.minecraft.block.SandBlock;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.server.BlockTagProvider;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.TagKey;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
-import java.util.Map;
+public class TerrestriaBlockTagProvider extends BlockTagProvider {
 
-import static com.terraformersmc.terrestria.data.TerrestriaDatagen.RUNTIME_RESOURCE_PACK;
+	public TerrestriaBlockTagProvider(DataGenerator dataGenerator, ExistingFileHelper helper) {
+		super(dataGenerator, Terrestria.MOD_ID, helper);
+	}
 
-public class TerrestriaBlockTagProvider {
-
-	private static Map<TagKey<Block>, JTag> TAG_MAP = new Object2ObjectOpenHashMap<>();
-
-	public static void init() {
+	@Override
+	protected void configure() {
 		// basic block tags
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.HOE_MINEABLE), JTag.tag()
-			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getRegistryName())
-			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getRegistryName())
-			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES.getRegistryName())
-			.add(TerrestriaBlocks.SAKURA_LEAF_PILE.getRegistryName()));
+		this.getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
+			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
+			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
+			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES)
+			.add(TerrestriaBlocks.SAKURA_LEAF_PILE);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.FLOWER_POTS), JTag.tag()
-			.add(TerrestriaBlocks.POTTED_AGAVE.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_ALOE_VERA.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_BRYCE_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_CYPRESS_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_DARK_JAPANESE_MAPLE_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_HEMLOCK_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_INDIAN_PAINTBRUSH.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SHRUB_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_JUNGLE_PALM_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_MONSTERAS.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_RAINBOW_EUCALYPTUS_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_REDWOOD_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_RUBBER_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_SAKURA_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_TINY_CACTUS.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_WILLOW_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING.getRegistryName()));
+		this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
+			.add(TerrestriaBlocks.POTTED_AGAVE)
+			.add(TerrestriaBlocks.POTTED_ALOE_VERA)
+			.add(TerrestriaBlocks.POTTED_BRYCE_SAPLING)
+			.add(TerrestriaBlocks.POTTED_CYPRESS_SAPLING)
+			.add(TerrestriaBlocks.POTTED_DARK_JAPANESE_MAPLE_SAPLING)
+			.add(TerrestriaBlocks.POTTED_HEMLOCK_SAPLING)
+			.add(TerrestriaBlocks.POTTED_INDIAN_PAINTBRUSH)
+			.add(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SAPLING)
+			.add(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SHRUB_SAPLING)
+			.add(TerrestriaBlocks.POTTED_JUNGLE_PALM_SAPLING)
+			.add(TerrestriaBlocks.POTTED_MONSTERAS)
+			.add(TerrestriaBlocks.POTTED_RAINBOW_EUCALYPTUS_SAPLING)
+			.add(TerrestriaBlocks.POTTED_REDWOOD_SAPLING)
+			.add(TerrestriaBlocks.POTTED_RUBBER_SAPLING)
+			.add(TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING)
+			.add(TerrestriaBlocks.POTTED_SAKURA_SAPLING)
+			.add(TerrestriaBlocks.POTTED_TINY_CACTUS)
+			.add(TerrestriaBlocks.POTTED_WILLOW_SAPLING)
+			.add(TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.LEAVES), JTag.tag()
-			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getRegistryName())
-			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getRegistryName())
-			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES.getRegistryName()));
+		this.getOrCreateTagBuilder(BlockTags.LEAVES)
+			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
+			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
+			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.OAK_LOGS), JTag.tag()
-			.tag(TerrestriaBlockTags.SMALL_OAK_LOGS.id()));
+		this.getOrCreateTagBuilder(BlockTags.OAK_LOGS)
+			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.SAPLINGS), JTag.tag()
-			.add(TerrestriaBlocks.BRYCE_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.CYPRESS_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.HEMLOCK_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.JAPANESE_MAPLE_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.JUNGLE_PALM_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.REDWOOD_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.RUBBER_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.SAKURA_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.WILLOW_SAPLING.getRegistryName())
-			.add(TerrestriaBlocks.YUCCA_PALM_SAPLING.getRegistryName()));
+		this.getOrCreateTagBuilder(BlockTags.SAPLINGS)
+			.add(TerrestriaBlocks.BRYCE_SAPLING)
+			.add(TerrestriaBlocks.CYPRESS_SAPLING)
+			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING)
+			.add(TerrestriaBlocks.HEMLOCK_SAPLING)
+			.add(TerrestriaBlocks.JAPANESE_MAPLE_SAPLING)
+			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING)
+			.add(TerrestriaBlocks.JUNGLE_PALM_SAPLING)
+			.add(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING)
+			.add(TerrestriaBlocks.REDWOOD_SAPLING)
+			.add(TerrestriaBlocks.RUBBER_SAPLING)
+			.add(TerrestriaBlocks.SAKURA_SAPLING)
+			.add(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING)
+			.add(TerrestriaBlocks.WILLOW_SAPLING)
+			.add(TerrestriaBlocks.YUCCA_PALM_SAPLING);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.SMALL_FLOWERS), JTag.tag()
-			.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getRegistryName())
-			.add(TerrestriaBlocks.MONSTERAS.getRegistryName()));
+		this.getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS)
+			.add(TerrestriaBlocks.INDIAN_PAINTBRUSH)
+			.add(TerrestriaBlocks.MONSTERAS);
 
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaBlockTags.BLACK_SAND), JTag.tag()
-			.add(TerrestriaBlocks.BLACK_SAND.getRegistryName()));
+		this.getOrCreateTagBuilder(TerrestriaBlockTags.BLACK_SAND)
+			.add(TerrestriaBlocks.BLACK_SAND);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(TerrestriaBlockTags.SMALL_OAK_LOGS), JTag.tag()
-			.add(TerrestriaBlocks.SMALL_OAK_LOG.getRegistryName())
-			.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG.getRegistryName()));
+		this.getOrCreateTagBuilder(TerrestriaBlockTags.SMALL_OAK_LOGS)
+			.add(TerrestriaBlocks.SMALL_OAK_LOG)
+			.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
 
 
 		// custom dirt block tags
@@ -108,150 +109,148 @@ public class TerrestriaBlockTagProvider {
 		addWood(TerrestriaBlockTags.WILLOW_LOGS, TerrestriaBlocks.WILLOW);
 		addWood(TerrestriaBlockTags.YUCCA_PALM_LOGS, TerrestriaBlocks.YUCCA_PALM);
 
-		RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.LOGS_THAT_BURN), JTag.tag()
-			.tag(TerrestriaBlockTags.CYPRESS_LOGS.id())
-			.tag(TerrestriaBlockTags.HEMLOCK_LOGS.id())
-			.tag(TerrestriaBlockTags.JAPANESE_MAPLE_LOGS.id())
-			.tag(TerrestriaBlockTags.RAINBOW_EUCALYPTUS_LOGS.id())
-			.tag(TerrestriaBlockTags.REDWOOD_LOGS.id())
-			.tag(TerrestriaBlockTags.RUBBER_LOGS.id())
-			.tag(TerrestriaBlockTags.SAKURA_LOGS.id())
-			.tag(TerrestriaBlockTags.SMALL_OAK_LOGS.id())
-			.tag(TerrestriaBlockTags.WILLOW_LOGS.id())
-			.tag(TerrestriaBlockTags.YUCCA_PALM_LOGS.id()));
-		TAG_MAP.forEach((k, v) -> RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(k), v));
+		this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+			.addTag(TerrestriaBlockTags.CYPRESS_LOGS)
+			.addTag(TerrestriaBlockTags.HEMLOCK_LOGS)
+			.addTag(TerrestriaBlockTags.JAPANESE_MAPLE_LOGS)
+			.addTag(TerrestriaBlockTags.RAINBOW_EUCALYPTUS_LOGS)
+			.addTag(TerrestriaBlockTags.REDWOOD_LOGS)
+			.addTag(TerrestriaBlockTags.RUBBER_LOGS)
+			.addTag(TerrestriaBlockTags.SAKURA_LOGS)
+			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS)
+			.addTag(TerrestriaBlockTags.WILLOW_LOGS)
+			.addTag(TerrestriaBlockTags.YUCCA_PALM_LOGS);
 	}
 
-	private static void addDirt(DirtBlocks dirtBlock) {
-		TAG_MAP.computeIfAbsent(BlockTags.DIRT, t -> JTag.tag())
-			.add(dirtBlock.getDirt().getRegistryName())
-			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName());
+	private void addDirt(DirtBlocks dirtBlock) {
+		getOrCreateTagBuilder(BlockTags.DIRT)
+			.add(dirtBlock.getDirt())
+			.add(dirtBlock.getGrassBlock())
+			.add(dirtBlock.getPodzol());
 
-		TAG_MAP.computeIfAbsent(BlockTags.ENDERMAN_HOLDABLE, t -> JTag.tag())
-			.add(dirtBlock.getDirt().getRegistryName())
-			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName());
+		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE)
+			.add(dirtBlock.getDirt())
+			.add(dirtBlock.getGrassBlock())
+			.add(dirtBlock.getPodzol());
 
-		TAG_MAP.computeIfAbsent(BlockTags.MUSHROOM_GROW_BLOCK, t -> JTag.tag())
-			.add(dirtBlock.getPodzol().getRegistryName());
+		getOrCreateTagBuilder(BlockTags.MUSHROOM_GROW_BLOCK)
+			.add(dirtBlock.getPodzol());
 
-		TAG_MAP.computeIfAbsent(BlockTags.SHOVEL_MINEABLE, t -> JTag.tag())
-			.add(dirtBlock.getDirt().getRegistryName())
-			.add(dirtBlock.getDirtPath().getRegistryName())
-			.add(dirtBlock.getFarmland().getRegistryName())
-			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName());
+		getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
+			.add(dirtBlock.getDirt())
+			.add(dirtBlock.getDirtPath())
+			.add(dirtBlock.getFarmland())
+			.add(dirtBlock.getGrassBlock())
+			.add(dirtBlock.getPodzol());
 
-		TAG_MAP.computeIfAbsent(BlockTags.VALID_SPAWN, t -> JTag.tag())
-			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName());
+		getOrCreateTagBuilder(BlockTags.VALID_SPAWN)
+			.add(dirtBlock.getGrassBlock())
+			.add(dirtBlock.getPodzol());
 
 
-		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.FARMLAND, t -> JTag.tag())
-			.add(dirtBlock.getFarmland().getRegistryName());
+		getOrCreateTagBuilder(TerrestriaBlockTags.FARMLAND)
+			.add(dirtBlock.getFarmland());
 
-		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.GRASS_BLOCKS, t -> JTag.tag())
-			.add(dirtBlock.getGrassBlock().getRegistryName());
+		getOrCreateTagBuilder(TerrestriaBlockTags.GRASS_BLOCKS)
+			.add(dirtBlock.getGrassBlock());
 
-		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.PODZOL, t -> JTag.tag())
-			.add(dirtBlock.getPodzol().getRegistryName());
+		getOrCreateTagBuilder(TerrestriaBlockTags.PODZOL)
+			.add(dirtBlock.getPodzol());
 
-		TAG_MAP.computeIfAbsent(TerrestriaBlockTags.SOIL, t -> JTag.tag())
-			.add(dirtBlock.getDirt().getRegistryName())
-			.add(dirtBlock.getGrassBlock().getRegistryName())
-			.add(dirtBlock.getPodzol().getRegistryName());
+		getOrCreateTagBuilder(TerrestriaBlockTags.SOIL)
+			.add(dirtBlock.getDirt())
+			.add(dirtBlock.getGrassBlock())
+			.add(dirtBlock.getPodzol());
 	}
 
-	private static void addSand(SandBlock sandBlock) {
-		TAG_MAP.computeIfAbsent(BlockTags.ENDERMAN_HOLDABLE, t -> JTag.tag()).add(sandBlock.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.SAND, t -> JTag.tag()).add(sandBlock.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.SHOVEL_MINEABLE, t -> JTag.tag()).add(sandBlock.getRegistryName());
+	private void addSand(SandBlock sandBlock) {
+		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE).add(sandBlock);
+		getOrCreateTagBuilder(BlockTags.SAND).add(sandBlock);
+		getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(sandBlock);
 	}
 
-	private static void addStone(TagKey<Block> stoneTag, StoneBlocks stoneBlock) {
-
-		JTag stoneBuilder = TAG_MAP.computeIfAbsent(stoneTag, t -> JTag.tag());
+	private void addStone(TagKey<Block> stoneTag, StoneBlocks stoneBlock) {
+		ObjectBuilder<Block> stoneBuilder = getOrCreateTagBuilder(stoneTag);
 		if (stoneBlock.bricks != null) {
-			stoneBuilder.add(stoneBlock.bricks.full.getRegistryName());
+			stoneBuilder.add(stoneBlock.bricks.full);
 			addStoneVariant(stoneBlock.bricks);
 
-			stoneBuilder.add(stoneBlock.chiseledBricks.getRegistryName());
-			RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.PICKAXE_MINEABLE), JTag.tag().add(stoneBlock.chiseledBricks.getRegistryName()));
+			stoneBuilder.add(stoneBlock.chiseledBricks);
+			getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.chiseledBricks);
 
-			stoneBuilder.add(stoneBlock.crackedBricks.getRegistryName());
-			RUNTIME_RESOURCE_PACK.addTag(TerrestriaDatagen.tagID(BlockTags.PICKAXE_MINEABLE), JTag.tag().add(stoneBlock.crackedBricks.getRegistryName()));
+			stoneBuilder.add(stoneBlock.crackedBricks);
+			getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.crackedBricks);
 		}
 		if (stoneBlock.cobblestone != null) {
-			stoneBuilder.add(stoneBlock.cobblestone.full.getRegistryName());
+			stoneBuilder.add(stoneBlock.cobblestone.full);
 			addStoneVariant(stoneBlock.cobblestone);
 		}
 		if (stoneBlock.mossyBricks != null) {
-			stoneBuilder.add(stoneBlock.mossyBricks.full.getRegistryName());
+			stoneBuilder.add(stoneBlock.mossyBricks.full);
 			addStoneVariant(stoneBlock.mossyBricks);
 		}
 		if (stoneBlock.mossyCobblestone != null) {
-			stoneBuilder.add(stoneBlock.mossyCobblestone.full.getRegistryName());
+			stoneBuilder.add(stoneBlock.mossyCobblestone.full);
 			addStoneVariant(stoneBlock.mossyCobblestone);
 		}
 		if (stoneBlock.plain != null) {
-			stoneBuilder.add(stoneBlock.plain.full.getRegistryName());
+			stoneBuilder.add(stoneBlock.plain.full);
 			addStoneVariant(stoneBlock.plain);
 		}
 		if (stoneBlock.smooth != null) {
-			stoneBuilder.add(stoneBlock.smooth.full.getRegistryName());
+			stoneBuilder.add(stoneBlock.smooth.full);
 			addStoneVariant(stoneBlock.smooth);
 		}
 
-		TAG_MAP.computeIfAbsent(BlockTags.BUTTONS, t -> JTag.tag()).add(stoneBlock.button.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.PRESSURE_PLATES, t -> JTag.tag()).add(stoneBlock.pressurePlate.getRegistryName());
+		getOrCreateTagBuilder(BlockTags.BUTTONS).add(stoneBlock.button);
+		getOrCreateTagBuilder(BlockTags.PRESSURE_PLATES).add(stoneBlock.pressurePlate);
 	}
 
-	private static void addStoneVariant(StoneVariantBlocks stoneVariantBlock) {
-		TAG_MAP.computeIfAbsent(BlockTags.SLABS, t -> JTag.tag()).add(stoneVariantBlock.slab.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.STAIRS, t -> JTag.tag()).add(stoneVariantBlock.stairs.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WALLS, t -> JTag.tag()).add(stoneVariantBlock.wall.getRegistryName());
+	private void addStoneVariant(StoneVariantBlocks stoneVariantBlock) {
+		getOrCreateTagBuilder(BlockTags.SLABS).add(stoneVariantBlock.slab);
+		getOrCreateTagBuilder(BlockTags.STAIRS).add(stoneVariantBlock.stairs);
+		getOrCreateTagBuilder(BlockTags.WALLS).add(stoneVariantBlock.wall);
 
-		TAG_MAP.computeIfAbsent(BlockTags.PICKAXE_MINEABLE, t ->JTag.tag())
-				.add(stoneVariantBlock.full.getRegistryName())
-				.add(stoneVariantBlock.slab.getRegistryName())
-				.add(stoneVariantBlock.stairs.getRegistryName());
+		getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+				.add(stoneVariantBlock.full)
+				.add(stoneVariantBlock.slab)
+				.add(stoneVariantBlock.stairs);
 				// Adding to WALLS does this for PICKAXE_MINEABLE.
 	}
 
-	private static void addWood(TagKey<Block> logTag, WoodBlocks woodBlock) {
-		JTag woodBuilder = TAG_MAP.computeIfAbsent(logTag, t -> JTag.tag());
+	private void addWood(TagKey<Block> logTag, WoodBlocks woodBlock) {
+		ObjectBuilder<Block> woodBuilder = getOrCreateTagBuilder(logTag);
 		woodBuilder
-			.add(woodBlock.log.getRegistryName())
-			.add(woodBlock.strippedLog.getRegistryName());
+			.add(woodBlock.log)
+			.add(woodBlock.strippedLog);
 		if (woodBlock.strippedWood != null) {
-			woodBuilder.add(woodBlock.strippedWood.getRegistryName());
+			woodBuilder.add(woodBlock.strippedWood);
 		}
 		if (woodBlock.wood != null) {
-			woodBuilder.add(woodBlock.wood.getRegistryName());
+			woodBuilder.add(woodBlock.wood);
 		}
 		if(woodBlock instanceof QuarteredWoodBlocks) {
 			woodBuilder
-				.add(((QuarteredWoodBlocks) woodBlock).quarterLog.getRegistryName())
-				.add(((QuarteredWoodBlocks) woodBlock).strippedQuarterLog.getRegistryName());
+				.add(((QuarteredWoodBlocks) woodBlock).quarterLog)
+				.add(((QuarteredWoodBlocks) woodBlock).strippedQuarterLog);
 		}
 
-		TAG_MAP.computeIfAbsent(BlockTags.FENCE_GATES, t -> JTag.tag()).add(woodBlock.fenceGate.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.LEAVES, t -> JTag.tag()).add(woodBlock.leaves.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.PLANKS, t -> JTag.tag()).add(woodBlock.planks.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.SLABS, t -> JTag.tag()).add(woodBlock.slab.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.STAIRS, t -> JTag.tag()).add(woodBlock.stairs.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.STANDING_SIGNS, t -> JTag.tag()).add(woodBlock.sign.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WALL_SIGNS, t -> JTag.tag()).add(woodBlock.wallSign.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_BUTTONS, t -> JTag.tag()).add(woodBlock.button.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_DOORS, t -> JTag.tag()).add(woodBlock.door.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_FENCES, t -> JTag.tag()).add(woodBlock.fence.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_PRESSURE_PLATES, t -> JTag.tag()).add(woodBlock.pressurePlate.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_SLABS, t -> JTag.tag()).add(woodBlock.slab.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_STAIRS, t -> JTag.tag()).add(woodBlock.stairs.getRegistryName());
-		TAG_MAP.computeIfAbsent(BlockTags.WOODEN_TRAPDOORS, t -> JTag.tag()).add(woodBlock.trapdoor.getRegistryName());
+		getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(woodBlock.fenceGate);
+		getOrCreateTagBuilder(BlockTags.LEAVES).add(woodBlock.leaves);
+		getOrCreateTagBuilder(BlockTags.PLANKS).add(woodBlock.planks);
+		getOrCreateTagBuilder(BlockTags.SLABS).add(woodBlock.slab);
+		getOrCreateTagBuilder(BlockTags.STAIRS).add(woodBlock.stairs);
+		getOrCreateTagBuilder(BlockTags.STANDING_SIGNS).add(woodBlock.sign);
+		getOrCreateTagBuilder(BlockTags.WALL_SIGNS).add(woodBlock.wallSign);
+		getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(woodBlock.button);
+		getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(woodBlock.door);
+		getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(woodBlock.fence);
+		getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(woodBlock.pressurePlate);
+		getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(woodBlock.slab);
+		getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(woodBlock.stairs);
+		getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(woodBlock.trapdoor);
 
 		// Adding to FENCE_GATES or any WOODEN tag does this for AXE_MINEABLE.
-		TAG_MAP.computeIfAbsent(BlockTags.HOE_MINEABLE, t -> JTag.tag()).add(woodBlock.leaves.getRegistryName());
+		getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(woodBlock.leaves);
 	}
 }

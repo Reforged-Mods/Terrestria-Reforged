@@ -12,10 +12,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TerrestriaRegistry {
+	public static final List<Block> BLOCKS = new ArrayList<>();
 	public static BlockItem registerBuildingBlockItem(String name, Block block) {
 		return registerBlockItem(name, block, ItemGroup.BUILDING_BLOCKS);
 	}
@@ -54,6 +57,7 @@ public class TerrestriaRegistry {
 
 	public static <T extends Block> T register(String name, T block) {
 		block.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
+		BLOCKS.add(block);
 		ForgeRegistries.BLOCKS.register(block);
 		return block;
 	}

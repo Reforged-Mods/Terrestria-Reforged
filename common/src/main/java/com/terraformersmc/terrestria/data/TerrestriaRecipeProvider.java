@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.data;
 
+import com.terraformersmc.terraform.utils.TerraformRecipeProvider;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
@@ -7,6 +8,7 @@ import com.terraformersmc.terrestria.init.helpers.StoneVariantItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
@@ -21,9 +23,13 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.function.Consumer;
 
-public class TerrestriaRecipeProvider {
+public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
+	public TerrestriaRecipeProvider(DataGenerator dataGenerator) {
+		super(dataGenerator);
+	}
 
-	/*protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+	@Override
+	protected void generate(Consumer<RecipeJsonProvider> exporter) {
 		// misc. recipes
 		new ShapelessRecipeJsonBuilder(TerrestriaItems.BRYCE_SAPLING, 1)
 				.input(Items.OAK_SAPLING)
@@ -220,5 +226,5 @@ public class TerrestriaRecipeProvider {
 	@Override
 	protected Identifier getRecipeIdentifier(Identifier identifier) {
 		return new Identifier(Terrestria.MOD_ID, identifier.getPath());
-	}*/
+	}
 }

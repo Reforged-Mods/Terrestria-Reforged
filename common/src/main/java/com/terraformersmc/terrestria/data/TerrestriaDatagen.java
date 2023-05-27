@@ -1,35 +1,26 @@
 package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terrestria.Terrestria;
-import net.devtech.arrp.api.RRPEvent;
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.server.BlockTagProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = Terrestria.MOD_ID + "_common", bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TerrestriaDatagen {
-
-	public static final RuntimeResourcePack RUNTIME_RESOURCE_PACK = RuntimeResourcePack.create("terrestria:dynamic");
-
-	public static void onInitializeDataGenerator() {
-		TerrestriaBiomeTagProvider.init();
-		TerrestriaBlockLootTableProvider.init();
-		TerrestriaBlockTagProvider.init();
-		TerrestriaItemTagProvider.init();
-		//TerrestriaRecipeProvider.init();
-		RUNTIME_RESOURCE_PACK.dump();
+	public static void onInitializeDataGenerator(DataGenerator dataGenerator, ExistingFileHelper helper) {
+		dataGenerator.addProvider(new TerrestriaBiomeTagProvider(dataGenerator, helper));
+		dataGenerator.addProvider(new TerrestriaLootTableProvider(dataGenerator));
+		BlockTagProvider provider = new TerrestriaBlockTagProvider(dataGenerator, helper);
+		dataGenerator.addProvider(provider);
+		dataGenerator.addProvider(new TerrestriaItemTagProvider(dataGenerator, provider, helper));
+		dataGenerator.addProvider(new TerrestriaRecipeProvider(dataGenerator));
 	}
 
 	@SubscribeEvent
-	public static void onResourcePackAddAfter(RRPEvent.AfterVanilla event){
-		event.addPack(RUNTIME_RESOURCE_PACK);
-	}
-
-	public static Identifier tagID(TagKey<?> key){
-		String suffix = key.registry() == Registry.BIOME_KEY ? "" : "s";
-		return new Identifier(key.id().getNamespace(), key.registry().getValue().getPath() + suffix + "/" + key.id().getPath());
+	public static void onGatherDataEvent(GatherDataEvent event){
+		onInitializeDataGenerator(event.getGenerator(), event.getExistingFileHelper());
 	}
 }

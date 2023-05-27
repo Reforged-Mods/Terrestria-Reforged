@@ -107,7 +107,6 @@ public class Terrestria {
 
 	private void commonLoad(FMLCommonSetupEvent event){
 		runnables.forEach(event::enqueueWork);
-		TerrestriaDatagen.onInitializeDataGenerator();
 	}
 
 	public static void callbackWhenInitialized(Runnable callback) {

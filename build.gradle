@@ -35,7 +35,6 @@ dependencies {
 	if (findProject(':worldgen') != null) {
 		includeMod "terrablender", "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 	}
-	modImplementation(include("com.github.Reforged-Mods:ARRP-forge:0.5.7.2"))
 	afterEvaluate {
 		subprojects.each {
 			implementation project(path: "${it.name}", configuration: "namedElements")

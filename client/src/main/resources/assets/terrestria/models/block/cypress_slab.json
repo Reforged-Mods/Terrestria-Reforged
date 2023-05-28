@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "terrestria:block/cypress_planks",
+    "top": "terrestria:block/cypress_planks",
+    "side": "terrestria:block/cypress_planks"
+  }
+}

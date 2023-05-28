@@ -27,14 +27,14 @@ dependencies {
 
 	forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 	//modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:1.0.5") //d7bc649383
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-config-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-dirt-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-shapes-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-surfaces-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-tree-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-wood-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}"
+	//includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
+	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-config-api-v1:${project.terraform_version}"
+	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-dirt-api-v1:${project.terraform_version}"
+	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-shapes-api-v1:${project.terraform_version}"
+	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-surfaces-api-v1:${project.terraform_version}"
+	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-tree-api-v1:${project.terraform_version}"
+	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-wood-api-v1:${project.terraform_version}"
+	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}"
 	if (findProject(':worldgen') != null) {
 		includeMod "terrablender", "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 	}
@@ -109,7 +109,7 @@ subprojects {
 		forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 		modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:${rootProject.fbapi_reforged_version}") //d7bc649383
 
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
+		//modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
 		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-config-api-v1:${project.terraform_version}"
 		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-dirt-api-v1:${project.terraform_version}"
 		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-shapes-api-v1:${project.terraform_version}"

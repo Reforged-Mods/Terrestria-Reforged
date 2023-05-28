@@ -1,15 +1,11 @@
 package com.terraformersmc.terrestria.init.helpers;
 
 import com.google.common.collect.ImmutableMap;
-import com.terraformersmc.terraform.biomeremapper.api.BiomeRemapper;
-import com.terraformersmc.terraform.biomeremapper.api.BiomeRemapperApi;
-import com.terraformersmc.terraform.biomeremapper.api.DataVersions;
 import com.terraformersmc.terrestria.Terrestria;
 
-@BiomeRemapper
-public class TerrestriaBiomeRemappings implements BiomeRemapperApi {
+public class TerrestriaBiomeRemappings {
 	public void init() {
-		register(Terrestria.MOD_ID, DataVersions.V_1_18_2, ImmutableMap.<String, String>builder()
+		/*register(Terrestria.MOD_ID, DataVersions.V_1_18_2, ImmutableMap.<String, String>builder()
 				.put("terrestria:caldera_beach", "terrestria:caldera")
 				.put("terrestria:caldera_foothills", "terrestria:caldera")
 				.put("terrestria:caldera_ridge", "terrestria:caldera")
@@ -33,6 +29,6 @@ public class TerrestriaBiomeRemappings implements BiomeRemapperApi {
 				.put("terrestria:wooded_sakura_hills", "terrestria:sakura_forest")
 				.put("terrestria:volcanic_island_beach", "terrestria:volcanic_island")
 				.put("terrestria:volcanic_island_shore", "terrestria:volcanic_island")
-				.build());
+				.build());*/
 	}
 }

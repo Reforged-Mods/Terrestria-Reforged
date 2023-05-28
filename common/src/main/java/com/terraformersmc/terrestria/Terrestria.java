@@ -64,7 +64,7 @@ public class Terrestria {
 	private static void register() {
 		ModContainer previous = ModLoadingContext.get().getActiveContainer();
 		ModContainer newContainer = ModList.get().getModContainerById(MOD_ID).orElse(null);
-		if (newContainer == null) return;
+		if (newContainer == null) newContainer = previous;
 		ModLoadingContext.get().setActiveContainer(newContainer);
 		// Load the general config if it hasn't been loaded already
 		CONFIG_MANAGER.getGeneralConfig();

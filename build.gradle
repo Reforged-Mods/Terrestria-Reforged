@@ -9,7 +9,10 @@ plugins {
 apply from: 'https://raw.githubusercontent.com/Reforged-Mods/GradleScripts/2.5-arch-loom/ferry.gradle'
 
 loom {
+	accessWidenerPath = file("src/main/resources/terrestria.accesswidener")
 	forge {
+		convertAccessWideners = true
+		extraAccessWideners.add("terrestria.accesswidener")
 		mixinConfigs = ["mixins.terrestria-client.json", "mixins.terrestria-common.json", "mixins.terrestria-worldgen.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-common.bugfix.json"]
 	}
 }

@@ -36,7 +36,7 @@ dependencies {
 	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-wood-api-v1:${project.terraform_version}"
 	modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}"
 	if (findProject(':worldgen') != null) {
-		includeMod "terrablender", "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
+		modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 	}
 	afterEvaluate {
 		subprojects.each {

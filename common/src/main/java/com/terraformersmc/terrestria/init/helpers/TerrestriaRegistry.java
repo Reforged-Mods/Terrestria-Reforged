@@ -43,7 +43,7 @@ public class TerrestriaRegistry {
 	}
 
 	public static SignItem registerSignItem(String name, Block standing, Block wall) {
-		SignItem item = new SignItem(new Item.Settings().group(Terrestria.itemGroup).maxCount(16), standing, wall);
+		SignItem item = new SignItem(new Item.Settings().group(ItemGroup.DECORATIONS).maxCount(16), standing, wall);
 		item.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
 		ForgeRegistries.ITEMS.register(item);
 		return item;

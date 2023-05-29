@@ -9,6 +9,7 @@ import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.resource.FileResourcePackProvider;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class TerrestriaConfigManager {
 	private static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
 	public TerrestriaConfigManager() {
-		Path configDirectory = new File(".", "config/terrestria").toPath();
+		Path configDirectory = FMLPaths.CONFIGDIR.get().resolve(Terrestria.MOD_ID);
 
 		try {
 			Files.createDirectories(configDirectory);

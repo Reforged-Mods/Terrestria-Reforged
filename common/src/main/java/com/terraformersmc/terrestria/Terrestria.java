@@ -7,10 +7,7 @@ import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierTyp
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
@@ -54,6 +51,17 @@ public class Terrestria {
 		eventBus.addListener(this::commonLoad);
 		eventBus.register(this);
 		itemGroup = new ItemGroup(MOD_ID + ".items") {
+
+			@Override
+			public void appendStacks(DefaultedList<ItemStack> stacks) {
+				super.appendStacks(stacks);
+				Registry.ITEM.forEach(item -> {
+					if (Registry.ITEM.getId(item).getNamespace().equals(MOD_ID)) {
+						item.appendStacks(item.getGroup(), stacks);
+					}
+				});
+			}
+
 			@Override
 			public ItemStack createIcon() {
 				return new ItemStack(TerrestriaItems.RUBBER_SAPLING);

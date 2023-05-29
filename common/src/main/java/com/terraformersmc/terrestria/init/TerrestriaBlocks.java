@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.dirt.block.TerraformDirtPathBlock;
 import com.terraformersmc.terraform.utils.TerraformBlockSettings;
+import com.terraformersmc.terraform.utils.TerraformFlammableBlockRegistry;
 import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.leaves.block.LeafPileBlock;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
@@ -41,7 +42,6 @@ import java.util.List;
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaBlocks {
-	public static List<BurnWrapper> BURN_VALUES = new ArrayList<>();
 
 	public static QuarteredWoodBlocks REDWOOD;
 	public static QuarteredWoodBlocks HEMLOCK;
@@ -220,28 +220,6 @@ public class TerrestriaBlocks {
 	}
 
 	public static void add(Block block, int burn, int spread){
-		BURN_VALUES.add(new BurnWrapper(block, burn, spread));
-	}
-
-	public static class BurnWrapper {
-		private final Block block;
-		private final int burn, spread;
-		public BurnWrapper(Block block, int burn, int spread){
-			this.block = block;
-			this.burn = burn;
-			this.spread = spread;
-		}
-
-		public Block getBlock() {
-			return block;
-		}
-
-		public int getBurn() {
-			return burn;
-		}
-
-		public int getSpread() {
-			return spread;
-		}
+		TerraformFlammableBlockRegistry.addFlammableBlock(block, burn, spread);
 	}
 }

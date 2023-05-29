@@ -8,8 +8,7 @@
     "MixinSlimeEntity",
     "MixinSugarCaneBlock",
     "MixinWaterCreatureEntity",
-    "TreeDecoratorTypeAccessor",
-    "VillagerTypeAccessor"
+    "TreeDecoratorTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

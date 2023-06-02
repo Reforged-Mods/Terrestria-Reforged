@@ -24,7 +24,7 @@ public class TerrestriaMixinPlugin implements IMixinConfigPlugin {
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
 		// If Lithium is loaded, disable our pathing mixin
-		if (LoadingModList.get().getMods().stream().anyMatch(m -> m.getModId().equals("lithium")) && mixinClassName.contains("LandPathNodeMaker")) {
+		if (LoadingModList.get().getMods().stream().anyMatch(m -> m.getModId().equals("lithium") || m.getModId().equals("canary")) && mixinClassName.contains("LandPathNodeMaker")) {
 			return false;
 		}
 

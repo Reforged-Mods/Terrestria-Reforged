@@ -8,15 +8,6 @@ plugins {
 
 apply from: 'https://raw.githubusercontent.com/Reforged-Mods/GradleScripts/2.5-arch-loom/ferry.gradle'
 
-loom {
-	accessWidenerPath = file("src/main/resources/terrestria.accesswidener")
-	forge {
-		convertAccessWideners = true
-		extraAccessWideners.add("terrestria.accesswidener")
-		mixinConfigs = ["mixins.terrestria-client.json", "mixins.terrestria-common.json", "mixins.terrestria-worldgen.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-common.bugfix.json"]
-	}
-}
-
 //Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 

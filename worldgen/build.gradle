@@ -3,6 +3,8 @@ archivesBaseName = "terrestria-worldgen"
 loom {
 	accessWidenerPath = file("src/main/resources/terrestria-worldgen.accesswidener")
 	forge {
+		convertAccessWideners = true
+		extraAccessWideners.add("terrestria-worldgen.accesswidener")
 		mixinConfigs = ["mixins.terrestria-worldgen.json"]
 	}
 }

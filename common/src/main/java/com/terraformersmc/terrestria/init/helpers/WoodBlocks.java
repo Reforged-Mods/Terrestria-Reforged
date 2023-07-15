@@ -81,13 +81,13 @@ public class WoodBlocks {
 
 		blocks.planks = TerrestriaRegistry.register(name + "_planks", new Block(TerraformBlockSettings.copyOf(Blocks.OAK_PLANKS).mapColor(colors.planks)));
 		blocks.slab = TerrestriaRegistry.register(name + "_slab", new SlabBlock(TerraformBlockSettings.copyOf(Blocks.OAK_SLAB).mapColor(colors.planks)));
-		blocks.stairs = TerrestriaRegistry.register(name + "_stairs", new TerraformStairsBlock(blocks.planks, TerraformBlockSettings.copyOf(Blocks.OAK_STAIRS).mapColor(colors.planks)));
+		blocks.stairs = TerrestriaRegistry.register(name + "_stairs", new StairsBlock(() -> blocks.planks.getDefaultState(), TerraformBlockSettings.copyOf(Blocks.OAK_STAIRS).mapColor(colors.planks)));
 		blocks.fence = TerrestriaRegistry.register(name + "_fence", new FenceBlock(TerraformBlockSettings.copyOf(Blocks.OAK_FENCE).mapColor(colors.planks)));
 		blocks.fenceGate = TerrestriaRegistry.register(name + "_fence_gate", new FenceGateBlock(TerraformBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).mapColor(colors.planks)));
-		blocks.door = TerrestriaRegistry.register(name + "_door", new TerraformDoorBlock(TerraformBlockSettings.copyOf(Blocks.OAK_DOOR).mapColor(colors.planks)));
-		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformButtonBlock(TerraformBlockSettings.copyOf(Blocks.OAK_BUTTON).mapColor(colors.planks)));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(TerraformBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks)));
-		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TerraformTrapdoorBlock(TerraformBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).mapColor(colors.planks)));
+		blocks.door = TerrestriaRegistry.register(name + "_door", new DoorBlock(TerraformBlockSettings.copyOf(Blocks.OAK_DOOR).mapColor(colors.planks)));
+		blocks.button = TerrestriaRegistry.register(name + "_button", new WoodenButtonBlock(TerraformBlockSettings.copyOf(Blocks.OAK_BUTTON).mapColor(colors.planks)));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, TerraformBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks)));
+		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TrapdoorBlock(TerraformBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).mapColor(colors.planks)));
 
 		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "entity/signs/" + name);
 
@@ -112,13 +112,8 @@ public class WoodBlocks {
 		}
 
 		// tree
-		flammableRegistry.add(log, 5, 5);
-		flammableRegistry.add(strippedLog, 5, 5);
 		if (strippedWood != strippedLog) {
 			TerrestriaBlocks.add(strippedWood, 5, 5);
-		}
-		if (wood != log) {
-			flammableRegistry.add(wood, 5, 5);
 		}
 
 		TerrestriaBlocks.add(leaves, 30, 60);

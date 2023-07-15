@@ -99,7 +99,7 @@ public class TerrestriaBiomeTagProvider extends BiomeTagProvider {
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SLOPE.id()))
 			.add(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_OVERWORLD.id()))
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_OVERWORLD.id()))
 			.add(TerrestriaBiomes.CALDERA)
 			.add(TerrestriaBiomes.CANYON)
 			.add(TerrestriaBiomes.CYPRESS_FOREST)
@@ -124,7 +124,7 @@ public class TerrestriaBiomeTagProvider extends BiomeTagProvider {
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), new Identifier("forge", "is_mesa")))
 			.add(TerrestriaBiomes.CANYON);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SAVANNA.id()))
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_SAVANNA.id()))
 			.add(TerrestriaBiomes.OUTBACK);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SNOWY.id()))

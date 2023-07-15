@@ -1,8 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
 import com.terraformersmc.terraform.utils.TerraformBlockSettings;
-import com.terraformersmc.terraform.utils.TerraformUtils;
-import com.terraformersmc.terraform.wood.block.TerraformStairsBlock;
 import net.minecraft.block.*;
 
 public class StoneVariantBlocks {
@@ -22,7 +20,7 @@ public class StoneVariantBlocks {
 
 		blocks.full = TerrestriaRegistry.register(name, new Block(TerraformBlockSettings.copyOf(Blocks.COBBLESTONE).mapColor(color)));
 		blocks.slab = TerrestriaRegistry.register(shapedName + "_slab", new SlabBlock(TerraformBlockSettings.copyOf(Blocks.COBBLESTONE_STAIRS).mapColor(color)));
-		blocks.stairs = TerrestriaRegistry.register(shapedName + "_stairs", new TerraformStairsBlock(blocks.full, TerraformBlockSettings.copyOf(Blocks.COBBLESTONE_STAIRS).mapColor(color)));
+		blocks.stairs = TerrestriaRegistry.register(shapedName + "_stairs", new StairsBlock(() -> blocks.full.getDefaultState(), TerraformBlockSettings.copyOf(Blocks.COBBLESTONE_STAIRS).mapColor(color)));
 		blocks.wall = TerrestriaRegistry.register(shapedName + "_wall", new WallBlock(TerraformBlockSettings.copyOf(Blocks.COBBLESTONE_WALL).mapColor(color)));
 
 		return blocks;

@@ -4,19 +4,19 @@ import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.server.BlockTagProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = Terrestria.MOD_ID + "_common", bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TerrestriaDatagen {
 	public static void onInitializeDataGenerator(DataGenerator dataGenerator, ExistingFileHelper helper) {
-		dataGenerator.addProvider(new TerrestriaBiomeTagProvider(dataGenerator, helper));
-		dataGenerator.addProvider(new TerrestriaLootTableProvider(dataGenerator));
+		dataGenerator.addProvider(true, new TerrestriaBiomeTagProvider(dataGenerator, helper));
+		dataGenerator.addProvider(true, new TerrestriaLootTableProvider(dataGenerator));
 		BlockTagProvider provider = new TerrestriaBlockTagProvider(dataGenerator, helper);
-		dataGenerator.addProvider(provider);
-		dataGenerator.addProvider(new TerrestriaItemTagProvider(dataGenerator, provider, helper));
-		dataGenerator.addProvider(new TerrestriaRecipeProvider(dataGenerator));
+		dataGenerator.addProvider(true, provider);
+		dataGenerator.addProvider(true, new TerrestriaItemTagProvider(dataGenerator, provider, helper));
+		dataGenerator.addProvider(true, new TerrestriaRecipeProvider(dataGenerator));
 	}
 
 	@SubscribeEvent

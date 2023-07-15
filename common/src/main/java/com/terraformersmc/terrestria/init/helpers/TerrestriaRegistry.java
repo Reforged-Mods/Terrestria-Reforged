@@ -35,8 +35,8 @@ public class TerrestriaRegistry {
 		BlockItem item = new BlockItem(block, new Item.Settings().group(itemGroup));
 		item.appendBlocks(Item.BLOCK_ITEMS, item);
 
-		ComposterRecipes.registerCompostableBlock(block);
 		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
+		ComposterRecipes.registerCompostableBlock(block);
 		return item;
 	}
 

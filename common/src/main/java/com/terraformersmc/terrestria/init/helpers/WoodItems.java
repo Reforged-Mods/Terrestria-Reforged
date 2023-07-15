@@ -3,8 +3,8 @@ package com.terraformersmc.terrestria.init.helpers;
 import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import com.terraformersmc.terraform.utils.TerraformFuelRegistry;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Items;
 import net.minecraft.item.SignItem;
@@ -73,16 +73,12 @@ public class WoodItems {
 	}
 
 	protected void addCompostables() {
-		CompostingChanceRegistry compostingRegistry = CompostingChanceRegistry.INSTANCE;
-
-		compostingRegistry.add(leaves, compostingRegistry.get(Items.OAK_LEAVES));
-		//compostingRegistry.add(sapling, compostingRegistry.get(Items.OAK_SAPLING));
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(leaves, 0.3f);
+		//ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(sapling, 0.3f);
 	}
 
 	protected void addFuels() {
-		FuelRegistry fuelRegistry = FuelRegistry.INSTANCE;
-
-		fuelRegistry.add(fence, 300);
-		fuelRegistry.add(fenceGate, 300);
+		TerraformFuelRegistry.addFuel(fence, 300);
+		TerraformFuelRegistry.addFuel(fenceGate, 300);
 	}
 }

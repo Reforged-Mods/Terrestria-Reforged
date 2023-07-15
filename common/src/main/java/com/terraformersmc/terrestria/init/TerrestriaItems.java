@@ -1,13 +1,13 @@
 package com.terraformersmc.terrestria.init;
 
+import com.terraformersmc.terraform.utils.TerraformFuelRegistry;
 import com.terraformersmc.terrestria.init.helpers.QuarteredWoodItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 
 import com.terraformersmc.terrestria.item.LogTurnerItem;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -129,52 +129,50 @@ public class TerrestriaItems {
 	}
 
 	private static void addCompostables() {
-		CompostingChanceRegistry compostingRegistry = CompostingChanceRegistry.INSTANCE;
-		float CACTUS_CHANCE = compostingRegistry.get(Items.CACTUS);
-		float FERN_CHANCE = compostingRegistry.get(Items.FERN);
-		float FLOWER_CHANCE = compostingRegistry.get(Items.POPPY);
-		float GRASS_CHANCE = compostingRegistry.get(Items.GRASS);
-		float LEAVES_CHANCE = compostingRegistry.get(Items.OAK_LEAVES);
-		float SAPLING_CHANCE = compostingRegistry.get(Items.OAK_SAPLING);
-		float SEAGRASS_CHANCE = compostingRegistry.get(Items.SEAGRASS);
+		float CACTUS_CHANCE = ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getFloat(Items.CACTUS);
+		float FERN_CHANCE = ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getFloat(Items.FERN);
+		float FLOWER_CHANCE = ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getFloat(Items.POPPY);
+		float GRASS_CHANCE = ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getFloat(Items.GRASS);
+		float LEAVES_CHANCE = ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getFloat(Items.OAK_LEAVES);
+		float SAPLING_CHANCE = ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getFloat(Items.OAK_SAPLING);
+		float SEAGRASS_CHANCE = ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.getFloat(Items.SEAGRASS);
 
-		compostingRegistry.add(DARK_JAPANESE_MAPLE_LEAVES, LEAVES_CHANCE);
-		compostingRegistry.add(JAPANESE_MAPLE_SHRUB_LEAVES, LEAVES_CHANCE);
-		compostingRegistry.add(JUNGLE_PALM_LEAVES, LEAVES_CHANCE);
-		compostingRegistry.add(SAKURA_LEAF_PILE, LEAVES_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DARK_JAPANESE_MAPLE_LEAVES, LEAVES_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(JAPANESE_MAPLE_SHRUB_LEAVES, LEAVES_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(JUNGLE_PALM_LEAVES, LEAVES_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(SAKURA_LEAF_PILE, LEAVES_CHANCE);
 
-		compostingRegistry.add(SAGUARO_CACTUS, CACTUS_CHANCE);
-		compostingRegistry.add(TINY_CACTUS, CACTUS_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(SAGUARO_CACTUS, CACTUS_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(TINY_CACTUS, CACTUS_CHANCE);
 
-		compostingRegistry.add(CATTAIL, SEAGRASS_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(CATTAIL, SEAGRASS_CHANCE);
 
-		compostingRegistry.add(AGAVE, FLOWER_CHANCE);
-		compostingRegistry.add(ALOE_VERA, FLOWER_CHANCE);
-		compostingRegistry.add(DEAD_GRASS, GRASS_CHANCE);
-		compostingRegistry.add(INDIAN_PAINTBRUSH, FLOWER_CHANCE);
-		compostingRegistry.add(MONSTERAS, FERN_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(AGAVE, FLOWER_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(ALOE_VERA, FLOWER_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DEAD_GRASS, GRASS_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(INDIAN_PAINTBRUSH, FLOWER_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(MONSTERAS, FERN_CHANCE);
 
 		// TODO: Consider if there's a reasonable way to make WoodItems do this.
-		compostingRegistry.add(BRYCE_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(CYPRESS_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(DARK_JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(HEMLOCK_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(JAPANESE_MAPLE_SHRUB_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(JUNGLE_PALM_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(RAINBOW_EUCALYPTUS_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(REDWOOD_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(RUBBER_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(SAGUARO_CACTUS_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(SAKURA_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(WILLOW_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(YUCCA_PALM_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BRYCE_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(CYPRESS_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DARK_JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(HEMLOCK_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(JAPANESE_MAPLE_SHRUB_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(JUNGLE_PALM_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(RAINBOW_EUCALYPTUS_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(REDWOOD_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(RUBBER_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(SAGUARO_CACTUS_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(SAKURA_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(WILLOW_SAPLING, SAPLING_CHANCE);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(YUCCA_PALM_SAPLING, SAPLING_CHANCE);
 	}
 
 	private static void addFuels() {
-		FuelRegistry fuelRegistry = FuelRegistry.INSTANCE;
 
-		fuelRegistry.add(DEAD_GRASS, 100);
-		fuelRegistry.add(LOG_TURNER, 300);
+		TerraformFuelRegistry.addFuel(DEAD_GRASS, 100);
+		TerraformFuelRegistry.addFuel(LOG_TURNER, 300);
 	}
 }

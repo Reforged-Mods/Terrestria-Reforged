@@ -122,9 +122,7 @@ public class TerrestriaBiomes {
 		Identifier identifier = new Identifier(Terrestria.MOD_ID, name);
 		RegistryKey<Biome> biomeKey = RegistryKey.of(Registry.BIOME_KEY, identifier);
 
-		biome.setRegistryName(identifier);
-		//BuiltinRegistries.add(BuiltinRegistries.BIOME, identifier, biome);
-		ForgeRegistries.BIOMES.register(biome);
+		ForgeRegistries.BIOMES.register(identifier, biome);
 		biomes.put(name, biomeKey);
 
 		return biomeKey;

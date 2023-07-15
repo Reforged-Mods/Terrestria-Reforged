@@ -39,8 +39,7 @@ public class TerrestriaFoliagePlacerTypes {
 
 	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, Codec<P> codec) {
 		FoliagePlacerType<P> type = new FoliagePlacerType<P>(codec);
-		type.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
-		ForgeRegistries.FOLIAGE_PLACER_TYPES.register(type);
+		ForgeRegistries.FOLIAGE_PLACER_TYPES.register(new Identifier(Terrestria.MOD_ID, name), type);
 		return type;
 	}
 

@@ -36,7 +36,7 @@ public class TerrestriaFeatures {
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
-		ForgeRegistries.FEATURES.register(feature.setRegistryName(new Identifier(Terrestria.MOD_ID, name)));
+		ForgeRegistries.FEATURES.register(new Identifier(Terrestria.MOD_ID, name), feature);
 		return feature;
 	}
 }

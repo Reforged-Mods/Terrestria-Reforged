@@ -24,8 +24,7 @@ public class TerrestriaTreeDecorators {
 
 	private static <P extends TreeDecorator> TreeDecoratorType<P> register(String name, Codec<P> codec) {
 		TreeDecoratorType<P> type = new TreeDecoratorType<>(codec);
-		type.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
-		ForgeRegistries.TREE_DECORATOR_TYPES.register(type);
+		ForgeRegistries.TREE_DECORATOR_TYPES.register(new Identifier(Terrestria.MOD_ID, name), type);
 		return type;
 	}
 }

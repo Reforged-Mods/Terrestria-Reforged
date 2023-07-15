@@ -8,6 +8,7 @@ import com.terraformersmc.terrestria.init.helpers.StoneVariantItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -16,6 +17,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 
@@ -71,7 +73,7 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 
 	private void generateWood(Consumer<RecipeJsonProvider> exporter, WoodItems woodItem, TagKey<Item> logsTag) {
 		offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
-		offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
+		ShapelessRecipeJsonBuilder.create(woodItem.chestBoat).input(Blocks.CHEST).input(woodItem.boat).group("chest_boat").criterion("has_boat", conditionsFromTag(ItemTags.BOATS)).offerTo(exporter);
 
 		new ShapelessRecipeJsonBuilder(woodItem.button, 1)
 			.group("wooden_button")

@@ -11,13 +11,6 @@ import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModContainer;
@@ -29,6 +22,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegisterEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -107,8 +101,10 @@ public class Terrestria {
 	}
 
 	@SubscribeEvent
-	public void onRegister(final RegistryEvent.Register<Block> event){
-		onInitialize();
+	public void onRegister(final RegisterEvent event){
+		if (event.getRegistryKey() == ForgeRegistries.Keys.BLOCKS) {
+			onInitialize();
+		}
 	}
 
 	private void commonLoad(FMLCommonSetupEvent event){

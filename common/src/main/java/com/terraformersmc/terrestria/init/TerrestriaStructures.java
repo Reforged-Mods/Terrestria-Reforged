@@ -10,6 +10,8 @@ import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
@@ -34,11 +36,5 @@ public class TerrestriaStructures {
 
 	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
 		return Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, id), piece);
-	}
-
-	private static <T extends FeatureConfig> StructureFeature<T> registerStructureFeature(String id, StructureFeature<T> feature) {
-		feature.setRegistryName(new Identifier(Terrestria.MOD_ID, id));
-		ForgeRegistries.STRUCTURE_FEATURES.register(feature);
-		return feature;
 	}
 }

@@ -123,14 +123,11 @@ public class TerrestriaBlocks {
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, WoodBlocks.LogSize.SMALL);
 		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, WoodBlocks.LogSize.SMALL);
 
-		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
-		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
-		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SaguaroCactusBlock(null, FabricBlockSettings.copyOf(Blocks.CACTUS)));
+		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, TerraformBlockSettings.copyOf(Blocks.OAK_PLANKS)));
+		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, TerraformBlockSettings.copyOf(Blocks.OAK_PLANKS)));
+		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SaguaroCactusBlock(null, TerraformBlockSettings.copyOf(Blocks.CACTUS)));
 
-		add(SMALL_OAK_LOG, 5, 5);
-		add(STRIPPED_SMALL_OAK_LOG, 5, 5);
-
-		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(TerraformBlockSettings.copyOf(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves",
 				new LeavesBlock(TerraformBlockSettings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never))
@@ -140,13 +137,8 @@ public class TerrestriaBlocks {
 
 		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(TerraformBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.025f, 0.1f).noCollision().sounds(BlockSoundGroup.GRASS).mapColor(MapColor.PINK)));
 
-		add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
-		add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
-		add(JUNGLE_PALM_LEAVES, 30, 60);
-		add(SAKURA_LEAF_PILE, 30, 60);
-
-		TALL_CATTAIL = TerrestriaRegistry.register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
-		CATTAIL = TerrestriaRegistry.register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
+		TALL_CATTAIL = TerrestriaRegistry.register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, TerraformBlockSettings.copyOf(Blocks.SEAGRASS)));
+		CATTAIL = TerrestriaRegistry.register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, TerraformBlockSettings.copyOf(Blocks.SEAGRASS)));
 
 		// Saplings
 		Settings saplingSettings = Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS);
@@ -208,20 +200,19 @@ public class TerrestriaBlocks {
 		POTTED_TINY_CACTUS = TerrestriaRegistry.register("potted_tiny_cactus", new FlowerPotBlock(TINY_CACTUS,Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_AGAVE = TerrestriaRegistry.register("potted_agave", new FlowerPotBlock(AGAVE, Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_ALOE_VERA = TerrestriaRegistry.register("potted_aloe_vera", new FlowerPotBlock(ALOE_VERA, Settings.copy(Blocks.POTTED_POPPY)));
+		addFlammables();
 	}
 
 	private static void addFlammables() {
-		FlammableBlockRegistry flammableRegistry = FlammableBlockRegistry.getDefaultInstance();
+		add(SMALL_OAK_LOG, 5, 5);
+		add(STRIPPED_SMALL_OAK_LOG, 5, 5);
 
-		flammableRegistry.add(SMALL_OAK_LOG, 5, 5);
-		flammableRegistry.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
+		add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
+		add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
+		add(JUNGLE_PALM_LEAVES, 30, 60);
+		add(SAKURA_LEAF_PILE, 30, 60);
 
-		flammableRegistry.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
-		flammableRegistry.add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
-		flammableRegistry.add(JUNGLE_PALM_LEAVES, 30, 60);
-		flammableRegistry.add(SAKURA_LEAF_PILE, 30, 60);
-
-		flammableRegistry.add(DEAD_GRASS, 30, 60);
+		add(DEAD_GRASS, 30, 60);
 	}
 
 	public static boolean never(BlockState state, BlockView world, BlockPos pos) {

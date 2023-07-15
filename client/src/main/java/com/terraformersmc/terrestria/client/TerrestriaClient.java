@@ -20,7 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -234,13 +234,13 @@ public class TerrestriaClient {
 		}
 	}
 
-	public static void onItemColorHandler(ColorHandlerEvent.Item e) {
+	public static void onItemColorHandler(RegisterColorHandlersEvent.Item e) {
 		for (Item item : ITEM_COLOR_PROVIDERS.keySet()){
 			e.getItemColors().register(ITEM_COLOR_PROVIDERS.get(item), item);
 		}
 	}
 
-	public static void onBlockColorHandler(ColorHandlerEvent.Block e) {
+	public static void onBlockColorHandler(RegisterColorHandlersEvent.Block e) {
 		addColors();
 		for (Block block : COLOR_PROVIDERS.keySet()) {
 			e.getBlockColors().registerColorProvider(COLOR_PROVIDERS.get(block), block);

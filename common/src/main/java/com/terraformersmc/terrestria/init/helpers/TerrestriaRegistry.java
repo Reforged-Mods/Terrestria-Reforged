@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terraform.leaves.ComposterRecipes;
 import com.terraformersmc.terrestria.Terrestria;
 
 import net.minecraft.block.Block;
@@ -35,29 +36,24 @@ public class TerrestriaRegistry {
 		item.appendBlocks(Item.BLOCK_ITEMS, item);
 
 		ComposterRecipes.registerCompostableBlock(block);
-
-		item.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
-		ForgeRegistries.ITEMS.register(item);
+		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
 		return item;
 	}
 
 	public static SignItem registerSignItem(String name, Block standing, Block wall) {
 		SignItem item = new SignItem(new Item.Settings().group(ItemGroup.DECORATIONS).maxCount(16), standing, wall);
-		item.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
-		ForgeRegistries.ITEMS.register(item);
+		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
 		return item;
 	}
 
 	public static <I extends Item> I registerItem(String name, I item) {
-		item.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
-		ForgeRegistries.ITEMS.register(item);
+		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
 		return item;
 	}
 
 	public static <T extends Block> T register(String name, T block) {
-		block.setRegistryName(new Identifier(Terrestria.MOD_ID, name));
 		BLOCKS.add(block);
-		ForgeRegistries.BLOCKS.register(block);
+		ForgeRegistries.BLOCKS.register(new Identifier(Terrestria.MOD_ID, name), block);
 		return block;
 	}
 }

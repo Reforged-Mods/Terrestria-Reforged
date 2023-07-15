@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.tag.TerrestriaBiomeTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.server.BiomeTagProvider;
 import net.minecraft.tag.BiomeTags;
@@ -9,6 +10,7 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -22,6 +24,9 @@ public class TerrestriaBiomeTagProvider extends BiomeTagProvider {
 		/*
 		 * Vanilla biome categories
 		 */
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS.id()))
+			.add(TerrestriaBiomes.CYPRESS_SWAMP);
+
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_BEACH.id()))
 			.add(TerrestriaBiomes.VOLCANIC_ISLAND);
 
@@ -39,6 +44,9 @@ public class TerrestriaBiomeTagProvider extends BiomeTagProvider {
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_MOUNTAIN.id()))
 			.add(TerrestriaBiomes.CALDERA);
 
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_SAVANNA.id()))
+			.add(TerrestriaBiomes.OUTBACK);
+
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_TAIGA.id()))
 			.add(TerrestriaBiomes.DENSE_WOODLANDS)
 			.add(TerrestriaBiomes.HEMLOCK_RAINFOREST)
@@ -48,6 +56,22 @@ public class TerrestriaBiomeTagProvider extends BiomeTagProvider {
 			.add(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
 			.add(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
 			.add(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.SPAWNS_COLD_VARIANT_FROGS.id()))
+			.add(TerrestriaBiomes.CALDERA)
+			.add(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
+			.add(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE);
+
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.SPAWNS_WARM_VARIANT_FROGS.id()))
+			.add(TerrestriaBiomes.CANYON)
+			.add(TerrestriaBiomes.DUNES)
+			.add(TerrestriaBiomes.LUSH_DESERT)
+			.add(TerrestriaBiomes.OASIS)
+			.add(TerrestriaBiomes.VOLCANIC_ISLAND);
+
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.WATER_ON_MAP_OUTLINES.id()))
+			.add(TerrestriaBiomes.CYPRESS_SWAMP);
+
 
 
 		/*
@@ -230,5 +254,17 @@ public class TerrestriaBiomeTagProvider extends BiomeTagProvider {
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.VILLAGE_TAIGA_HAS_STRUCTURE.id()))
 			.add(TerrestriaBiomes.HEMLOCK_TREELINE)
 			.add(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), TerrestriaBiomeTags.CANYON_ARCH_HAS_STRUCTURE.id()))
+			.add(TerrestriaBiomes.CANYON);
+
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), TerrestriaBiomeTags.OCEAN_VOLCANO_HAS_STRUCTURE.id()))
+			.add(BiomeKeys.DEEP_FROZEN_OCEAN)
+			.add(BiomeKeys.DEEP_COLD_OCEAN)
+			.add(BiomeKeys.DEEP_OCEAN)
+			.add(BiomeKeys.DEEP_LUKEWARM_OCEAN);
+
+		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), TerrestriaBiomeTags.VOLCANO_HAS_STRUCTURE.id()))
+			.add(TerrestriaBiomes.VOLCANIC_ISLAND);
 	}
 }

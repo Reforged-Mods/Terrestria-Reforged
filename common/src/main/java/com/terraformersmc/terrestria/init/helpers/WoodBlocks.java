@@ -17,15 +17,15 @@ public class WoodBlocks {
 	public Block leaves;
 	public Block planks;
 	public SlabBlock slab;
-	public TerraformStairsBlock stairs;
+	public StairsBlock stairs;
 	public FenceBlock fence;
 	public FenceGateBlock fenceGate;
-	public TerraformDoorBlock door;
-	public TerraformButtonBlock button;
-	public TerraformPressurePlateBlock pressurePlate;
+	public DoorBlock door;
+	public WoodenButtonBlock button;
+	public PressurePlateBlock pressurePlate;
 	public TerraformSignBlock sign;
 	public TerraformWallSignBlock wallSign;
-	public TerraformTrapdoorBlock trapdoor;
+	public TrapdoorBlock trapdoor;
 	public Block strippedLog;
 	public Block strippedWood;
 	protected String name;
@@ -111,8 +111,14 @@ public class WoodBlocks {
 			TerrestriaBlocks.add(wood, 5, 5);
 		}
 
+		// tree
+		flammableRegistry.add(log, 5, 5);
+		flammableRegistry.add(strippedLog, 5, 5);
 		if (strippedWood != strippedLog) {
 			TerrestriaBlocks.add(strippedWood, 5, 5);
+		}
+		if (wood != log) {
+			flammableRegistry.add(wood, 5, 5);
 		}
 
 		TerrestriaBlocks.add(leaves, 30, 60);

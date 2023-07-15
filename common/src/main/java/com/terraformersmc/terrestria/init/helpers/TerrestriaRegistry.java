@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.leaves.ComposterRecipes;
 import com.terraformersmc.terrestria.Terrestria;
 
 import net.minecraft.block.Block;

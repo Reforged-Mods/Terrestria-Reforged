@@ -5,12 +5,11 @@ import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 
 public class QuarteredWoodBlocks extends WoodBlocks {
-
 	public Block quarterLog;
 	public Block strippedQuarterLog;
 
-	public QuarteredWoodBlocks() {
-	}
+	public static QuarteredWoodBlocks register(String name, WoodColors colors, boolean useExtendedLeaves) {
+		QuarteredWoodBlocks blocks = QuarteredWoodBlocks.copyOf(WoodBlocks.register(name, colors, LogSize.NORMAL, useExtendedLeaves));
 
 	@Override
 	public void addTreeFireInfo() {
@@ -34,6 +33,7 @@ public class QuarteredWoodBlocks extends WoodBlocks {
 
 	private static QuarteredWoodBlocks copyOf(WoodBlocks woodBlocks) {
 		QuarteredWoodBlocks blocks = new QuarteredWoodBlocks();
+
 		blocks.name = woodBlocks.name;
 		blocks.colors = woodBlocks.colors;
 		blocks.log = woodBlocks.log;
@@ -52,6 +52,16 @@ public class QuarteredWoodBlocks extends WoodBlocks {
 		blocks.trapdoor = woodBlocks.trapdoor;
 		blocks.strippedLog = woodBlocks.strippedLog;
 		blocks.strippedWood = woodBlocks.strippedWood;
+
 		return blocks;
+	}
+
+	protected void addFlammables() {
+		super.addFlammables();
+
+		FlammableBlockRegistry flammableRegistry = FlammableBlockRegistry.getDefaultInstance();
+
+		flammableRegistry.add(quarterLog, 5, 5);
+		flammableRegistry.add(strippedQuarterLog, 5, 5);
 	}
 }

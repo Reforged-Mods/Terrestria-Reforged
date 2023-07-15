@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria.data;
 import com.terraformersmc.terraform.dirt.DirtBlocks;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.TerrestriaBoats;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.*;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
@@ -12,6 +11,7 @@ import net.minecraft.data.server.BlockTagProvider;
 import net.minecraft.data.server.ItemTagProvider;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -23,17 +23,6 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 
 	@Override
 	protected void configure() {
-		this.getOrCreateTagBuilder(ItemTags.BOATS)
-			.add(TerrestriaBoats.CYPRESS_BOAT_TYPE.item())
-			.add(TerrestriaBoats.HEMLOCK_BOAT_TYPE.item())
-			.add(TerrestriaBoats.JAPANESE_MAPLE_BOAT_TYPE.item())
-			.add(TerrestriaBoats.RAINBOW_EUCALYPTUS_BOAT_TYPE.item())
-			.add(TerrestriaBoats.REDWOOD_BOAT_TYPE.item())
-			.add(TerrestriaBoats.RUBBER_BOAT_TYPE.item())
-			.add(TerrestriaBoats.SAKURA_BOAT_TYPE.item())
-			.add(TerrestriaBoats.WILLOW_BOAT_TYPE.item())
-			.add(TerrestriaBoats.YUCCA_PALM_BOAT_TYPE.item());
-
 		this.getOrCreateTagBuilder(ItemTags.LEAVES)
 			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_LEAVES)
 			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES)
@@ -66,6 +55,10 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		this.getOrCreateTagBuilder(TerrestriaItemTags.BLACK_SAND)
 			.add(TerrestriaItems.BLACK_SAND);
 
+		this.getOrCreateTagBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
+			.add(Items.MOSS_BLOCK)
+			.add(Items.VINE);
+
 		this.getOrCreateTagBuilder(TerrestriaItemTags.PLANKS_THAT_BURN)
 			.add(TerrestriaItems.CYPRESS.planks)
 			.add(TerrestriaItems.HEMLOCK.planks)
@@ -91,20 +84,12 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		// stone building item tags
 		addStone(TerrestriaItemTags.BASALT, TerrestriaItems.VOLCANIC_ROCK);
 
-		// wood building item tags (sadly no QuarteredWoodItems available)
-		addWood(TerrestriaItemTags.CYPRESS_LOGS, TerrestriaItems.CYPRESS)
-			.add(TerrestriaItems.CYPRESS_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_CYPRESS_QUARTER_LOG);
-		addWood(TerrestriaItemTags.HEMLOCK_LOGS, TerrestriaItems.HEMLOCK)
-			.add(TerrestriaItems.HEMLOCK_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_HEMLOCK_QUARTER_LOG);
+		// wood building item tags
+		addWood(TerrestriaItemTags.CYPRESS_LOGS, TerrestriaItems.CYPRESS);
+		addWood(TerrestriaItemTags.HEMLOCK_LOGS, TerrestriaItems.HEMLOCK);
 		addWood(TerrestriaItemTags.JAPANESE_MAPLE_LOGS, TerrestriaItems.JAPANESE_MAPLE);
-		addWood(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS, TerrestriaItems.RAINBOW_EUCALYPTUS)
-			.add(TerrestriaItems.RAINBOW_EUCALYPTUS_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
-		addWood(TerrestriaItemTags.REDWOOD_LOGS, TerrestriaItems.REDWOOD)
-			.add(TerrestriaItems.REDWOOD_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_REDWOOD_QUARTER_LOG);
+		addWood(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS, TerrestriaItems.RAINBOW_EUCALYPTUS);
+		addWood(TerrestriaItemTags.REDWOOD_LOGS, TerrestriaItems.REDWOOD);
 		addWood(TerrestriaItemTags.RUBBER_LOGS, TerrestriaItems.RUBBER);
 		addWood(TerrestriaItemTags.SAKURA_LOGS, TerrestriaItems.SAKURA);
 		addWood(TerrestriaItemTags.WILLOW_LOGS, TerrestriaItems.WILLOW);
@@ -134,6 +119,7 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		getOrCreateTagBuilder(ItemTags.SAND).add(sandItem);
 	}
 
+	@SuppressWarnings("SameParameterValue")
 	private void addStone(TagKey<Item> stoneTag, StoneItems stoneItem) {
 		ObjectBuilder<Item> stoneBuilder = getOrCreateTagBuilder(stoneTag);
 		if (stoneItem.bricks != null) {
@@ -144,6 +130,9 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 				.add(stoneItem.crackedBricks);
 
 			addStoneVariant(stoneItem.bricks);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.bricks.full);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.chiseledBricks);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.crackedBricks);
 		}
 		if (stoneItem.cobblestone != null) {
 			stoneBuilder.add(stoneItem.cobblestone.full);
@@ -152,10 +141,12 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 			// Add any cobble variant to vanilla crafting tags.
 			getOrCreateTagBuilder(ItemTags.STONE_CRAFTING_MATERIALS).add(stoneItem.cobblestone.full);
 			getOrCreateTagBuilder(ItemTags.STONE_TOOL_MATERIALS).add(stoneItem.cobblestone.full);
+			getOrCreateTagBuilder(TerrestriaItemTags.COBBLESTONE).add(stoneItem.cobblestone.full);
 		}
 		if (stoneItem.mossyBricks != null) {
 			stoneBuilder.add(stoneItem.mossyBricks.full);
 			addStoneVariant(stoneItem.mossyBricks);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.mossyBricks.full);
 		}
 		if (stoneItem.mossyCobblestone != null) {
 			stoneBuilder.add(stoneItem.mossyCobblestone.full);
@@ -164,10 +155,12 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		if (stoneItem.plain != null) {
 			stoneBuilder.add(stoneItem.plain.full);
 			addStoneVariant(stoneItem.plain);
+			getOrCreateTagBuilder(TerrestriaItemTags.STONE).add(stoneItem.plain.full);
 		}
 		if (stoneItem.smooth != null) {
 			stoneBuilder.add(stoneItem.smooth.full);
 			addStoneVariant(stoneItem.smooth);
+			getOrCreateTagBuilder(TerrestriaItemTags.STONE).add(stoneItem.smooth.full);
 		}
 
 		getOrCreateTagBuilder(ItemTags.BUTTONS).add(stoneItem.button);
@@ -180,16 +173,34 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		getOrCreateTagBuilder(ItemTags.WALLS).add(stoneVariantItem.wall);
 	}
 
-	private ObjectBuilder<Item> addWood(TagKey<Item> logTag, WoodItems woodItem) {
+	private void addWood(TagKey<Item> logTag, WoodItems woodItem) {
 		ObjectBuilder<Item> woodBuilder = getOrCreateTagBuilder(logTag);
 		woodBuilder
-				.add(woodItem.log)
-				.add(woodItem.strippedLog);
+			.add(woodItem.log)
+			.add(woodItem.strippedLog);
+		getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_LOGS).add(woodItem.strippedLog);
+
 		if (woodItem.strippedWood != null) {
 			woodBuilder.add(woodItem.strippedWood);
+			getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_WOOD).add(woodItem.strippedWood);
 		}
 		if (woodItem.wood != null) {
 			woodBuilder.add(woodItem.wood);
+		}
+
+		if (woodItem instanceof QuarteredWoodItems quarteredWoodItems) {
+			woodBuilder
+				.add(quarteredWoodItems.quarterLog)
+				.add(quarteredWoodItems.strippedQuarterLog);
+			getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_LOGS).add(quarteredWoodItems.strippedQuarterLog);
+		}
+
+		// Add boats if they exist via the WoodItem.
+		if (woodItem.boat != null) {
+			this.getOrCreateTagBuilder(ItemTags.BOATS).add(woodItem.boat);
+		}
+		if (woodItem.chestBoat != null) {
+			this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(woodItem.chestBoat);
 		}
 
 		// There is no item tag for fence gates...
@@ -205,7 +216,5 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		getOrCreateTagBuilder(ItemTags.WOODEN_SLABS).add(woodItem.slab);
 		getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS).add(woodItem.stairs);
 		getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(woodItem.trapdoor);
-
-		return(woodBuilder);
 	}
 }

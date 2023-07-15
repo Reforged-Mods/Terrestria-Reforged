@@ -17,8 +17,8 @@ public class StoneBlocks {
 	public StoneVariantBlocks bricks;
 	public StoneVariantBlocks mossyBricks;
 
-	public TerraformStoneButtonBlock button;
-	public TerraformPressurePlateBlock pressurePlate;
+	public StoneButtonBlock button;
+	public PressurePlateBlock pressurePlate;
 	public Block chiseledBricks;
 	public Block crackedBricks;
 

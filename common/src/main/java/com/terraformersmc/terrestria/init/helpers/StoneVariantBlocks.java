@@ -8,7 +8,7 @@ import net.minecraft.block.*;
 public class StoneVariantBlocks {
 	public Block full;
 	public SlabBlock slab;
-	public TerraformStairsBlock stairs;
+	public StairsBlock stairs;
 	public WallBlock wall;
 
 	private StoneVariantBlocks() {}

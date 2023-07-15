@@ -32,18 +32,18 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 	protected void generate(Consumer<RecipeJsonProvider> exporter) {
 		// misc. recipes
 		new ShapelessRecipeJsonBuilder(TerrestriaItems.BRYCE_SAPLING, 1)
-				.input(Items.OAK_SAPLING)
-				.input(Items.STICK)
-				.criterion("has_bryce_sapling", InventoryChangedCriterion.Conditions.items(TerrestriaItems.BRYCE_SAPLING))
-				.offerTo(exporter, new Identifier(Terrestria.MOD_ID, "bryce_sapling_from_oak_sapling"));
+			.input(Items.OAK_SAPLING)
+			.input(Items.STICK)
+			.criterion("has_bryce_sapling", InventoryChangedCriterion.Conditions.items(TerrestriaItems.BRYCE_SAPLING))
+			.offerTo(exporter, new Identifier(Terrestria.MOD_ID, "bryce_sapling_from_oak_sapling"));
 
 		new ShapedRecipeJsonBuilder(TerrestriaItems.LOG_TURNER, 1)
-				.pattern("ss")
-				.pattern(" s")
-				.pattern("ss")
-				.input('s', Items.STICK)
-				.criterion("has_sticks", InventoryChangedCriterion.Conditions.items(Items.STICK))
-				.offerTo(exporter);
+			.pattern("ss")
+			.pattern(" s")
+			.pattern("ss")
+			.input('s', Items.STICK)
+			.criterion("has_sticks", InventoryChangedCriterion.Conditions.items(Items.STICK))
+			.offerTo(exporter);
 
 		offerSingleOutputShapelessRecipe(exporter, Items.RED_DYE, TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
 
@@ -71,6 +71,7 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 
 	private void generateWood(Consumer<RecipeJsonProvider> exporter, WoodItems woodItem, TagKey<Item> logsTag) {
 		offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
+		offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
 
 		new ShapelessRecipeJsonBuilder(woodItem.button, 1)
 			.group("wooden_button")
@@ -79,23 +80,23 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 			.offerTo(exporter);
 
 		createDoorRecipe(woodItem.door, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
-				.offerTo(exporter);
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.offerTo(exporter);
 
 		createFenceRecipe(woodItem.fence, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
-				.offerTo(exporter);
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.offerTo(exporter);
 
 		createFenceGateRecipe(woodItem.fenceGate, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
 		offerPlanksRecipe(exporter, woodItem.planks, logsTag);
 
-		createPressurePlateRecipe(exporter, woodItem.pressurePlate, woodItem.planks);
+		offerPressurePlateRecipe(exporter, woodItem.pressurePlate, woodItem.planks);
 
 		createSignRecipe(woodItem.sign, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
 		offerSlabRecipe(exporter, woodItem.slab, woodItem.planks);
@@ -156,7 +157,7 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 			new ShapelessRecipeJsonBuilder(stoneItem.mossyBricks.full, 1)
 				.group("mossy_bricks")
 				.input(stoneItem.bricks.full)
-				.input(Items.VINE)
+				.input(TerrestriaItemTags.MOSSY_INGREDIENTS)
 				.criterion("has_stone", InventoryChangedCriterion.Conditions.items(stoneItem.bricks.full))
 				.offerTo(exporter);
 		}
@@ -166,7 +167,7 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 			new ShapelessRecipeJsonBuilder(stoneItem.mossyCobblestone.full, 1)
 				.group("mossy_cobblestone")
 				.input(stoneItem.cobblestone.full)
-				.input(Items.VINE)
+				.input(TerrestriaItemTags.MOSSY_INGREDIENTS)
 				.criterion("has_stone", InventoryChangedCriterion.Conditions.items(stoneItem.cobblestone.full))
 				.offerTo(exporter);
 		}

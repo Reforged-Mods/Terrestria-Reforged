@@ -78,7 +78,6 @@ public class Terrestria {
 		CONFIG_MANAGER.getGeneralConfig();
 
 		TerrestriaBlocks.init();
-		TerrestriaBoats.init();
 		TerrestriaItems.init();
 		TerrestriaPlacementModifierType.init();
 		TerrestriaFoliagePlacerTypes.init();
@@ -88,7 +87,6 @@ public class Terrestria {
 		TerrestriaConfiguredFeatures.init();
 		TerrestriaPlacedFeatures.init();
 		TerrestriaStructures.init();
-		StructureFeature.init();
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
 

@@ -7,9 +7,18 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public final class TerrestriaItemTags {
+	public static final TagKey<Item> BASALT = TerrestriaItemTags.of(Identifier.of("c", "basalt"));
+	public static final TagKey<Item> BLACK_SAND = TerrestriaItemTags.of(Identifier.of("c", "black_sand"));
+	public static final TagKey<Item> COBBLESTONE = TerrestriaItemTags.of(Identifier.of("c", "cobblestone"));
+	public static final TagKey<Item> PLANKS_THAT_BURN = TerrestriaItemTags.of(Identifier.of("c", "planks_that_burn"));
+	public static final TagKey<Item> STONE = TerrestriaItemTags.of(Identifier.of("c", "stone"));
+	public static final TagKey<Item> STRIPPED_LOGS = TerrestriaItemTags.of(Identifier.of("c", "stripped_logs"));
+	public static final TagKey<Item> STRIPPED_WOOD = TerrestriaItemTags.of(Identifier.of("c", "stripped_wood"));
+
 	public static final TagKey<Item> CYPRESS_LOGS = TerrestriaItemTags.of("cypress_logs");
 	public static final TagKey<Item> HEMLOCK_LOGS = TerrestriaItemTags.of("hemlock_logs");
 	public static final TagKey<Item> JAPANESE_MAPLE_LOGS = TerrestriaItemTags.of("japanese_maple_logs");
+	public static final TagKey<Item> MOSSY_INGREDIENTS = TerrestriaItemTags.of("mossy_ingredients");
 	public static final TagKey<Item> RAINBOW_EUCALYPTUS_LOGS = TerrestriaItemTags.of("rainbow_eucalyptus_logs");
 	public static final TagKey<Item> REDWOOD_LOGS = TerrestriaItemTags.of("redwood_logs");
 	public static final TagKey<Item> RUBBER_LOGS = TerrestriaItemTags.of("rubber_logs");
@@ -22,6 +31,7 @@ public final class TerrestriaItemTags {
 	public static final TagKey<Item> BLACK_SAND = TerrestriaItemTags.of(new Identifier("forge", "black_sand"));
 	public static final TagKey<Item> PLANKS_THAT_BURN = TerrestriaItemTags.of(new Identifier("forge", "planks_that_burn"));
 
+	@SuppressWarnings("UnnecessaryReturnStatement")
 	private TerrestriaItemTags() {
 		return;
 	}

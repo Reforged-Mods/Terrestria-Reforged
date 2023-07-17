@@ -30,7 +30,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 // This class is an entrypoint
-@Mod("terrestria_client")
 @OnlyIn(Dist.CLIENT)
 public class TerrestriaClient {
 	@SuppressWarnings("unused")

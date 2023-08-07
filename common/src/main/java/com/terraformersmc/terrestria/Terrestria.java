@@ -34,7 +34,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-@Mod("terrestria_common")
 public class Terrestria {
 	public static final String MOD_ID = "terrestria";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
@@ -70,10 +69,6 @@ public class Terrestria {
 	}
 
 	private static void register() {
-		ModContainer previous = ModLoadingContext.get().getActiveContainer();
-		ModContainer newContainer = ModList.get().getModContainerById(MOD_ID).orElse(null);
-		if (newContainer == null) newContainer = previous;
-		ModLoadingContext.get().setActiveContainer(newContainer);
 		// Load the general config if it hasn't been loaded already
 		CONFIG_MANAGER.getGeneralConfig();
 
@@ -94,15 +89,14 @@ public class Terrestria {
 
 		// This must be after TerrestriaBiomes.init()
 		CONFIG_MANAGER.getBiomeConfig();
-		ModLoadingContext.get().setActiveContainer(previous);
 	}
 
 	public void onInitialize() {
 		register();
 
-		if (!ModList.get().isLoaded("terrestria_worldgen")) {
+		/*if (!ModList.get().isLoaded("terrestria_worldgen")) {
 			Terrestria.LOGGER.info("No Terrestria worldgen module present; Terrestria biomes will not generate.");
-		}
+		}*/
 
 		// At this point Terrestria is completely initialized.
 		initialized = true;

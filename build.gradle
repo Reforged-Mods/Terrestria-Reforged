@@ -4,12 +4,38 @@ plugins {
 	id 'idea'
 	id 'eclipse'
 	id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
+	id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 apply from: 'https://raw.githubusercontent.com/Reforged-Mods/GradleScripts/2.5-arch-loom/ferry.gradle'
 
+
+configurations {
+	common
+	shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+	compileClasspath.extendsFrom common
+	runtimeClasspath.extendsFrom common
+	developmentForge.extendsFrom common
+}
 //Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+loom {
+	runs {
+		data {
+			data()
+		}
+	}
+	accessWidenerPath = file("worldgen/src/main/resources/terrestria-worldgen.accesswidener")
+	forge {
+		dataGen {
+			mod "terrestria"
+		}
+		convertAccessWideners = true
+		extraAccessWideners.add("terrestria-worldgen.accesswidener")
+		mixinConfigs = ["mixins.terrestria-common.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-common.bugfix.json", "mixins.terrestria-worldgen.json", "mixins.terrestria-client.json"]
+	}
+}
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
@@ -29,13 +55,36 @@ dependencies {
 	if (findProject(':worldgen') != null) {
 		modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 	}
-	afterEvaluate {
-		subprojects.each {
-			implementation project(path: "${it.name}", configuration: "namedElements")
-			include project("${it.name}:")
-		}
+	common(project(path: ":common", configuration: "namedElements"))
+	common(project(path: ":worldgen", configuration: "namedElements"))
+	common(project(path: ":client", configuration: "namedElements"))
+	shadowCommon(project(path: "common", configuration: "namedElements"))
+	shadowCommon(project(path: "worldgen", configuration: "namedElements"))
+	shadowCommon(project(path: "client", configuration: "namedElements"))
+
+}
+
+shadowJar {
+	configurations = [project.configurations.shadowCommon]
+	classifier "dev-shadow"
+}
+
+remapJar {
+	input.set shadowJar.archiveFile
+	dependsOn shadowJar
+	classifier null
+}
+
+jar {
+	classifier "dev"
+}
+
+components.java {
+	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+		skip()
 	}
 }
+
 allprojects {
 	apply plugin: 'java'
 	apply plugin: 'idea'

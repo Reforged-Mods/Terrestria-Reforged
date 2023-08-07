@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
-@Mod.EventBusSubscriber(modid = Terrestria.MOD_ID + "_common", bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Terrestria.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TerrestriaDatagen {
 	public static void onInitializeDataGenerator(DataGenerator dataGenerator, ExistingFileHelper helper) {
 		dataGenerator.addProvider(new TerrestriaBiomeTagProvider(dataGenerator, helper));

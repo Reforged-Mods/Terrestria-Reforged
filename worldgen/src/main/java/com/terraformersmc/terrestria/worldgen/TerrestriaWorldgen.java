@@ -6,7 +6,6 @@ import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod("terrestria_worldgen")
 public class TerrestriaWorldgen {
 
 	public TerrestriaWorldgen(){

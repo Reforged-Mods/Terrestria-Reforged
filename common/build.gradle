@@ -1,15 +1,1 @@
 archivesBaseName = "terrestria-common"
-
-loom {
-	runs {
-		data {
-			data()
-		}
-	}
-	forge {
-		dataGen {
-			mod "terrestria_common"
-		}
-		mixinConfigs = ["mixins.terrestria-common.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-common.bugfix.json"]
-	}
-}

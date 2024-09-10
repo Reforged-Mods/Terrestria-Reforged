@@ -3,11 +3,10 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 	id 'eclipse'
-	id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
-	id "com.github.johnrengelman.shadow" version "7.0.0"
+	id 'dev.architectury.loom' version '1.6-SNAPSHOT'
 }
 
-apply from: 'https://raw.githubusercontent.com/Reforged-Mods/GradleScripts/2.5-arch-loom/ferry.gradle'
+//apply from: 'https://raw.githubusercontent.com/Reforged-Mods/GradleScripts/2.5-arch-loom/ferry.gradle'
 
 
 configurations {
@@ -45,13 +44,13 @@ dependencies {
 	forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 	//modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:1.0.5") //d7bc649383
 	//includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-config-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-dirt-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-shapes-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-surfaces-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-tree-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-wood-api-v1:${project.terraform_version}"
-	includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}"
+	modImplementation include("io.github.reforgedmods.terraform-api:terraform-config-api-v1:${project.terraform_version}")
+	modImplementation include("io.github.reforgedmods.terraform-api:terraform-dirt-api-v1:${project.terraform_version}")
+	modImplementation include("io.github.reforgedmods.terraform-api:terraform-shapes-api-v1:${project.terraform_version}")
+	modImplementation include("io.github.reforgedmods.terraform-api:terraform-surfaces-api-v1:${project.terraform_version}")
+	modImplementation include("io.github.reforgedmods.terraform-api:terraform-tree-api-v1:${project.terraform_version}")
+	modImplementation include("io.github.reforgedmods.terraform-api:terraform-wood-api-v1:${project.terraform_version}")
+	modImplementation include("io.github.reforgedmods.terraform-api:terraform-utils-v1:${project.terraform_version}")
 	if (findProject(':worldgen') != null) {
 		modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 	}
@@ -104,7 +103,7 @@ allprojects {
 	}
 
 	jar {
-		classifier = "dev"
+		archiveClassifier.set "dev"
 	}
 
 	afterEvaluate {
@@ -137,6 +136,7 @@ allprojects {
 		maven {
 			url = 'https://maven.minecraftforge.net/'
 		}
+		maven {  url = "https://repo.repsy.io/mvn/trinsdar/reforged-mods/"}
 		maven { url 'https://jitpack.io' }
 	}
 }
@@ -150,13 +150,13 @@ subprojects {
 		//modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:${rootProject.fbapi_reforged_version}") //d7bc649383
 
 		//modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-config-api-v1:${project.terraform_version}"
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-dirt-api-v1:${project.terraform_version}"
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-shapes-api-v1:${project.terraform_version}"
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-surfaces-api-v1:${project.terraform_version}"
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-tree-api-v1:${project.terraform_version}"
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-wood-api-v1:${project.terraform_version}"
-		modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}"
+		modImplementation "io.github.reforgedmods.terraform-api:terraform-config-api-v1:${project.terraform_version}"
+		modImplementation "io.github.reforgedmods.terraform-api:terraform-dirt-api-v1:${project.terraform_version}"
+		modImplementation "io.github.reforgedmods.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
+		modImplementation "io.github.reforgedmods.terraform-api:terraform-surfaces-api-v1:${project.terraform_version}"
+		modImplementation "io.github.reforgedmods.terraform-api:terraform-tree-api-v1:${project.terraform_version}"
+		modImplementation "io.github.reforgedmods.terraform-api:terraform-wood-api-v1:${project.terraform_version}"
+		modImplementation "io.github.reforgedmods.terraform-api:terraform-utils-v1:${project.terraform_version}"
 	}
 
 	version = rootProject.version

@@ -1,5 +1,0 @@
-archivesBaseName = "terrestria-client"
-
-dependencies {
-	implementation project(path: ':common')
-}

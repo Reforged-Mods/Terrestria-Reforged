@@ -2,13 +2,11 @@ package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.terraformersmc.terraform.shapes.api.Position;
-import com.terraformersmc.terraform.shapes.impl.Shapes;
-import com.terraformersmc.terraform.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
@@ -19,30 +17,24 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class SphereFoliagePlacer extends FoliagePlacer {
+public class DotShrubPlacer extends FoliagePlacer {
 
-	public static final Codec<SphereFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
-			fillFoliagePlacerFields(instance).apply(instance, SphereFoliagePlacer::new));
+	public static final Codec<DotShrubPlacer> CODEC = RecordCodecBuilder.create(dotShrubPlacerInstance ->
+			fillFoliagePlacerFields(dotShrubPlacerInstance).apply(dotShrubPlacerInstance, DotShrubPlacer::new));
 
-	public SphereFoliagePlacer(IntProvider radius, IntProvider offset) {
+	public DotShrubPlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
 	@Override
 	protected FoliagePlacerType<?> getType() {
-		return TerrestriaFoliagePlacerTypes.SPHERE;
+		return TerrestriaFoliagePlacerTypes.DOT_SHRUB;
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
-
-		//I add 0.5 to make it not a square and also not a single block
-		Shapes.ellipsoid(radius + 0.25,radius + 0.25,radius + 0.25)
-				.applyLayer(TranslateLayer.of(Position.of(treeNode.getCenter())))
-				.stream()
-				.forEach((block) -> {
-					checkAndSetBlockState(world, random, block.toBlockPos(), replacer, config);
-				});
+	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
+		checkAndSetBlockState(world, random, treeNode.getCenter(), replacer, config);
+		Direction.Type.HORIZONTAL.forEach((direction) -> checkAndSetBlockState(world, random, treeNode.getCenter().down().offset(direction), replacer, config));
 	}
 
 	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos currentPosition, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {

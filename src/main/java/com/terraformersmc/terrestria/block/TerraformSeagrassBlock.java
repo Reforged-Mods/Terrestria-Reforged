@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 public class TerraformSeagrassBlock extends SeagrassBlock {
 	private Block tall;
 
-	public TerraformSeagrassBlock(Block tall, Block.Settings settings) {
+	public TerraformSeagrassBlock(Block tall, Settings settings) {
 		super(settings);
 
 		this.tall = tall;

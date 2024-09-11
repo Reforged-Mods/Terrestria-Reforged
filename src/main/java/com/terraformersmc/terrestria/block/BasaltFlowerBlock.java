@@ -22,7 +22,7 @@ public class BasaltFlowerBlock extends FlowerBlock {
 	}
 
 	@Override
-	public AbstractBlock.OffsetType getOffsetType() {
-		return AbstractBlock.OffsetType.XZ;
+	public OffsetType getOffsetType() {
+		return OffsetType.XZ;
 	}
 }

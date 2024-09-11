@@ -35,7 +35,7 @@ loom {
 		}
 		convertAccessWideners = true
 		extraAccessWideners.add("terrestria.accesswidener")
-		mixinConfigs = ["mixins.terrestria-worldgen.json", "mixins.terrestria-common.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-client.json"]
+		mixinConfigs = ["mixins.terrestria-worldgen.json", "mixins.terrestria-common.json", "mixins.terrestria-common.pathing.json", "mixin.terrestria-common.bugfix.json", "mixins.terrestria-client.json"]
 	}
 }
 

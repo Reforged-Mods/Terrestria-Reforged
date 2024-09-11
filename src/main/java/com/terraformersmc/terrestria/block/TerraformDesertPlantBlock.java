@@ -36,7 +36,7 @@ public class TerraformDesertPlantBlock extends PlantBlock {
 	}
 
 	@Override
-	public AbstractBlock.OffsetType getOffsetType() {
-		return AbstractBlock.OffsetType.XYZ;
+	public OffsetType getOffsetType() {
+		return OffsetType.XYZ;
 	}
 }

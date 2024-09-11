@@ -31,7 +31,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
 		double maxRadius = 1.5 + 1.5 * random.nextDouble();
 
 		BlockPos.Mutable pos = treeNode.getCenter().mutableCopy();

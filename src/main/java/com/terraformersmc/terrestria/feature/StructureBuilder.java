@@ -1,4 +1,4 @@
-/*
+package com.terraformersmc.terrestria.feature;/*
 package com.terraformersmc.terrestria.feature;
 
 import com.google.common.collect.ImmutableList;

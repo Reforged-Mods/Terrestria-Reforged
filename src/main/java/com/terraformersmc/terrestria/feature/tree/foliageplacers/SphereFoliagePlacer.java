@@ -5,13 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.shapes.api.Position;
 import com.terraformersmc.terraform.shapes.impl.Shapes;
 import com.terraformersmc.terraform.shapes.impl.layer.transform.TranslateLayer;
-import com.terraformersmc.terrestria.feature.tree.foliageplacers.templates.SmallFoliagePlacer;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.TestableWorld;
+import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
@@ -19,31 +19,36 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class SmallLogSphereFoliagePlacer extends SmallFoliagePlacer {
+public class SphereFoliagePlacer extends FoliagePlacer {
 
-	public static final Codec<SmallLogSphereFoliagePlacer> CODEC = RecordCodecBuilder.create(smallLogSphereFoliagePlacerInstance ->
-			fillFoliagePlacerFields(smallLogSphereFoliagePlacerInstance).apply(smallLogSphereFoliagePlacerInstance, SmallLogSphereFoliagePlacer::new));
+	public static final Codec<SphereFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+			fillFoliagePlacerFields(instance).apply(instance, SphereFoliagePlacer::new));
 
-	public SmallLogSphereFoliagePlacer(IntProvider radius, IntProvider offset) {
+	public SphereFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
 	@Override
 	protected FoliagePlacerType<?> getType() {
-		return TerrestriaFoliagePlacerTypes.SMALL_LOG_SPHERE;
+		return TerrestriaFoliagePlacerTypes.SPHERE;
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
 
 		//I add 0.5 to make it not a square and also not a single block
 		Shapes.ellipsoid(radius + 0.25,radius + 0.25,radius + 0.25)
 				.applyLayer(TranslateLayer.of(Position.of(treeNode.getCenter())))
 				.stream()
 				.forEach((block) -> {
-					tryPlaceLeaves(world, block.toBlockPos(), random, replacer, config);
+					checkAndSetBlockState(world, random, block.toBlockPos(), replacer, config);
 				});
+	}
 
+	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos currentPosition, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {
+		if (TreeFeature.canReplace(world, currentPosition)) {
+			replacer.accept(currentPosition.toImmutable(), config.foliageProvider.getBlockState(random, currentPosition));
+		}
 	}
 
 	@Override

@@ -1,0 +1,13 @@
+{
+  "required": false,
+  "package": "com.terraformersmc.terrestria.mixin.pathing",
+  "compatibilityLevel": "JAVA_16",
+  "plugin": "com.terraformersmc.terrestria.mixin.pathing.TerrestriaMixinPlugin",
+  "mixins": [
+	"MixinLandPathNodeMaker"
+  ],
+  "injectors": {
+	"defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

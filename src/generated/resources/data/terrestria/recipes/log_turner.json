@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "ss",
+    " s",
+    "ss"
+  ],
+  "result": {
+    "item": "terrestria:log_turner"
+  }
+}

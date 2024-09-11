@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "group": "stone",
+  "ingredient": {
+    "item": "terrestria:basalt"
+  },
+  "result": "terrestria:smooth_basalt"
+}

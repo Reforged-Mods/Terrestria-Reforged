@@ -1,3 +1,5 @@
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+
 plugins {
 	id 'java'
 	id 'maven-publish'
@@ -6,10 +8,51 @@ plugins {
 	id 'dev.architectury.loom' version '1.6-SNAPSHOT'
 }
 
-//apply from: 'https://raw.githubusercontent.com/Reforged-Mods/GradleScripts/2.5-arch-loom/ferry.gradle'
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+group = project.maven_group
 
 //Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+loom {
+	accessWidenerPath = file("src/main/resources/terrestria.accesswidener")
+	runs {
+		data {
+			data()
+		}
+	}
+	forge {
+		dataGen {
+			mod "terrestria"
+		}
+		convertAccessWideners = true
+		extraAccessWideners.add("terrestria.accesswidener")
+		mixinConfigs = ["mixins.terrestria-worldgen.json", "mixins.terrestria-common.json", "mixins.terrestria-common.pathing.json", "mixins.terrestria-client.json"]
+	}
+}
+
+configurations {
+	dev {
+		canBeResolved = false
+		canBeConsumed = true
+	}
+}
+
+
+
+repositories {
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
+	}
+
+	// TerraBlender
+	maven {
+		url = 'https://maven.minecraftforge.net/'
+	}
+	maven {  url = "https://repo.repsy.io/mvn/trinsdar/reforged-mods/"}
+	maven { url 'https://jitpack.io' }
+}
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
@@ -26,16 +69,21 @@ dependencies {
 	modImplementation include("io.github.reforgedmods.terraform-api:terraform-tree-api-v1:${project.terraform_version}")
 	modImplementation include("io.github.reforgedmods.terraform-api:terraform-wood-api-v1:${project.terraform_version}")
 	modImplementation include("io.github.reforgedmods.terraform-api:terraform-utils-v1:${project.terraform_version}")
-	if (findProject(':worldgen') != null) {
-		modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
-	}
-	afterEvaluate {
-		subprojects.each {
-			implementation project(path: "${it.name}", configuration: "namedElements")
-			include project("${it.name}:")
-		}
+	modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("META-INF/mods.toml") {
+		expand "version": project.version
 	}
 }
+
+jar {
+	archiveClassifier.set "dev"
+}
+
 allprojects {
 	apply plugin: 'java'
 	apply plugin: 'idea'
@@ -43,75 +91,5 @@ allprojects {
 	apply plugin: 'maven-publish'
 	apply plugin: 'dev.architectury.loom'
 
-	java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-	group = project.maven_group
-
-	configurations {
-		dev {
-			canBeResolved = false
-			canBeConsumed = true
-		}
-	}
-
-	jar {
-		archiveClassifier.set "dev"
-	}
-
-	afterEvaluate {
-		processResources {
-			inputs.property "version", project.version
-
-			filesMatching("META-INF/mods.toml") {
-				expand "version": project.version
-			}
-		}
-	}
-
-	//task sourcesJar(type: Jar, dependsOn: classes) {
-	//	classifier = "sources"
-	//	from sourceSets.main.allSource
-	//}
-
-	tasks.withType(JavaCompile) {
-		it.options.encoding = "UTF-8"
-		it.options.release = 17
-	}
-
-	repositories {
-		maven {
-			name = 'TerraformersMC'
-			url = 'https://maven.terraformersmc.com/'
-		}
-
-		// TerraBlender
-		maven {
-			url = 'https://maven.minecraftforge.net/'
-		}
-		maven {  url = "https://repo.repsy.io/mvn/trinsdar/reforged-mods/"}
-		maven { url 'https://jitpack.io' }
-	}
-}
-
-subprojects {
-	dependencies {
-		minecraft "com.mojang:minecraft:${project.minecraft_version}"
-		mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-
-		forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-		//modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:${rootProject.fbapi_reforged_version}") //d7bc649383
-
-		//modImplementation "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
-		modImplementation "io.github.reforgedmods.terraform-api:terraform-config-api-v1:${project.terraform_version}"
-		modImplementation "io.github.reforgedmods.terraform-api:terraform-dirt-api-v1:${project.terraform_version}"
-		modImplementation "io.github.reforgedmods.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
-		modImplementation "io.github.reforgedmods.terraform-api:terraform-surfaces-api-v1:${project.terraform_version}"
-		modImplementation "io.github.reforgedmods.terraform-api:terraform-tree-api-v1:${project.terraform_version}"
-		modImplementation "io.github.reforgedmods.terraform-api:terraform-wood-api-v1:${project.terraform_version}"
-		modImplementation "io.github.reforgedmods.terraform-api:terraform-utils-v1:${project.terraform_version}"
-	}
-
-	version = rootProject.version
-
-	runClient.enabled = false
 }

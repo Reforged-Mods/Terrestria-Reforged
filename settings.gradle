@@ -11,6 +11,3 @@ pluginManagement {
 }
 
 rootProject.name = "terrestria-forge"
-include "client"
-include "common"
-include "worldgen"

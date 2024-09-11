@@ -1,10 +1,12 @@
 package com.terraformersmc.terrestria;
 
+import com.terraformersmc.terrestria.client.TerrestriaClient;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.data.TerrestriaDatagen;
 import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
+import com.terraformersmc.terrestria.worldgen.TerrestriaWorldgen;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.*;
@@ -17,9 +19,11 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -34,6 +38,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
+@Mod(Terrestria.MOD_ID)
 public class Terrestria {
 	public static final String MOD_ID = "terrestria";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
@@ -48,7 +53,9 @@ public class Terrestria {
 	public Terrestria(){
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		eventBus.addListener(this::commonLoad);
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> TerrestriaClient::new);
 		eventBus.register(this);
+		new TerrestriaWorldgen();
 		itemGroup = new ItemGroup(MOD_ID + ".items") {
 
 			@Override

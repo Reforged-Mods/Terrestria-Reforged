@@ -5,6 +5,7 @@
   "mixins": [
     "MixinFluidBlock",
     "MixinLavaFluid",
+    "MixinSchemas",
     "MixinSugarCaneBlock",
     "MixinWaterCreatureEntity",
     "TreeDecoratorTypeAccessor"

@@ -5,7 +5,7 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 	id 'eclipse'
-	id 'dev.architectury.loom' version '1.6-SNAPSHOT'
+	id 'dev.architectury.loom' version '1.9-SNAPSHOT'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -50,7 +50,7 @@ repositories {
 	maven {
 		url = 'https://maven.minecraftforge.net/'
 	}
-	maven {  url = "https://repo.repsy.io/mvn/trinsdar/reforged-mods/"}
+	maven {  url = "https://maven.blamejared.com/"}
 	maven { url 'https://jitpack.io' }
 }
 
@@ -60,15 +60,17 @@ dependencies {
 
 
 	forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+	compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixinextras_version}"))
+	implementation(include("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextras_version}"))
 	//modImplementation ("com.github.Reforged-Mods:FabricBiomeApiReforged:1.0.5") //d7bc649383
 	//includeMod "terraform-api", "com.github.Reforged-Mods.Terraform-Reforged:terraform-biome-remapper-api-v1:${project.terraform_version}"
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-config-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-dirt-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-shapes-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-surfaces-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-tree-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-wood-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-utils-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-config-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-dirt-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-shapes-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-surfaces-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-tree-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-wood-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-utils-v1:${project.terraform_version}")
 	modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 }
 

@@ -22,6 +22,7 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WoodenButtonBlock;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.SignType;
 
 public class WoodBlocks {
 	public Block log;
@@ -40,6 +41,7 @@ public class WoodBlocks {
 	public TrapdoorBlock trapdoor;
 	public Block strippedLog;
 	public Block strippedWood;
+	public SignType signType;
 	protected String name;
 	protected WoodColors colors;
 
@@ -101,10 +103,10 @@ public class WoodBlocks {
 		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, TerraformBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks)));
 		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TrapdoorBlock(TerraformBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).mapColor(colors.planks)));
 
-		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "entity/signs/" + name);
+		blocks.signType = SignType.register(SignType.create(Terrestria.MOD_ID + ":" + name));
 
-		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, TerraformBlockSettings.copyOf(Blocks.OAK_SIGN).mapColor(colors.planks)));
-		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, TerraformBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).mapColor(colors.planks)));
+		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_SIGN).mapColor(colors.planks), blocks.signType));
+		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).mapColor(colors.planks), blocks.signType));
 
 		blocks.addManufacturedFireInfo();
 

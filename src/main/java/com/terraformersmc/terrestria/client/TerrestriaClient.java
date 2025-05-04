@@ -6,7 +6,9 @@ import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
+import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.SignBlock;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.client.color.world.BiomeColors;
@@ -18,6 +20,7 @@ import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.SignType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -204,10 +207,12 @@ public class TerrestriaClient {
 		}
 	}
 
-	private void addSign(TerraformSignBlock sign) {
-		Identifier texture = sign.getTexture();
+	private void addSign(AbstractSignBlock sign) {
+		SignType signType = sign.getSignType();
+		Identifier id = new Identifier(signType.getName());
 
-		SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, texture));
+		TexturedRenderLayers.addWoodType(signType);
+		SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Identifier(id.getNamespace(), "entity/signs/" + id.getPath()));
 	}
 
 	public static void addArrayToLayer(RenderLayer layer, Block... blocks){

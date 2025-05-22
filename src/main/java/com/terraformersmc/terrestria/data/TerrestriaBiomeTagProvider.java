@@ -4,265 +4,269 @@ import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.tag.TerrestriaBiomeTags;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.server.BiomeTagProvider;
-import net.minecraft.tag.BiomeTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.data.DataOutput;
+import net.minecraft.data.server.tag.vanilla.VanillaBiomeTagProvider;
+import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class TerrestriaBiomeTagProvider extends BiomeTagProvider {
-	public TerrestriaBiomeTagProvider(DataGenerator dataGenerator, ExistingFileHelper helper) {
-		super(dataGenerator, Terrestria.MOD_ID, helper);
+import java.util.concurrent.CompletableFuture;
+
+public class TerrestriaBiomeTagProvider extends VanillaBiomeTagProvider {
+	public TerrestriaBiomeTagProvider(DataOutput dataOutput, CompletableFuture<WrapperLookup> completableFuture, ExistingFileHelper helper) {
+		super(dataOutput, completableFuture, Terrestria.MOD_ID, helper);
 	}
 
 	@Override
-	protected void configure() {
+	protected void configure(WrapperLookup lookup) {
 		/*
 		 * Vanilla biome categories
 		 */
 		getOrCreateTagBuilder(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
-			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IS_BEACH)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IS_FOREST)
-			.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
-			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.addOptional(TerrestriaBiomes.SAKURA_FOREST);
+			.addOptional(TerrestriaBiomes.CYPRESS_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IS_HILL)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IS_JUNGLE)
-			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST);
+			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IS_MOUNTAIN)
-			.addOptional(TerrestriaBiomes.CALDERA);
+			.addOptional(TerrestriaBiomes.CALDERA.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IS_SAVANNA)
-			.addOptional(TerrestriaBiomes.OUTBACK);
+			.addOptional(TerrestriaBiomes.OUTBACK.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IS_TAIGA)
-			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS)
-			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.SPAWNS_COLD_VARIANT_FROGS)
-			.addOptional(TerrestriaBiomes.CALDERA)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE);
+			.addOptional(TerrestriaBiomes.CALDERA.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
-			.addOptional(TerrestriaBiomes.CANYON)
-			.addOptional(TerrestriaBiomes.DUNES)
-			.addOptional(TerrestriaBiomes.LUSH_DESERT)
-			.addOptional(TerrestriaBiomes.OASIS)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
+			.addOptional(TerrestriaBiomes.CANYON.getValue())
+			.addOptional(TerrestriaBiomes.DUNES.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue())
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.WATER_ON_MAP_OUTLINES)
-			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue());
 
 
 
 		/*
 		 * Common biome categories
 		 */
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), new Identifier("forge", "is_temperate")))
-			.add(TerrestriaBiomes.CYPRESS_FOREST)
-			.add(TerrestriaBiomes.CYPRESS_SWAMP)
-			.add(TerrestriaBiomes.DENSE_WOODLANDS)
-			.add(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-			.add(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.add(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-			.add(TerrestriaBiomes.REDWOOD_FOREST)
-			.add(TerrestriaBiomes.SAKURA_FOREST);
+		this.getOrCreateTagBuilder(TagKey.of(this.registryRef, new Identifier("forge", "is_temperate")))
+			.addOptional(TerrestriaBiomes.CYPRESS_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue())
+			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_DEAD.id()))
-			.add(TerrestriaBiomes.DUNES);
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_DEAD)
+			.addOptional(TerrestriaBiomes.DUNES.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SANDY.id()))
-			.add(TerrestriaBiomes.CANYON)
-			.add(TerrestriaBiomes.DUNES)
-			.add(TerrestriaBiomes.LUSH_DESERT)
-			.add(TerrestriaBiomes.OASIS);
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_SANDY)
+			.addOptional(TerrestriaBiomes.CANYON.getValue())
+			.addOptional(TerrestriaBiomes.DUNES.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SLOPE.id()))
-			.add(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_SLOPE)
+			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_OVERWORLD.id()))
-			.add(TerrestriaBiomes.CALDERA)
-			.add(TerrestriaBiomes.CANYON)
-			.add(TerrestriaBiomes.CYPRESS_FOREST)
-			.add(TerrestriaBiomes.CYPRESS_SWAMP)
-			.add(TerrestriaBiomes.DENSE_WOODLANDS)
-			.add(TerrestriaBiomes.DUNES)
-			.add(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-			.add(TerrestriaBiomes.HEMLOCK_TREELINE)
-			.add(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.add(TerrestriaBiomes.LUSH_DESERT)
-			.add(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-			.add(TerrestriaBiomes.OASIS)
-			.add(TerrestriaBiomes.OUTBACK)
-			.add(TerrestriaBiomes.RAINBOW_RAINFOREST)
-			.add(TerrestriaBiomes.REDWOOD_FOREST)
-			.add(TerrestriaBiomes.SAKURA_FOREST)
-			.add(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-			.add(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND)
-			.add(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+		this.getOrCreateTagBuilder(BiomeTags.IS_OVERWORLD)
+			.addOptional(TerrestriaBiomes.CALDERA.getValue())
+			.addOptional(TerrestriaBiomes.CANYON.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue())
+			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS.getValue())
+			.addOptional(TerrestriaBiomes.DUNES.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue())
+			.addOptional(TerrestriaBiomes.OUTBACK.getValue())
+			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue())
+			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), new Identifier("forge", "is_mesa")))
-			.add(TerrestriaBiomes.CANYON);
+		this.getOrCreateTagBuilder(TagKey.of(this.registryRef, new Identifier("forge", "is_mesa")))
+			.addOptional(TerrestriaBiomes.CANYON.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_SAVANNA.id()))
-			.add(TerrestriaBiomes.OUTBACK);
+		this.getOrCreateTagBuilder(BiomeTags.IS_SAVANNA)
+			.addOptional(TerrestriaBiomes.OUTBACK.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SNOWY.id()))
-			.add(TerrestriaBiomes.CALDERA)
-			.add(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-			.add(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE);
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_SNOWY)
+			.addOptional(TerrestriaBiomes.CALDERA.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SWAMP.id()))
-			.add(TerrestriaBiomes.CYPRESS_SWAMP);
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_SWAMP)
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_CONIFEROUS.id()))
-			.add(TerrestriaBiomes.CALDERA)
-			.add(TerrestriaBiomes.CYPRESS_FOREST);
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_CONIFEROUS)
+			.addOptional(TerrestriaBiomes.CALDERA.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_FOREST.getValue());
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), new Identifier("forge", "is_deciduous")))
-			.add(TerrestriaBiomes.DENSE_WOODLANDS)
-			.add(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.add(TerrestriaBiomes.RAINBOW_RAINFOREST)
-			.add(TerrestriaBiomes.SAKURA_FOREST);
+		this.getOrCreateTagBuilder(TagKey.of(this.registryRef, new Identifier("forge", "is_deciduous")))
+			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue());
 
 
 		/*
 		 * Biome structure generation tags
 		 */
 		getOrCreateTagBuilder(BiomeTags.DESERT_PYRAMID_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.LUSH_DESERT)
-			.addOptional(TerrestriaBiomes.OASIS);
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.IGLOO_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST);
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.JUNGLE_TEMPLE_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST);
+			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.MINESHAFT_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.CALDERA)
-			.addOptional(TerrestriaBiomes.CANYON)
-			.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
-			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
-			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS)
-			.addOptional(TerrestriaBiomes.DUNES)
-			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.addOptional(TerrestriaBiomes.LUSH_DESERT)
-			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.OASIS)
-			.addOptional(TerrestriaBiomes.OUTBACK)
-			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
-			.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.SAKURA_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND)
-			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+			.addOptional(TerrestriaBiomes.CALDERA.getValue())
+			.addOptional(TerrestriaBiomes.CANYON.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue())
+			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS.getValue())
+			.addOptional(TerrestriaBiomes.DUNES.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue())
+			.addOptional(TerrestriaBiomes.OUTBACK.getValue())
+			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue())
+			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_DESERT_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.LUSH_DESERT)
-			.addOptional(TerrestriaBiomes.OASIS)
-			.addOptional(TerrestriaBiomes.OUTBACK);
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue())
+			.addOptional(TerrestriaBiomes.OUTBACK.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_JUNGLE_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
+			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_MOUNTAIN_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
-			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.SAKURA_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST);
+			.addOptional(TerrestriaBiomes.CYPRESS_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.SWAMP_HUT_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.SHIPWRECK_BEACHED_HAS_STRUCTURE)
 			.addTag(BiomeTags.IS_BEACH);
 
 		getOrCreateTagBuilder(BiomeTags.STRONGHOLD_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.CALDERA)
-			.addOptional(TerrestriaBiomes.CANYON)
-			.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
-			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
-			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS)
-			.addOptional(TerrestriaBiomes.DUNES)
-			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.addOptional(TerrestriaBiomes.LUSH_DESERT)
-			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.OASIS)
-			.addOptional(TerrestriaBiomes.OUTBACK)
-			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
-			.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.SAKURA_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND)
-			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+			.addOptional(TerrestriaBiomes.CALDERA.getValue())
+			.addOptional(TerrestriaBiomes.CANYON.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.CYPRESS_SWAMP.getValue())
+			.addOptional(TerrestriaBiomes.DENSE_WOODLANDS.getValue())
+			.addOptional(TerrestriaBiomes.DUNES.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue())
+			.addOptional(TerrestriaBiomes.OUTBACK.getValue())
+			.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue())
+			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.VILLAGE_DESERT_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.LUSH_DESERT)
-			.addOptional(TerrestriaBiomes.OASIS)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
+			.addOptional(TerrestriaBiomes.LUSH_DESERT.getValue())
+			.addOptional(TerrestriaBiomes.OASIS.getValue())
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-			.addOptional(TerrestriaBiomes.SAKURA_FOREST);
+			.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST.getValue())
+			.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.REDWOOD_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SAKURA_FOREST.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.VILLAGE_SAVANNA_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.OUTBACK);
+			.addOptional(TerrestriaBiomes.OUTBACK.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.VILLAGE_SNOWY_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE);
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST.getValue())
+			.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE.getValue());
 
 		getOrCreateTagBuilder(BiomeTags.VILLAGE_TAIGA_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
-			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+			.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE.getValue())
+			.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST.getValue());
 
 		getOrCreateTagBuilder(TerrestriaBiomeTags.CANYON_ARCH_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.CANYON);
+			.addOptional(TerrestriaBiomes.CANYON.getValue());
 
 		getOrCreateTagBuilder(TerrestriaBiomeTags.OCEAN_VOLCANO_HAS_STRUCTURE)
-			.add(BiomeKeys.DEEP_FROZEN_OCEAN)
-			.add(BiomeKeys.DEEP_COLD_OCEAN)
-			.add(BiomeKeys.DEEP_OCEAN)
-			.add(BiomeKeys.DEEP_LUKEWARM_OCEAN);
+			.addOptional(BiomeKeys.DEEP_FROZEN_OCEAN.getValue())
+			.addOptional(BiomeKeys.DEEP_COLD_OCEAN.getValue())
+			.addOptional(BiomeKeys.DEEP_OCEAN.getValue())
+			.addOptional(BiomeKeys.DEEP_LUKEWARM_OCEAN.getValue());
 
 		getOrCreateTagBuilder(TerrestriaBiomeTags.VOLCANO_HAS_STRUCTURE)
-			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
+			.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND.getValue());
 	}
 }

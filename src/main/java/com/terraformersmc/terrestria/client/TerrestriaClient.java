@@ -1,20 +1,11 @@
 package com.terraformersmc.terrestria.client;
 
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
-import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
-import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleRenderEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.minecraft.block.AbstractSignBlock;
+import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.SignBlock;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.client.color.world.BiomeColors;
@@ -23,14 +14,11 @@ import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.SignType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -64,7 +52,6 @@ public class TerrestriaClient {
 		eventBus.addListener(TerrestriaClient::onItemColorHandler);
 		eventBus.addListener(TerrestriaClient::onBlockColorHandler);
 		eventBus.addListener(this::clientSetup);
-		eventBus.addListener(this::onRegisterSpriteEvents);
 		registerEntityRenderers();
 	}
 
@@ -106,7 +93,7 @@ public class TerrestriaClient {
 		// Load the client config if it hasn't been loaded already
 		Terrestria.getConfigManager().getClientConfig();
 
-		RenderLayers.setRenderLayer(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
+		RenderLayers.setRenderLayer(TerrestriaBlocks.SAKURA.leafPile, RenderLayer.getCutoutMipped());
 
 		addArrayToLayer(
 				DOOR_BLOCK_LAYER,
@@ -180,7 +167,17 @@ public class TerrestriaClient {
 
 		RenderLayers.setRenderLayer(TerrestriaBlocks.ANDISOL.getGrassBlock(), GRASS_BLOCK_LAYER);
 
-		//RenderLayers.setRenderLayer(TerrestriaItems.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
+		addWoodTypes(
+			TerrestriaBlocks.REDWOOD,
+			TerrestriaBlocks.HEMLOCK,
+			TerrestriaBlocks.RUBBER,
+			TerrestriaBlocks.CYPRESS,
+			TerrestriaBlocks.WILLOW,
+			TerrestriaBlocks.JAPANESE_MAPLE,
+			TerrestriaBlocks.RAINBOW_EUCALYPTUS,
+			TerrestriaBlocks.SAKURA,
+			TerrestriaBlocks.YUCCA_PALM
+		);
 	}
 
 	private void registerEntityRenderers() {
@@ -196,37 +193,11 @@ public class TerrestriaClient {
 	}
 
 
-	public void onRegisterSpriteEvents(TextureStitchEvent.Pre event) {
-		if (event.getAtlas().getId().equals(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE)) {
-			addSigns(event,
-				TerrestriaBlocks.REDWOOD.sign,
-				TerrestriaBlocks.HEMLOCK.sign,
-				TerrestriaBlocks.RUBBER.sign,
-				TerrestriaBlocks.CYPRESS.sign,
-				TerrestriaBlocks.WILLOW.sign,
-				TerrestriaBlocks.JAPANESE_MAPLE.sign,
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.sign,
-				TerrestriaBlocks.SAKURA.sign,
-				TerrestriaBlocks.YUCCA_PALM.sign
-			);
+	private void addWoodTypes(WoodBlocks... signs) {
+		for (WoodBlocks sign : signs) {
+			TexturedRenderLayers.addWoodType(sign.woodType);
 		}
 	}
-
-	private void addSigns(TextureStitchEvent.Pre event, TerraformSignBlock... signs) {
-		for (TerraformSignBlock sign : signs) {
-			addSign(event, sign);
-		}
-	}
-
-	private void addSign(TextureStitchEvent.Pre event, AbstractSignBlock sign) {
-		SignType signType = sign.getSignType();
-		Identifier id = new Identifier(signType.getName());
-
-		TexturedRenderLayers.addWoodType(signType);
-		event.addSprite(new Identifier(id.getNamespace(), "entity/signs/" + id.getPath()));
-	}
-
-
 
 	public static void addArrayToLayer(RenderLayer layer, Block... blocks){
 		for (Block block : blocks) {

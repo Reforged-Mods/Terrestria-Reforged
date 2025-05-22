@@ -1,0 +1,76 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/cypress"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/cypress"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hemlock"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/hemlock"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/japanese_maple"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/japanese_maple"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/rainbow_eucalyptus"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/rainbow_eucalyptus"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/redwood"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/redwood"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/rubber"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/rubber"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/rsakura"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/rsakura"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/willow"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/willow"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/yucca_palm"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "terrestria:entity/signs/hanging/yucca_palm"
+    }
+  ]
+}

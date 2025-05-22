@@ -5,6 +5,8 @@ import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 import com.terraformersmc.terraform.utils.TerraformFuelRegistry;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.HangingSignItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.SignItem;
 
 public class WoodItems {
@@ -94,7 +96,10 @@ public class WoodItems {
 
 	protected void addCompostables() {
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(leaves, 0.3f);
-		//ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(sapling, 0.3f);
+		if (hasLeafPile()){
+			ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(leafPile, 0.3f);
+		}
+
 	}
 
 	protected void addFuels() {

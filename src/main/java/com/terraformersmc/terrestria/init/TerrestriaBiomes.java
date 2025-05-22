@@ -19,12 +19,11 @@ import com.terraformersmc.terrestria.biome.SnowyHemlockRainforestBiomes;
 import com.terraformersmc.terrestria.biome.VolcanicIslandBiomes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
@@ -34,7 +33,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
-@SuppressWarnings("UnstableApiUsage")
 public class TerrestriaBiomes {
 	public static final RegistryKey<Biome> CALDERA = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "caldera"));
 	public static final RegistryKey<Biome> CANYON = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "canyon"));
@@ -80,27 +78,27 @@ public class TerrestriaBiomes {
 			WINDSWEPT_REDWOOD_FOREST
 	);
 
-	public static void populate(FabricDynamicRegistryProvider.Entries entries) {
-		entries.add(CALDERA, CalderaBiomes.create(entries));
-		entries.add(CANYON, CanyonBiomes.create(entries));
-		entries.add(CYPRESS_FOREST, CypressForestBiomes.create(entries));
-		entries.add(CYPRESS_SWAMP, CypressSwampBiomes.create(entries));
-		entries.add(DENSE_WOODLANDS, DenseWoodlandsBiomes.create(entries));
-		entries.add(DUNES, DunesBiomes.create(entries));
-		entries.add(HEMLOCK_RAINFOREST, HemlockRainforestBiomes.create(entries, false));
-		entries.add(HEMLOCK_TREELINE, HemlockRainforestBiomes.create(entries, true));
-		entries.add(JAPANESE_MAPLE_FOREST, JapaneseMapleForestBiomes.create(entries));
-		entries.add(LUSH_DESERT, LushDesertBiomes.create(entries, false));
-		entries.add(LUSH_REDWOOD_FOREST, LushRedwoodForestBiomes.create(entries));
-		entries.add(OASIS, LushDesertBiomes.create(entries, true));
-		entries.add(OUTBACK, OutbackBiomes.create(entries));
-		entries.add(RAINBOW_RAINFOREST, RainbowRainforestBiomes.create(entries));
-		entries.add(REDWOOD_FOREST, RedwoodForestBiomes.create(entries, false));
-		entries.add(SAKURA_FOREST, SakuraForestBiomes.create(entries));
-		entries.add(SNOWY_HEMLOCK_FOREST, SnowyHemlockRainforestBiomes.create(entries, false));
-		entries.add(SNOWY_HEMLOCK_TREELINE, SnowyHemlockRainforestBiomes.create(entries, true));
-		entries.add(VOLCANIC_ISLAND, VolcanicIslandBiomes.create(entries));
-		entries.add(WINDSWEPT_REDWOOD_FOREST, RedwoodForestBiomes.create(entries, true));
+	public static void populate(Registerable<Biome> entries) {
+		entries.register(CALDERA, CalderaBiomes.create(entries));
+		entries.register(CANYON, CanyonBiomes.create(entries));
+		entries.register(CYPRESS_FOREST, CypressForestBiomes.create(entries));
+		entries.register(CYPRESS_SWAMP, CypressSwampBiomes.create(entries));
+		entries.register(DENSE_WOODLANDS, DenseWoodlandsBiomes.create(entries));
+		entries.register(DUNES, DunesBiomes.create(entries));
+		entries.register(HEMLOCK_RAINFOREST, HemlockRainforestBiomes.create(entries, false));
+		entries.register(HEMLOCK_TREELINE, HemlockRainforestBiomes.create(entries, true));
+		entries.register(JAPANESE_MAPLE_FOREST, JapaneseMapleForestBiomes.create(entries));
+		entries.register(LUSH_DESERT, LushDesertBiomes.create(entries, false));
+		entries.register(LUSH_REDWOOD_FOREST, LushRedwoodForestBiomes.create(entries));
+		entries.register(OASIS, LushDesertBiomes.create(entries, true));
+		entries.register(OUTBACK, OutbackBiomes.create(entries));
+		entries.register(RAINBOW_RAINFOREST, RainbowRainforestBiomes.create(entries));
+		entries.register(REDWOOD_FOREST, RedwoodForestBiomes.create(entries, false));
+		entries.register(SAKURA_FOREST, SakuraForestBiomes.create(entries));
+		entries.register(SNOWY_HEMLOCK_FOREST, SnowyHemlockRainforestBiomes.create(entries, false));
+		entries.register(SNOWY_HEMLOCK_TREELINE, SnowyHemlockRainforestBiomes.create(entries, true));
+		entries.register(VOLCANIC_ISLAND, VolcanicIslandBiomes.create(entries));
+		entries.register(WINDSWEPT_REDWOOD_FOREST, RedwoodForestBiomes.create(entries, true));
 	}
 
 	public static void addBasicFeatures(GenerationSettings.LookupBackedBuilder generationSettings) {

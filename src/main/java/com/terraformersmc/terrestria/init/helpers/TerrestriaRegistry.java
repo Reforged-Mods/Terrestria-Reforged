@@ -14,37 +14,20 @@ import java.util.List;
 
 public class TerrestriaRegistry {
 	public static final List<Block> BLOCKS = new ArrayList<>();
-	public static BlockItem registerBuildingBlockItem(String name, Block block) {
-		return registerBlockItem(name, block, ItemGroup.BUILDING_BLOCKS);
+
+	public static BlockItem registerBlockItem(String name, Block block) {
+		BlockItem item = new BlockItem(block, new Item.Settings());
+		return register(name, item);
 	}
 
-	public static BlockItem registerDecorationBlockItem(String name, Block block) {
-		return registerBlockItem(name, block, ItemGroup.DECORATIONS);
-	}
-
-	public static BlockItem registerRedstoneBlockItem(String name, Block block) {
-		return registerBlockItem(name, block, ItemGroup.REDSTONE);
-	}
-
-	public static BlockItem registerBlockItem(String name, Block block, ItemGroup itemGroup) {
-		BlockItem item = new BlockItem(block, new Item.Settings().group(itemGroup));
-		item.appendBlocks(Item.BLOCK_ITEMS, item);
-
-		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
-		ComposterRecipes.registerCompostableBlock(block);
-		return item;
-	}
-
-	public static SignItem registerSignItem(String name, Block standing, Block wall) {
-		SignItem item = new SignItem(new Item.Settings().group(ItemGroup.DECORATIONS).maxCount(16), standing, wall);
+	public static <I extends Item> I register(String name, I item) {
+		if (item instanceof BlockItem blockItem) {
+			blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
+		}
 		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
 		return item;
 	}
 
-	public static <I extends Item> I registerItem(String name, I item) {
-		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
-		return item;
-	}
 
 	public static <T extends Block> T register(String name, T block) {
 		BLOCKS.add(block);

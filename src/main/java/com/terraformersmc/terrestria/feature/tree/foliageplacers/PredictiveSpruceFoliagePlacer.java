@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.leaves.block.ExtendedLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.state.property.Properties;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
@@ -42,7 +42,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	@Override
-	protected void generateSquare(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
+	protected void generateSquare(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
 		int giantTrunkOffset = giantTrunk ? 1 : 0;
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 		int actualDistance;
@@ -54,11 +54,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 					if (TreeFeature.canReplace(world, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);
 						BlockState baseState = config.foliageProvider.get(random, mutable);
-						// TODO: https://github.com/TerraformersMC/Terrestria/pull/256/files/bf6e019da7969f01ed15f736fbeb0f796d701034#r651410439
-						//       This is about leaf decay behavior, which changed quite a bit in 1.17.
-						//       Look here first if we get reports of strange decay on the biggest trees.
-
-						replacer.accept(mutable.toImmutable(), withDistance(baseState, actualDistance));
+						placer.placeBlock(mutable.toImmutable(), withDistance(baseState, actualDistance));
 					}
 				}
 			}
@@ -87,12 +83,10 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	private static BlockState withDistance(BlockState state, int distance) {
-		if (state.contains(ExtendedLeavesBlock.DISTANCE)) {
-			return state.with(ExtendedLeavesBlock.DISTANCE, Math.min(distance, ExtendedLeavesBlock.MAX_DISTANCE));
-		}
-
-		if (state.contains(Properties.DISTANCE_1_7)) {
-			return state.with(Properties.DISTANCE_1_7, Math.min(distance, 7));
+		if (state.getBlock() instanceof ExtendedLeavesBlock) {
+			return state.with(LeavesBlock.DISTANCE, Math.min(distance, ExtendedLeavesBlock.MAX_DISTANCE));
+		} else if (state.contains(LeavesBlock.DISTANCE)) {
+			return state.with(LeavesBlock.DISTANCE, Math.min(distance, LeavesBlock.MAX_DISTANCE));
 		}
 
 		return state;

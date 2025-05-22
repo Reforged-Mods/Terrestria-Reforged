@@ -19,7 +19,7 @@ public class TerraformDesertPlantBlock extends PlantBlock {
 	}
 
 	public TerraformDesertPlantBlock(Settings settings, boolean onlySand) {
-		super(settings.offsetType(OffsetType.XYZ));
+		super(settings.offset(AbstractBlock.OffsetType.XYZ));
 		this.onlySand = onlySand;
 	}
 

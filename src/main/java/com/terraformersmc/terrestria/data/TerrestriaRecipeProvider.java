@@ -20,8 +20,8 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.function.Consumer;
 
@@ -87,7 +87,7 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
-		offerHangingSignRecipe(exporter, woodItem.hangingSign, woodItem.planks);
+		offerHangingSignRecipe(exporter, woodItem.hangingSign, woodItem.strippedLog);
 
 		offerPlanksRecipe(exporter, woodItem.planks, logsTag, 4);
 

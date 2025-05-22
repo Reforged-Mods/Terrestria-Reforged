@@ -28,19 +28,10 @@ import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodColors;
-import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.PlantBlock;
-import net.minecraft.block.SandBlock;
-import net.minecraft.block.SaplingBlock;
-import net.minecraft.block.SeagrassBlock;
-import net.minecraft.block.TallSeagrassBlock;
+
+import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
@@ -135,9 +126,9 @@ public class TerrestriaBlocks {
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, WoodBlocks.LogSize.SMALL, true, false, false);
 		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, WoodBlocks.LogSize.SMALL);
 
-		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, TerraformBlockSettings.copyOf(Blocks.OAK_PLANKS)));
-		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, TerraformBlockSettings.copyOf(Blocks.OAK_PLANKS)));
-		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SaguaroCactusBlock(null, TerraformBlockSettings.copyOf(Blocks.CACTUS)));
+		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", SaguaroCactusBlock.of(Blocks.CACTUS.getDefaultMapColor()));
+		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", SmallLogBlock.of(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.getDefaultMapColor(), Blocks.OAK_WOOD.getDefaultMapColor()));
+		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", SmallLogBlock.of(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.getDefaultMapColor()));
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(TerraformBlockSettings.copyOf(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
@@ -214,6 +205,7 @@ public class TerrestriaBlocks {
 		POTTED_ALOE_VERA = TerrestriaRegistry.register("potted_aloe_vera", new FlowerPotBlock(ALOE_VERA, Settings.copy(Blocks.POTTED_POPPY)));
 		addFlammables();
 		addFlattenables();
+		addStrippables();
 	}
 
 	private static void addFlammables() {
@@ -232,6 +224,10 @@ public class TerrestriaBlocks {
 		FlattenableBlockRegistry.register(ANDISOL.getDirt(), ANDISOL.getDirtPath().getDefaultState());
 		FlattenableBlockRegistry.register(ANDISOL.getGrassBlock(), ANDISOL.getDirtPath().getDefaultState());
 		FlattenableBlockRegistry.register(ANDISOL.getPodzol(), ANDISOL.getDirtPath().getDefaultState());
+	}
+
+	private static void addStrippables() {
+		StrippableBlockRegistry.register(SMALL_OAK_LOG, STRIPPED_SMALL_OAK_LOG);
 	}
 
 	public static boolean never(BlockState state, BlockView world, BlockPos pos) {

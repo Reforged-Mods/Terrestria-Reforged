@@ -33,10 +33,10 @@ public class StoneBlocks {
 		blocks.bricks = StoneVariantBlocks.register(name + "_bricks", name + "_brick", color);
 		blocks.mossyBricks = StoneVariantBlocks.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", color);
 
-		blocks.button = TerrestriaRegistry.register(name + "_button", new StoneButtonBlock(TerraformBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, TerraformBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
-		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(TerraformBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
-		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(TerraformBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
+		blocks.button = TerrestriaRegistry.register(name + "_button", new ButtonBlock(FabricBlockSettings.copyOf(Blocks.STONE_BUTTON).mapColor(color), BlockSetType.STONE, 20, false));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE).mapColor(color), BlockSetType.STONE));
+		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
+		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
 
 		return blocks;
 	}

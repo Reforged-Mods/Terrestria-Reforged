@@ -208,7 +208,7 @@ public class TerrestriaPlacedFeatures {
 
 		entries.add(DENSE_FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
 
-		entries.add(DENSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
+		entries.add(DENSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
 
 		entries.add(SPARSE_SMALL_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE));
 
@@ -268,7 +268,7 @@ public class TerrestriaPlacedFeatures {
 
 		entries.add(MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
 
-		entries.add(MEGA_REDWOOD_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
+		entries.add(MEGA_REDWOOD_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE));
 
 		entries.add(DENSEST_MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 8, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
 
@@ -374,7 +374,6 @@ public class TerrestriaPlacedFeatures {
 		List<PlacementModifier> list = new ArrayList<>(List.of(placementModifiers));
 		list.add(BiomePlacementModifier.of());
 		return placeFeature(entries, feature, list);
-
 	}
 
 	private static PlacedFeature placeFeatureWithoutBiomeFilter(FabricDynamicRegistryProvider.Entries entries, RegistryKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {

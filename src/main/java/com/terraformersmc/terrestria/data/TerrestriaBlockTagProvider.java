@@ -120,7 +120,7 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 		addWood(TerrestriaBlockTags.WILLOW_LOGS, TerrestriaBlocks.WILLOW);
 		addWood(TerrestriaBlockTags.YUCCA_PALM_LOGS, TerrestriaBlocks.YUCCA_PALM);
 
-		this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+		getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
 			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
 	}
 
@@ -244,8 +244,10 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 			.add(woodBlock.strippedLog);
 		getOrCreateTagBuilder(TerrestriaBlockTags.STRIPPED_LOGS).add(woodBlock.strippedLog);
 
-		if (woodBlock.strippedWood != null) {
-			woodBuilder.add(woodBlock.strippedWood);
+		if (woodBlock.hasWood()) {
+			woodBuilder
+				.add(woodBlock.wood)
+				.add(woodBlock.strippedWood);
 			getOrCreateTagBuilder(TerrestriaBlockTags.STRIPPED_WOOD).add(woodBlock.strippedWood);
 		}
 		if (woodBlock.wood != null) {
@@ -253,9 +255,9 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 		}
 		if (woodBlock instanceof QuarteredWoodBlocks quarteredWoodBlocks) {
 			woodBuilder
-				.add(quarteredWoodBlocks.quarterLog)
-				.add(quarteredWoodBlocks.strippedQuarterLog);
-			getOrCreateTagBuilder(TerrestriaBlockTags.STRIPPED_LOGS).add(quarteredWoodBlocks.strippedQuarterLog);
+				.add(woodBlock.quarterLog)
+				.add(woodBlock.strippedQuarterLog);
+			getOrCreateTagBuilder(TerrestriaBlockTags.STRIPPED_LOGS).add(woodBlock.strippedQuarterLog);
 		}
 
 		getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(woodBlock.fenceGate);
@@ -277,9 +279,12 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 
 		// Adding to FENCE_GATES or any WOODEN tag does this for AXE_MINEABLE.
 		getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(woodBlock.leaves);
+		if (woodBlock.hasLeafPile()) {
+			getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(woodBlock.leafPile);
+		}
 
 		// There is no way in this version of Minecraft to query whether a block burns.
-		// So, all the logs and planks burn.  It's true, but also we've solved this in 1.19.4+.
+		// So, all the logs and planks burn.  It's true, but also we've solved this in 1.20.
 		getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).addTag(logTag);
 		getOrCreateTagBuilder(TerrestriaBlockTags.PLANKS_THAT_BURN).add(woodBlock.planks);
 	}

@@ -17,8 +17,6 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
-import java.util.function.BiConsumer;
-
 public class CanopyFoliagePlacer extends FoliagePlacer {
 
 	public static final Codec<CanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
@@ -34,7 +32,7 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
 
 		radius = treeNode.getFoliageRadius();
 		BlockPos centerPos = treeNode.getCenter();
@@ -45,7 +43,7 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 				.stream().filter(AirValidator.of(world))
 				.forEach(position -> {
 					BlockPos pos = position.toBlockPos();
-					replacer.accept(pos, config.foliageProvider.get(random, pos));
+					placer.placeBlock(pos, config.foliageProvider.get(random, pos));
 				});
 	}
 

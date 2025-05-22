@@ -15,10 +15,10 @@ public final class TerrestriaBlockTags {
 	public static final TagKey<Block> STRIPPED_LOGS = TerrestriaBlockTags.of(new Identifier("forge", "stripped_logs"));
 	public static final TagKey<Block> STRIPPED_WOOD = TerrestriaBlockTags.of(new Identifier("forge", "stripped_wood"));
 
-	public static final TagKey<Block> FARMLAND = TerrestriaBlockTags.of(new Identifier("terraform", "farmland"));
-	public static final TagKey<Block> GRASS_BLOCKS = TerrestriaBlockTags.of(new Identifier("terraform", "grass_blocks"));
-	public static final TagKey<Block> PODZOL = TerrestriaBlockTags.of(new Identifier("terraform", "podzol"));
-	public static final TagKey<Block> SOIL = TerrestriaBlockTags.of(new Identifier("terraform", "soil"));
+	public static final TagKey<Block> FARMLAND = TerrestriaBlockTags.of(Identifier.of("terraform", "farmland"));
+	public static final TagKey<Block> GRASS_BLOCKS = TerrestriaBlockTags.of(Identifier.of("terraform", "grass_blocks"));
+	public static final TagKey<Block> PODZOL = TerrestriaBlockTags.of(Identifier.of("terraform", "podzol"));
+	public static final TagKey<Block> SOIL = TerrestriaBlockTags.of(Identifier.of("terraform", "soil"));
 
 	public static final TagKey<Block> CYPRESS_LOGS = TerrestriaBlockTags.of("cypress_logs");
 	public static final TagKey<Block> HEMLOCK_LOGS = TerrestriaBlockTags.of("hemlock_logs");
@@ -37,7 +37,7 @@ public final class TerrestriaBlockTags {
 	}
 
 	private static TagKey<Block> of(String path) {
-		return TerrestriaBlockTags.of(new Identifier(Terrestria.MOD_ID, path));
+		return TerrestriaBlockTags.of(Identifier.of(Terrestria.MOD_ID, path));
 	}
 
 	private static TagKey<Block> of(Identifier id) {

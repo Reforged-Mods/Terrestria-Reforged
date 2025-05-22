@@ -9,6 +9,10 @@ import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -20,27 +24,26 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class TerrestriaItemGroups {
-	@SuppressWarnings("unused")
-	private static final ItemGroup ITEM_GROUP;
-	private static final HashMap<ItemGroup, HashMap<ItemConvertible, ItemGroupEntries>> ITEM_GROUP_ENTRY_MAPS;
+	private static final RegistryKey<ItemGroup> ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(Terrestria.MOD_ID, "items"));
+	private static final HashMap<RegistryKey<ItemGroup>, HashMap<ItemConvertible, ItemGroupEntries>> ITEM_GROUP_ENTRY_MAPS;
 
 	/*
 	 * These items are the last Vanilla item of a "similar" type to items we add to Vanilla groups.
 	 * Each is used to build a collection of items which will be inserted below the Vanilla item.
 	 */
 	private static final Item BUILDING_STONE_ITEMS = Items.MOSSY_STONE_BRICK_WALL;
-	private static final Item BUILDING_WOOD_ITEMS = Items.MANGROVE_BUTTON;
-	private static final Item FUNCTIONAL_SIGN = Items.MANGROVE_HANGING_SIGN;
+	private static final Item BUILDING_WOOD_ITEMS = Items.CHERRY_BUTTON;
+	private static final Item FUNCTIONAL_SIGN = Items.CHERRY_HANGING_SIGN;
 	private static final Item NATURAL_CACTUS = Items.CACTUS;
 	private static final Item NATURAL_DIRT_ITEMS = Items.FARMLAND;
-	private static final Item NATURAL_LEAVES = Items.MANGROVE_LEAVES;
-	private static final Item NATURAL_LOG = Items.MANGROVE_LOG;
-	private static final Item NATURAL_SAPLING = Items.MANGROVE_PROPAGULE;
+	private static final Item NATURAL_LEAVES = Items.CHERRY_LEAVES;
+	private static final Item NATURAL_LOG = Items.CHERRY_LOG;
+	private static final Item NATURAL_SAPLING = Items.CHERRY_SAPLING;
 	private static final Item NATURAL_SAND = Items.RED_SANDSTONE;
 	private static final Item NATURAL_STONE = Items.STONE;
 	private static final Item NATURAL_TALL_VEGETATION = Items.LARGE_FERN;
 	private static final Item NATURAL_VEGETATION = Items.FERN;
-	private static final Item TOOLS_BOAT = Items.MANGROVE_CHEST_BOAT;
+	private static final Item TOOLS_BOAT = Items.CHERRY_CHEST_BOAT;
 
 	static {
 		ITEM_GROUP_ENTRY_MAPS = new HashMap<>(8);
@@ -155,7 +158,7 @@ public class TerrestriaItemGroups {
 		/*
 		 * Add the items configured above to the Vanilla item groups.
 		 */
-		for (ItemGroup group : ITEM_GROUP_ENTRY_MAPS.keySet()) {
+		for (RegistryKey<ItemGroup> group : ITEM_GROUP_ENTRY_MAPS.keySet()) {
 			ItemGroupEvents.modifyEntriesEvent(group).register((content) -> {
 				FeatureSet featureSet = content.getEnabledFeatures();
 				HashMap<ItemConvertible, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.get(group);
@@ -168,8 +171,6 @@ public class TerrestriaItemGroups {
 					if (relative == null) {
 						// Target the end of the Item Group
 						content.addAll(entries.getCollection());
-					} else if (relative.equals(Items.MANGROVE_HANGING_SIGN) && !Items.MANGROVE_HANGING_SIGN.isEnabled(featureSet)) {
-						content.addAfter(Items.MANGROVE_SIGN, entries.getCollection());
 					} else {
 						//Terrestria.LOGGER.warn("About to add to Vanilla Item Group '{}' after Item '{}': '{}'", group.getId(), relative, entries.getCollection().stream().map(ItemStack::getItem).collect(Collectors.toList()));
 						content.addAfter(relative, entries.getCollection());
@@ -182,7 +183,7 @@ public class TerrestriaItemGroups {
 		/*
 		 * Also add all the items to Terrestria's own item group.
 		 */
-		ITEM_GROUP = FabricItemGroup.builder(new Identifier(Terrestria.MOD_ID, "items"))
+		Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder()
 				.displayName(Text.literal("Terrestria"))
 				.icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultStack())
 				.entries((context, entries) -> {
@@ -191,7 +192,8 @@ public class TerrestriaItemGroups {
 							.map(ItemGroupEntries::getCollection).flatMap(Collection::stream)
 							.collect(Collectors.groupingByConcurrent(ItemStack::getItem)).keySet().stream()
 							.sorted(Comparator.comparing((item) -> item.getName().getString())).forEach(entries::add);
-				}).build();
+				}).build()
+		);
 	}
 
 	private static void addDirtEntries(DirtBlocks blocks) {
@@ -309,12 +311,12 @@ public class TerrestriaItemGroups {
 		}
 	}
 
-	public static void addGroupEntry(ItemConvertible item, ItemGroup group) {
+	public static void addGroupEntry(ItemConvertible item, RegistryKey<ItemGroup> group) {
 		// Appends the item to the bottom of the group.
 		addGroupEntry(item, group, null);
 	}
 
-	public static void addGroupEntry(ItemConvertible item, ItemGroup group, @Nullable ItemConvertible relative) {
+	public static void addGroupEntry(ItemConvertible item, RegistryKey<ItemGroup> group, @Nullable ItemConvertible relative) {
 		HashMap<ItemConvertible, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.computeIfAbsent(group, (key) -> new HashMap<>(32));
 		ItemGroupEntries entries = entryMap.computeIfAbsent(relative, ItemGroupEntries::empty);
 		entries.addItem(item);

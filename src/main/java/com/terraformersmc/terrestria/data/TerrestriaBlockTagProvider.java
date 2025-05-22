@@ -99,6 +99,12 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 			.add(TerrestriaBlocks.SMALL_OAK_LOG)
 			.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
 
+		getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
+
+		getOrCreateTagBuilder(TerrestriaBlockTags.STRIPPED_LOGS)
+			.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
+
 
 		// custom dirt block tags
 		addDirt(TerrestriaBlocks.ANDISOL);
@@ -159,6 +165,9 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 			.add(dirtBlock.getPodzol());
 
 
+		getOrCreateTagBuilder(TerrestriaBlockTags.DIRT)
+			.add(dirtBlock.getDirt());
+
 		getOrCreateTagBuilder(TerrestriaBlockTags.FARMLAND)
 			.add(dirtBlock.getFarmland());
 
@@ -178,6 +187,8 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE).add(sandBlock);
 		getOrCreateTagBuilder(BlockTags.SAND).add(sandBlock);
 		getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(sandBlock);
+
+		getOrCreateTagBuilder(TerrestriaBlockTags.SAND).add(sandBlock);
 	}
 
 	@SuppressWarnings("SameParameterValue")
@@ -283,9 +294,10 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 			getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(woodBlock.leafPile);
 		}
 
-		// There is no way in this version of Minecraft to query whether a block burns.
-		// So, all the logs and planks burn.  It's true, but also we've solved this in 1.20.
-		getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).addTag(logTag);
-		getOrCreateTagBuilder(TerrestriaBlockTags.PLANKS_THAT_BURN).add(woodBlock.planks);
+		// If the log burns, we assume all the logs, planks, and wood burn.
+		if (woodBlock.log.getDefaultState().isBurnable()) {
+			getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).addTag(logTag);
+			getOrCreateTagBuilder(TerrestriaBlockTags.PLANKS_THAT_BURN).add(woodBlock.planks);
+		}
 	}
 }

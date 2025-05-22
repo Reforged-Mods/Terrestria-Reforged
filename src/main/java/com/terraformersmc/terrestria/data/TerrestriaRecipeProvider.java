@@ -39,6 +39,14 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 			.criterion("has_bryce_sapling", InventoryChangedCriterion.Conditions.items(TerrestriaItems.BRYCE_SAPLING))
 			.offerTo(exporter, new Identifier(Terrestria.MOD_ID, "bryce_sapling_from_oak_sapling"));
 
+		CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(TerrestriaItems.SAGUARO_CACTUS), RecipeCategory.MISC, Items.GREEN_DYE, 1.0f, 200)
+			.criterion("has_cactus", InventoryChangedCriterion.Conditions.items(TerrestriaItems.SAGUARO_CACTUS))
+			.offerTo(exporter);
+
+		CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(TerrestriaItems.TINY_CACTUS), RecipeCategory.MISC, Items.LIME_DYE, 1.0f, 200)
+			.criterion("has_tiny_cactus", InventoryChangedCriterion.Conditions.items(TerrestriaItems.TINY_CACTUS))
+			.offerTo(exporter);
+
 		new ShapedRecipeJsonBuilder(RecipeCategory.TOOLS, TerrestriaItems.LOG_TURNER, 1)
 			.pattern("ss")
 			.pattern(" s")

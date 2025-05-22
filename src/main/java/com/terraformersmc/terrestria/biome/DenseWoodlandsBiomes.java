@@ -2,6 +2,8 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -11,7 +13,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class DenseWoodlandsBiomes {
-	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+	public static Biome create(Registerable<Biome> entries) {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries))
 				.spawnSettings(createSpawnSettings())
@@ -26,8 +28,8 @@ public class DenseWoodlandsBiomes {
 				.build();
 	}
 
-	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
-		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.getRegistryLookup(RegistryKeys.PLACED_FEATURE), entries.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addPlainsTallGrass(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);

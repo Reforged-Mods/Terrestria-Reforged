@@ -4,6 +4,8 @@ import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -13,7 +15,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class HemlockRainforestBiomes {
-	public static Biome create(FabricDynamicRegistryProvider.Entries entries, boolean sparse) {
+	public static Biome create(Registerable<Biome> entries, boolean sparse) {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries, sparse))
 				.spawnSettings(createSpawnSettings())
@@ -29,25 +31,25 @@ public class HemlockRainforestBiomes {
 				.build();
 	}
 
-	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries, boolean sparse) {
-		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> entries, boolean sparse) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.getRegistryLookup(RegistryKeys.PLACED_FEATURE), entries.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addLargeFerns(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
 		if (sparse) {
 			// hemlock treeline
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.FALLEN_HEMLOCK_LOGS));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.SPARSE_MEGA_HEMLOCK_TREES));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.PATCH_LUSH_FERNS));
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.FALLEN_HEMLOCK_LOGS);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_MEGA_HEMLOCK_TREES);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
 		} else {
 			// hemlock rainforest
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.DENSEST_MEGA_HEMLOCK_TREES));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.DENSEST_HEMLOCK_TREES));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.DENSE_FALLEN_HEMLOCK_LOGS));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.PATCH_LUSH_FERNS));
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_MEGA_HEMLOCK_TREES);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_HEMLOCK_TREES);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_FALLEN_HEMLOCK_LOGS);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
 		}
 		DefaultBiomeFeatures.addTaigaGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);

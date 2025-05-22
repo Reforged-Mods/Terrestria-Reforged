@@ -4,6 +4,8 @@ import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -13,7 +15,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class LushDesertBiomes {
-	public static Biome create(FabricDynamicRegistryProvider.Entries entries, boolean oasis) {
+	public static Biome create(Registerable<Biome> entries, boolean oasis) {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries, oasis))
 				.spawnSettings(createSpawnSettings())
@@ -28,24 +30,24 @@ public class LushDesertBiomes {
 				.build();
 	}
 
-	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries, boolean oasis) {
-		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> entries, boolean oasis) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.getRegistryLookup(RegistryKeys.PLACED_FEATURE), entries.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
 		if (oasis) {
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.JUNGLE_PALM_TREES));
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.JUNGLE_PALM_TREES);
 		} else {
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.RARE_YUCCA_PALM_TREES));
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.SAGUARO_CACTUSES));
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.RARE_YUCCA_PALM_TREES);
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SAGUARO_CACTUSES);
 		}
 		DefaultBiomeFeatures.addDefaultFlowers(builder);
 		DefaultBiomeFeatures.addDefaultGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		if (oasis) {
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.PATCH_OASIS_VEGETATION));
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_OASIS_VEGETATION);
 		} else {
-			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, entries.ref(TerrestriaPlacedFeatures.PATCH_LUSH_DESERT_VEGETATION));
+			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_DESERT_VEGETATION);
 		}
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
 		return builder.build();

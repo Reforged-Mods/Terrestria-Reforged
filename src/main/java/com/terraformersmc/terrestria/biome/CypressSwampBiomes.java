@@ -2,9 +2,10 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -16,7 +17,7 @@ import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class CypressSwampBiomes {
-	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+	public static Biome create(Registerable<Biome> entries) {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries))
 				.spawnSettings(createSpawnSettings())
@@ -33,8 +34,8 @@ public class CypressSwampBiomes {
 				.build();
 	}
 
-	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
-		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.getRegistryLookup(RegistryKeys.PLACED_FEATURE), entries.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		DefaultBiomeFeatures.addFossils(builder);
 		addBasicFeatures(builder);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_TALL_GRASS);

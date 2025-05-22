@@ -4,6 +4,8 @@ import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -12,7 +14,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.OceanPlacedFeatures;
 
 public class VolcanicIslandBiomes {
-	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+	public static Biome create(Registerable<Biome> entries) {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries))
 				.spawnSettings(createSpawnSettings())
@@ -27,8 +29,8 @@ public class VolcanicIslandBiomes {
 				.build();
 	}
 
-	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
-		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.getRegistryLookup(RegistryKeys.PLACED_FEATURE), entries.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		DefaultBiomeFeatures.addLandCarvers(builder);
 		DefaultBiomeFeatures.addAmethystGeodes(builder);
 		DefaultBiomeFeatures.addDungeons(builder);

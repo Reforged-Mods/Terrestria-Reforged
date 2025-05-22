@@ -11,19 +11,23 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SandBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.server.BlockTagProvider;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.data.DataOutput;
+import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class TerrestriaBlockTagProvider extends BlockTagProvider {
+import java.util.concurrent.CompletableFuture;
 
-	public TerrestriaBlockTagProvider(DataGenerator dataGenerator, ExistingFileHelper helper) {
-		super(dataGenerator, Terrestria.MOD_ID, helper);
+public class TerrestriaBlockTagProvider extends BlockTagsProvider {
+
+	public TerrestriaBlockTagProvider(DataOutput dataOutput, CompletableFuture<WrapperLookup> lookup, ExistingFileHelper helper) {
+		super(dataOutput, lookup, Terrestria.MOD_ID, helper);
 	}
 
 	@Override
-	protected void configure() {
+	protected void configure(WrapperLookup lookup) {
 		// basic block tags
 		getOrCreateTagBuilder(BlockTags.AZALEA_ROOT_REPLACEABLE)
 			.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
@@ -264,7 +268,8 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 		if (woodBlock.wood != null) {
 			woodBuilder.add(woodBlock.wood);
 		}
-		if (woodBlock instanceof QuarteredWoodBlocks quarteredWoodBlocks) {
+
+		if (woodBlock.hasQuarterLog()) {
 			woodBuilder
 				.add(woodBlock.quarterLog)
 				.add(woodBlock.strippedQuarterLog);

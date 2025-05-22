@@ -7,19 +7,29 @@ import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SaplingBlock;
-import net.minecraft.data.server.BlockLootTableGenerator;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
+import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Item;
 import net.minecraft.loot.condition.TableBonusLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.entry.LeafEntry;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 
+	protected TerrestriaBlockLootTableProvider() {
+		super(Set.of(), FeatureFlags.FEATURE_MANAGER.getFeatureSet());
+	}
+
 	@Override
-	protected void addTables() {
+	protected void generate() {
 		// simple blocks
 		addDrop(TerrestriaBlocks.AGAVE);
 		addDrop(TerrestriaBlocks.ALOE_VERA);
@@ -168,7 +178,7 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 
 	private void addWoodDrops(WoodBlocks woodBlock, @Nullable SaplingBlock sapling) {
 		addDrop(woodBlock.button);
-		addDrop(woodBlock.door, BlockLootTableGenerator::doorDrops);
+		addDrop(woodBlock.door, this::doorDrops);
 		addDrop(woodBlock.fence);
 		addDrop(woodBlock.fenceGate);
 		addDrop(woodBlock.hangingSign);

@@ -13,25 +13,23 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class SakuraForestBiomes {
-	public static void register() {
-		final Biome.Builder template = new Biome.Builder()
+	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+		return new Biome.Builder()
+				.generationSettings(createGenerationSettings(entries))
+				.spawnSettings(createSpawnSettings())
 				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.8F)
 				.downfall(1.0F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-					.waterColor(0x3f76e4)
-					.waterFogColor(0x50533)
-					.build()
-				);
-
-		TerrestriaBiomes.SAKURA_FOREST = TerrestriaBiomes.register("sakura_forest", template
-				.generationSettings(sakuraForestGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				.build());
+						.waterColor(0x3f76e4)
+						.waterFogColor(0x50533)
+						.build()
+				)
+				.build();
 	}
 
-	private static GenerationSettings.Builder sakuraForestGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
@@ -40,12 +38,12 @@ public class SakuraForestBiomes {
 		DefaultBiomeFeatures.addForestGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		return builder;
+		return builder.build();
 	}
 
-	private static SpawnSettings.Builder defaultSpawnSettings() {
+	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
-		return builder;
+		return builder.build();
 	}
 }

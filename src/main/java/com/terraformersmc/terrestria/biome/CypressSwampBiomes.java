@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
@@ -15,25 +16,25 @@ import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class CypressSwampBiomes {
-	public static void register() {
-		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", new Biome.Builder()
+	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+		return new Biome.Builder()
+				.generationSettings(createGenerationSettings(entries))
+				.spawnSettings(createSpawnSettings())
 				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-					.waterColor(0x2c7f32)
-					.waterFogColor(0x053305)
-					.grassColor(0x699e3c)
-					.foliageColor(0x619137)
-					.build()
+						.waterColor(0x2c7f32)
+						.waterFogColor(0x053305)
+						.grassColor(0x699e3c)
+						.foliageColor(0x619137)
+						.build()
 				)
-				.generationSettings(cypressSwampGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				.build());
+				.build();
 	}
 
-	private static GenerationSettings.Builder cypressSwampGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
 		DefaultBiomeFeatures.addFossils(builder);
 		addBasicFeatures(builder);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_TALL_GRASS);
@@ -50,14 +51,13 @@ public class CypressSwampBiomes {
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addSwampVegetation(builder);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_WARM);
-
-		return builder;
+		return builder.build();
 	}
 
-	private static SpawnSettings.Builder defaultSpawnSettings() {
+	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4));
 		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 1, 1, 1));
-		return builder;
+		return builder.build();
 	}
 }

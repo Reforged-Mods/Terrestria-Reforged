@@ -15,7 +15,7 @@ public class StoneBlocks {
 	public StoneVariantBlocks bricks;
 	public StoneVariantBlocks mossyBricks;
 
-	public StoneButtonBlock button;
+	public ButtonBlock button;
 	public PressurePlateBlock pressurePlate;
 	public Block chiseledBricks;
 	public Block crackedBricks;

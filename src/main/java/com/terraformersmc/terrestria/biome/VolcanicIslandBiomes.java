@@ -12,25 +12,23 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.OceanPlacedFeatures;
 
 public class VolcanicIslandBiomes {
-	public static void register() {
-		final Biome.Builder template = new Biome.Builder()
+	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+		return new Biome.Builder()
+				.generationSettings(createGenerationSettings(entries))
+				.spawnSettings(createSpawnSettings())
 				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.9F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-					.waterColor(0x54d3c0)
-					.waterFogColor(0x24a0b0)
-					.build()
-				);
-
-		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", template
-				.generationSettings(volcanicIslandGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				.build());
+						.waterColor(0x54d3c0)
+						.waterFogColor(0x24a0b0)
+						.build()
+				)
+				.build();
 	}
 
-	private static GenerationSettings.Builder volcanicIslandGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
 		DefaultBiomeFeatures.addLandCarvers(builder);
 		DefaultBiomeFeatures.addAmethystGeodes(builder);
 		DefaultBiomeFeatures.addDungeons(builder);
@@ -48,14 +46,14 @@ public class VolcanicIslandBiomes {
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_WARM);
 		DefaultBiomeFeatures.addSeagrassOnStone(builder);
-		return builder;
+		return builder.build();
 	}
 
-	private static SpawnSettings.Builder defaultSpawnSettings() {
+	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.spawn(SpawnGroup.WATER_CREATURE, new SpawnSettings.SpawnEntry(EntityType.SQUID, 3, 1, 4));
 		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.SALMON, 15, 3, 6));
 		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.COD, 15, 1, 5));
-		return builder;
+		return builder.build();
 	}
 }

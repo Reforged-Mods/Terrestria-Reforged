@@ -2,7 +2,6 @@ package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terraform.dirt.DirtBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -26,7 +25,7 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 		addDrop(TerrestriaBlocks.ALOE_VERA);
 		addDrop(TerrestriaBlocks.BLACK_SAND);
 		addDrop(TerrestriaBlocks.BRYCE_SAPLING);
-		addDrop(TerrestriaBlocks.CATTAIL, BlockLootTableGenerator::dropsWithShears);
+		addDrop(TerrestriaBlocks.CATTAIL, VanillaBlockLootTableGenerator::dropsWithShears);
 		addDrop(TerrestriaBlocks.CYPRESS_SAPLING);
 		addDrop(TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING);
 		addDrop(TerrestriaBlocks.DEAD_GRASS);
@@ -35,7 +34,7 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 		addDrop(TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
 		addDrop(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
 		addDrop(TerrestriaBlocks.JUNGLE_PALM_SAPLING);
-		addDrop(TerrestriaBlocks.MONSTERAS, BlockLootTableGenerator::grassDrops);
+		addDrop(TerrestriaBlocks.MONSTERAS, this::grassDrops);
 		addDrop(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		addDrop(TerrestriaBlocks.REDWOOD_SAPLING);
 		addDrop(TerrestriaBlocks.RUBBER_SAPLING);
@@ -66,25 +65,25 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 		addWoodDrops(TerrestriaBlocks.YUCCA_PALM, null);
 
 		// potted things
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_AGAVE);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_ALOE_VERA);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_BRYCE_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_CYPRESS_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_DARK_JAPANESE_MAPLE_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_HEMLOCK_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_INDIAN_PAINTBRUSH);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SHRUB_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_JUNGLE_PALM_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_MONSTERAS);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_RAINBOW_EUCALYPTUS_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_REDWOOD_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_RUBBER_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_SAKURA_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_TINY_CACTUS);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_WILLOW_SAPLING);
-		addPottedPlantDrop(TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_AGAVE);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_ALOE_VERA);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_BRYCE_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_CYPRESS_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_DARK_JAPANESE_MAPLE_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_HEMLOCK_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_INDIAN_PAINTBRUSH);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SHRUB_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_JUNGLE_PALM_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_MONSTERAS);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_RAINBOW_EUCALYPTUS_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_REDWOOD_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_RUBBER_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_SAKURA_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_TINY_CACTUS);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_WILLOW_SAPLING);
+		addPottedPlantDrops(TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING);
 
 		// specialty tree leaves
 		addDrop(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, leavesDrop(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
@@ -122,7 +121,7 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 	private void addStoneDrops(StoneBlocks stoneBlock) {
 		if (stoneBlock.bricks != null) {
 			addDrop(stoneBlock.bricks.full);
-			addDrop(stoneBlock.bricks.slab, BlockLootTableGenerator::slabDrops);
+			addDrop(stoneBlock.bricks.slab, this::slabDrops);
 			addDrop(stoneBlock.bricks.stairs);
 			addDrop(stoneBlock.bricks.wall);
 
@@ -131,19 +130,19 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 		}
 		if (stoneBlock.cobblestone != null) {
 			addDrop(stoneBlock.cobblestone.full);
-			addDrop(stoneBlock.cobblestone.slab, BlockLootTableGenerator::slabDrops);
+			addDrop(stoneBlock.cobblestone.slab, this::slabDrops);
 			addDrop(stoneBlock.cobblestone.stairs);
 			addDrop(stoneBlock.cobblestone.wall);
 		}
 		if (stoneBlock.mossyBricks != null) {
 			addDrop(stoneBlock.mossyBricks.full);
-			addDrop(stoneBlock.mossyBricks.slab, BlockLootTableGenerator::slabDrops);
+			addDrop(stoneBlock.mossyBricks.slab, this::slabDrops);
 			addDrop(stoneBlock.mossyBricks.stairs);
 			addDrop(stoneBlock.mossyBricks.wall);
 		}
 		if (stoneBlock.mossyCobblestone != null) {
 			addDrop(stoneBlock.mossyCobblestone.full);
-			addDrop(stoneBlock.mossyCobblestone.slab, BlockLootTableGenerator::slabDrops);
+			addDrop(stoneBlock.mossyCobblestone.slab, this::slabDrops);
 			addDrop(stoneBlock.mossyCobblestone.stairs);
 			addDrop(stoneBlock.mossyCobblestone.wall);
 		}
@@ -153,13 +152,13 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 			} else {
 				addDrop(stoneBlock.plain.full);
 			}
-			addDrop(stoneBlock.plain.slab, BlockLootTableGenerator::slabDrops);
+			addDrop(stoneBlock.plain.slab, this::slabDrops);
 			addDrop(stoneBlock.plain.stairs);
 			addDrop(stoneBlock.plain.wall);
 		}
 		if (stoneBlock.smooth != null) {
 			addDrop(stoneBlock.smooth.full);
-			addDrop(stoneBlock.smooth.slab, BlockLootTableGenerator::slabDrops);
+			addDrop(stoneBlock.smooth.slab, this::slabDrops);
 			addDrop(stoneBlock.smooth.stairs);
 			addDrop(stoneBlock.smooth.wall);
 		}
@@ -173,25 +172,33 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 		addDrop(woodBlock.door, BlockLootTableGenerator::doorDrops);
 		addDrop(woodBlock.fence);
 		addDrop(woodBlock.fenceGate);
+		addDrop(woodBlock.hangingSign);
 		addDrop(woodBlock.log);
 		addDrop(woodBlock.planks);
 		addDrop(woodBlock.pressurePlate);
 		addDrop(woodBlock.sign);
-		addDrop(woodBlock.slab, BlockLootTableGenerator::slabDrops);
+		addDrop(woodBlock.slab, this::slabDrops);
 		addDrop(woodBlock.stairs);
 		addDrop(woodBlock.strippedLog);
-		addDrop(woodBlock.strippedWood);
 		addDrop(woodBlock.trapdoor);
+		addDrop(woodBlock.wallHangingSign);
 		addDrop(woodBlock.wallSign);
-		addDrop(woodBlock.wood);
 
-		if (woodBlock instanceof QuarteredWoodBlocks) {
-			addDrop(((QuarteredWoodBlocks) woodBlock).quarterLog);
-			addDrop(((QuarteredWoodBlocks) woodBlock).strippedQuarterLog);
+		if (woodBlock.hasWood()) {
+			addDrop(woodBlock.wood);
+			addDrop(woodBlock.strippedWood);
+		}
+
+		if (woodBlock.hasQuarterLog()) {
+			addDrop(woodBlock.quarterLog);
+			addDrop(woodBlock.strippedQuarterLog);
 		}
 
 		if (sapling != null) {
-			addDrop(woodBlock.leaves, leavesDrop(woodBlock.leaves, sapling, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+			addDrop(woodBlock.leaves, leavesDrops(woodBlock.leaves, sapling, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+			if (woodBlock.hasLeafPile()) {
+				addDrop(woodBlock.leafPile, leavesDrops(woodBlock.leafPile, sapling, 0.00625f, 0.0078125f, 0.010416667f, 0.0125f));
+			}
 		}
 	}
 

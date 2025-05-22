@@ -11,27 +11,24 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class CanyonBiomes {
-
-	public static void register() {
-		final Biome.Builder template = new Biome.Builder()
-			.precipitation(Biome.Precipitation.NONE)
-			.temperature(0.9F)
-			.downfall(0.1F)
-			.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-				.waterColor(0x4da5e3)
-				.waterFogColor(0x24a0b0)
-				.foliageColor(0xbdea62)
-				.build()
-			);
-
-		TerrestriaBiomes.CANYON = TerrestriaBiomes.register("canyon", template
-			.generationSettings(canyonGenerationSettings().build())
-			.spawnSettings(defaultSpawnSettings().build())
-			.build());
+	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+		return new Biome.Builder()
+				.generationSettings(createGenerationSettings(entries))
+				.spawnSettings(createSpawnSettings())
+				.precipitation(Biome.Precipitation.NONE)
+				.temperature(0.9F)
+				.downfall(0.1F)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.waterColor(0x4da5e3)
+						.waterFogColor(0x24a0b0)
+						.foliageColor(0xbdea62)
+						.build()
+				)
+				.build();
 	}
 
-	private static GenerationSettings.Builder canyonGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
@@ -41,11 +38,11 @@ public class CanyonBiomes {
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
 		DefaultBiomeFeatures.addDesertFeatures(builder);
-		return builder;
+		return builder.build();
 	}
 
-	private static SpawnSettings.Builder defaultSpawnSettings() {
+	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		return builder;
+		return builder.build();
 	}
 }

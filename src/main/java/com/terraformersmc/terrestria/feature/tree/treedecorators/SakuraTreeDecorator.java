@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -54,7 +54,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
 			// Otherwise, you get very destructive sakura trees.
 			if (valid && TreeFeature.canReplace(world, top)) {
-				generator.replace(top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState());
+				generator.replace(top, TerrestriaBlocks.SAKURA.leafPile.getDefaultState());
 			}
 		}
 	}

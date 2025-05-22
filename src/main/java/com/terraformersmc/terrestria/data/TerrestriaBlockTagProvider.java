@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria.data;
 import com.terraformersmc.terraform.dirt.DirtBlocks;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -26,7 +25,10 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 	@Override
 	protected void configure() {
 		// basic block tags
-		this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
+		getOrCreateTagBuilder(BlockTags.AZALEA_ROOT_REPLACEABLE)
+			.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
+
+		getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
 			.add(TerrestriaBlocks.POTTED_AGAVE)
 			.add(TerrestriaBlocks.POTTED_ALOE_VERA)
 			.add(TerrestriaBlocks.POTTED_BRYCE_SAPLING)
@@ -47,27 +49,29 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 			.add(TerrestriaBlocks.POTTED_WILLOW_SAPLING)
 			.add(TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING);
 
-		this.getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
-			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
-			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
-			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES)
-			.add(TerrestriaBlocks.SAKURA_LEAF_PILE);
-
-		this.getOrCreateTagBuilder(BlockTags.LEAVES)
+		getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
 			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
 			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
 			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES);
 
-		this.getOrCreateTagBuilder(BlockTags.OAK_LOGS)
+		getOrCreateTagBuilder(BlockTags.LEAVES)
+			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
+			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
+			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES);
+
+		getOrCreateTagBuilder(BlockTags.MOSS_REPLACEABLE)
+			.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
+
+		getOrCreateTagBuilder(BlockTags.OAK_LOGS)
 			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
 
-		this.getOrCreateTagBuilder(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
+		getOrCreateTagBuilder(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
 			.add(Blocks.SMOOTH_SANDSTONE)
 			.add(TerrestriaBlocks.ANDISOL.getDirt())
 			.add(TerrestriaBlocks.ANDISOL.getGrassBlock())
 			.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
 
-		this.getOrCreateTagBuilder(BlockTags.SAPLINGS)
+		getOrCreateTagBuilder(BlockTags.SAPLINGS)
 			.add(TerrestriaBlocks.BRYCE_SAPLING)
 			.add(TerrestriaBlocks.CYPRESS_SAPLING)
 			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING)
@@ -83,15 +87,15 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 			.add(TerrestriaBlocks.WILLOW_SAPLING)
 			.add(TerrestriaBlocks.YUCCA_PALM_SAPLING);
 
-		this.getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS)
+		getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS)
 			.add(TerrestriaBlocks.INDIAN_PAINTBRUSH)
 			.add(TerrestriaBlocks.MONSTERAS);
 
 
-		this.getOrCreateTagBuilder(TerrestriaBlockTags.BLACK_SAND)
+		getOrCreateTagBuilder(TerrestriaBlockTags.BLACK_SAND)
 			.add(TerrestriaBlocks.BLACK_SAND);
 
-		this.getOrCreateTagBuilder(TerrestriaBlockTags.SMALL_OAK_LOGS)
+		getOrCreateTagBuilder(TerrestriaBlockTags.SMALL_OAK_LOGS)
 			.add(TerrestriaBlocks.SMALL_OAK_LOG)
 			.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
 
@@ -261,6 +265,8 @@ public class TerrestriaBlockTagProvider extends BlockTagProvider {
 		getOrCreateTagBuilder(BlockTags.STAIRS).add(woodBlock.stairs);
 		getOrCreateTagBuilder(BlockTags.STANDING_SIGNS).add(woodBlock.sign);
 		getOrCreateTagBuilder(BlockTags.WALL_SIGNS).add(woodBlock.wallSign);
+		getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS).add(woodBlock.hangingSign);
+		getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS).add(woodBlock.wallHangingSign);
 		getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(woodBlock.button);
 		getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(woodBlock.door);
 		getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(woodBlock.fence);

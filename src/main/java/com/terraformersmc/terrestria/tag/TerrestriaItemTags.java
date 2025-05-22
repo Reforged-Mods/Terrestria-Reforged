@@ -2,9 +2,9 @@ package com.terraformersmc.terrestria.tag;
 
 import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.item.Item;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public final class TerrestriaItemTags {
 	public static final TagKey<Item> BASALT = TerrestriaItemTags.of(Identifier.of("forge", "basalt"));
@@ -33,10 +33,10 @@ public final class TerrestriaItemTags {
 	}
 
 	private static TagKey<Item> of(String path) {
-		return TerrestriaItemTags.of(new Identifier(Terrestria.MOD_ID, path));
+		return TerrestriaItemTags.of(Identifier.of(Terrestria.MOD_ID, path));
 	}
 
 	private static TagKey<Item> of(Identifier id) {
-		return TagKey.of(Registry.ITEM_KEY, id);
+		return TagKey.of(RegistryKeys.ITEM, id);
 	}
 }

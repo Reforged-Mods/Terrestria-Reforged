@@ -3,10 +3,9 @@ package com.terraformersmc.terrestria.init.helpers;
 import com.terraformersmc.terraform.leaves.ComposterRecipes;
 import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.SignItem;
+import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.registries.ForgeRegistries;
 

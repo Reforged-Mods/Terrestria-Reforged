@@ -13,26 +13,24 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class CypressForestBiomes {
-	public static void register() {
-		final Biome.Builder template = new Biome.Builder()
+	public static Biome create(FabricDynamicRegistryProvider.Entries entries) {
+		return new Biome.Builder()
+				.generationSettings(createGenerationSettings(entries))
+				.spawnSettings(createSpawnSettings())
 				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.7F)
 				.downfall(0.8F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-					.waterColor(0x3f76e4)
-					.waterFogColor(0x50533)
-					.grassColor(0x7ecc41)
-					.build()
-				);
-
-		TerrestriaBiomes.CYPRESS_FOREST = TerrestriaBiomes.register("cypress_forest", template
-				.generationSettings(cypressGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				.build());
+						.waterColor(0x3f76e4)
+						.waterFogColor(0x50533)
+						.grassColor(0x7ecc41)
+						.build()
+				)
+				.build();
 	}
 
-	private static GenerationSettings.Builder cypressGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(FabricDynamicRegistryProvider.Entries entries) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(entries.placedFeatures(), entries.configuredCarvers());
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addForestFlowers(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
@@ -43,12 +41,12 @@ public class CypressForestBiomes {
 		DefaultBiomeFeatures.addForestGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		return builder;
+		return builder.build();
 	}
 
-	private static SpawnSettings.Builder defaultSpawnSettings() {
+	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
-		return builder;
+		return builder.build();
 	}
 }

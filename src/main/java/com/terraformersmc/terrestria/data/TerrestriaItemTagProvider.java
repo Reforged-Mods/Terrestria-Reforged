@@ -31,38 +31,56 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES)
 			.add(TerrestriaItems.JUNGLE_PALM_LEAVES);
 
-		this.getOrCreateTagBuilder(ItemTags.OAK_LOGS)
-			.addTag(TerrestriaItemTags.SMALL_OAK_LOGS);
+		copy(BlockTags.DIRT, ItemTags.DIRT);
 
-		this.getOrCreateTagBuilder(ItemTags.SAPLINGS)
-			.add(TerrestriaItems.BRYCE_SAPLING)
-			.add(TerrestriaItems.CYPRESS_SAPLING)
-			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_SAPLING)
-			.add(TerrestriaItems.HEMLOCK_SAPLING)
-			.add(TerrestriaItems.JAPANESE_MAPLE_SAPLING)
-			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_SAPLING)
-			.add(TerrestriaItems.JUNGLE_PALM_SAPLING)
-			.add(TerrestriaItems.RAINBOW_EUCALYPTUS_SAPLING)
-			.add(TerrestriaItems.REDWOOD_SAPLING)
-			.add(TerrestriaItems.RUBBER_SAPLING)
-			.add(TerrestriaItems.SAKURA_SAPLING)
-			.add(TerrestriaItems.SAGUARO_CACTUS_SAPLING)
-			.add(TerrestriaItems.WILLOW_SAPLING)
-			.add(TerrestriaItems.YUCCA_PALM_SAPLING);
+		copy(BlockTags.CEILING_HANGING_SIGNS, ItemTags.HANGING_SIGNS);
 
-		this.getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS)
-			.add(TerrestriaItems.INDIAN_PAINTBRUSH)
-			.add(TerrestriaItems.MONSTERAS);
+		copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
+
+		copy(BlockTags.LEAVES, ItemTags.LEAVES);
+
+		copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+
+		copy(BlockTags.OAK_LOGS, ItemTags.OAK_LOGS);
+
+		copy(BlockTags.PLANKS, ItemTags.PLANKS);
+
+		copy(BlockTags.SAND, ItemTags.SAND);
+
+		copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
+
+		copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
+
+		copy(BlockTags.SLABS, ItemTags.SLABS);
+
+		copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
+
+		copy(BlockTags.STAIRS, ItemTags.STAIRS);
+
+		copy(BlockTags.WALLS, ItemTags.WALLS);
+
+		copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
+
+		copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
+
+		copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
+
+		copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
+
+		copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
+
+		copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
+
+		copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
 
 
-		this.getOrCreateTagBuilder(TerrestriaItemTags.BLACK_SAND)
-			.add(TerrestriaItems.BLACK_SAND);
+		copy(TerrestriaBlockTags.BLACK_SAND, TerrestriaItemTags.BLACK_SAND);
 
-		this.getOrCreateTagBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
+		getOrCreateTagBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
 			.add(Items.MOSS_BLOCK)
 			.add(Items.VINE);
 
-		this.getOrCreateTagBuilder(TerrestriaItemTags.PLANKS_THAT_BURN)
+		getOrCreateTagBuilder(TerrestriaItemTags.PLANKS_THAT_BURN)
 			.add(TerrestriaItems.CYPRESS.planks)
 			.add(TerrestriaItems.HEMLOCK.planks)
 			.add(TerrestriaItems.JAPANESE_MAPLE.planks)
@@ -73,42 +91,36 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 			.add(TerrestriaItems.WILLOW.planks)
 			.add(TerrestriaItems.YUCCA_PALM.planks);
 
-		this.getOrCreateTagBuilder(TerrestriaItemTags.SMALL_OAK_LOGS)
-			.add(TerrestriaItems.SMALL_OAK_LOG)
-			.add(TerrestriaItems.STRIPPED_SMALL_OAK_LOG);
+		copy(TerrestriaBlockTags.SMALL_OAK_LOGS, TerrestriaItemTags.SMALL_OAK_LOGS);
 
 
-		// custom dirt item tags (no nice convenient item container?)
-		addDirt(TerrestriaBlocks.ANDISOL);
+		// stone type tags
+		copy(TerrestriaBlockTags.BASALT, TerrestriaItemTags.BASALT);
 
-		// custom sand item tags
-		addSand(TerrestriaItems.BLACK_SAND);
+		// stone items
+		addStone(TerrestriaItems.VOLCANIC_ROCK);
 
-		// stone building item tags
-		addStone(TerrestriaItemTags.BASALT, TerrestriaItems.VOLCANIC_ROCK);
+		// wood type tags
+		copy(TerrestriaBlockTags.CYPRESS_LOGS, TerrestriaItemTags.CYPRESS_LOGS);
+		copy(TerrestriaBlockTags.HEMLOCK_LOGS, TerrestriaItemTags.HEMLOCK_LOGS);
+		copy(TerrestriaBlockTags.JAPANESE_MAPLE_LOGS, TerrestriaItemTags.JAPANESE_MAPLE_LOGS);
+		copy(TerrestriaBlockTags.RAINBOW_EUCALYPTUS_LOGS, TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS);
+		copy(TerrestriaBlockTags.REDWOOD_LOGS, TerrestriaItemTags.REDWOOD_LOGS);
+		copy(TerrestriaBlockTags.RUBBER_LOGS, TerrestriaItemTags.RUBBER_LOGS);
+		copy(TerrestriaBlockTags.SAKURA_LOGS, TerrestriaItemTags.SAKURA_LOGS);
+		copy(TerrestriaBlockTags.WILLOW_LOGS, TerrestriaItemTags.WILLOW_LOGS);
+		copy(TerrestriaBlockTags.YUCCA_PALM_LOGS, TerrestriaItemTags.YUCCA_PALM_LOGS);
 
-		// wood building item tags
-		addWood(TerrestriaItemTags.CYPRESS_LOGS, TerrestriaItems.CYPRESS);
-		addWood(TerrestriaItemTags.HEMLOCK_LOGS, TerrestriaItems.HEMLOCK);
-		addWood(TerrestriaItemTags.JAPANESE_MAPLE_LOGS, TerrestriaItems.JAPANESE_MAPLE);
-		addWood(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS, TerrestriaItems.RAINBOW_EUCALYPTUS);
-		addWood(TerrestriaItemTags.REDWOOD_LOGS, TerrestriaItems.REDWOOD);
-		addWood(TerrestriaItemTags.RUBBER_LOGS, TerrestriaItems.RUBBER);
-		addWood(TerrestriaItemTags.SAKURA_LOGS, TerrestriaItems.SAKURA);
-		addWood(TerrestriaItemTags.WILLOW_LOGS, TerrestriaItems.WILLOW);
-		addWood(TerrestriaItemTags.YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM);
-
-		this.getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
-			.addTag(TerrestriaItemTags.CYPRESS_LOGS)
-			.addTag(TerrestriaItemTags.HEMLOCK_LOGS)
-			.addTag(TerrestriaItemTags.JAPANESE_MAPLE_LOGS)
-			.addTag(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS)
-			.addTag(TerrestriaItemTags.REDWOOD_LOGS)
-			.addTag(TerrestriaItemTags.RUBBER_LOGS)
-			.addTag(TerrestriaItemTags.SAKURA_LOGS)
-			.addTag(TerrestriaItemTags.SMALL_OAK_LOGS)
-			.addTag(TerrestriaItemTags.WILLOW_LOGS)
-			.addTag(TerrestriaItemTags.YUCCA_PALM_LOGS);
+		// wood items
+		addWood(TerrestriaItems.CYPRESS);
+		addWood(TerrestriaItems.HEMLOCK);
+		addWood(TerrestriaItems.JAPANESE_MAPLE);
+		addWood(TerrestriaItems.RAINBOW_EUCALYPTUS);
+		addWood(TerrestriaItems.REDWOOD);
+		addWood(TerrestriaItems.RUBBER);
+		addWood(TerrestriaItems.SAKURA);
+		addWood(TerrestriaItems.WILLOW);
+		addWood(TerrestriaItems.YUCCA_PALM);
 	}
 
 	private void addDirt(DirtBlocks dirtBlock) {
@@ -200,10 +212,10 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 
 		// Add boats if they exist via the WoodItem.
 		if (woodItem.boat != null) {
-			this.getOrCreateTagBuilder(ItemTags.BOATS).add(woodItem.boat);
+			getOrCreateTagBuilder(ItemTags.BOATS).add(woodItem.boat);
 		}
 		if (woodItem.chestBoat != null) {
-			this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(woodItem.chestBoat);
+			getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(woodItem.chestBoat);
 		}
 
 		// There is no item tag for fence gates...

@@ -7,7 +7,6 @@ import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.structure.StructurePiecesCollector;
 import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeCoords;

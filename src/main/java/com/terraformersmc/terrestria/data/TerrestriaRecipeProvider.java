@@ -10,6 +10,8 @@ import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataOutput;
+import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
@@ -17,8 +19,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.tag.ItemTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +29,7 @@ import java.util.Collections;
 import java.util.function.Consumer;
 
 public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
-	public TerrestriaRecipeProvider(DataGenerator dataGenerator) {
+	public TerrestriaRecipeProvider(DataOutput dataGenerator) {
 		super(dataGenerator);
 	}
 
@@ -74,8 +77,12 @@ public class TerrestriaRecipeProvider extends TerraformRecipeProvider {
 	}
 
 	private void generateWood(Consumer<RecipeJsonProvider> exporter, WoodItems woodItem, TagKey<Item> logsTag) {
-		offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
-		ShapelessRecipeJsonBuilder.create(woodItem.chestBoat).input(Blocks.CHEST).input(woodItem.boat).group("chest_boat").criterion("has_boat", conditionsFromTag(ItemTags.BOATS)).offerTo(exporter);
+		if (woodItem.hasBoat()) {
+			assert (woodItem.boat != null);  // it's not null; this is just for IDEA
+			offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
+			assert (woodItem.chestBoat != null);  // it's not null; this is just for IDEA
+			offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
+		}
 
 		new ShapelessRecipeJsonBuilder(RecipeCategory.REDSTONE, woodItem.button, 1)
 			.group("wooden_button")

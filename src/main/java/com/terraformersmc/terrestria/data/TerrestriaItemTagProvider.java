@@ -4,32 +4,35 @@ import com.terraformersmc.terraform.dirt.DirtBlocks;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
-import com.terraformersmc.terrestria.init.helpers.QuarteredWoodItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
+import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.server.BlockTagProvider;
-import net.minecraft.data.server.ItemTagProvider;
+import net.minecraft.data.DataOutput;
+import net.minecraft.data.server.tag.ItemTagProvider;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.tag.ItemTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
 
 public class TerrestriaItemTagProvider extends ItemTagProvider {
-	public TerrestriaItemTagProvider(DataGenerator dataGenerator, BlockTagProvider provider, ExistingFileHelper helper) {
-		super(dataGenerator, provider, Terrestria.MOD_ID, helper);
+	public TerrestriaItemTagProvider(DataOutput dataOutput, CompletableFuture<WrapperLookup> completableFuture, CompletableFuture<TagLookup<Block>> completableFuture2, @Nullable ExistingFileHelper helper) {
+		super(dataOutput, completableFuture, completableFuture2, Terrestria.MOD_ID, helper);
 	}
 
 	@Override
-	protected void configure() {
-		this.getOrCreateTagBuilder(ItemTags.LEAVES)
-			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_LEAVES)
-			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES)
-			.add(TerrestriaItems.JUNGLE_PALM_LEAVES);
+	protected void configure(WrapperLookup lookup) {
+		copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
 
 		copy(BlockTags.DIRT, ItemTags.DIRT);
 
@@ -76,23 +79,28 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 
 		copy(TerrestriaBlockTags.BLACK_SAND, TerrestriaItemTags.BLACK_SAND);
 
+		copy(TerrestriaBlockTags.COBBLESTONE, TerrestriaItemTags.COBBLESTONE);
+
 		getOrCreateTagBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
 			.add(Items.MOSS_BLOCK)
 			.add(Items.VINE);
 
-		getOrCreateTagBuilder(TerrestriaItemTags.PLANKS_THAT_BURN)
-			.add(TerrestriaItems.CYPRESS.planks)
-			.add(TerrestriaItems.HEMLOCK.planks)
-			.add(TerrestriaItems.JAPANESE_MAPLE.planks)
-			.add(TerrestriaItems.RAINBOW_EUCALYPTUS.planks)
-			.add(TerrestriaItems.REDWOOD.planks)
-			.add(TerrestriaItems.RUBBER.planks)
-			.add(TerrestriaItems.SAKURA.planks)
-			.add(TerrestriaItems.WILLOW.planks)
-			.add(TerrestriaItems.YUCCA_PALM.planks);
+		copy(TerrestriaBlockTags.PLANKS_THAT_BURN, TerrestriaItemTags.PLANKS_THAT_BURN);
 
 		copy(TerrestriaBlockTags.SMALL_OAK_LOGS, TerrestriaItemTags.SMALL_OAK_LOGS);
 
+		copy(TerrestriaBlockTags.STONE, TerrestriaItemTags.STONE);
+
+		copy(TerrestriaBlockTags.STRIPPED_LOGS, TerrestriaItemTags.STRIPPED_LOGS);
+
+		copy(TerrestriaBlockTags.STRIPPED_WOOD, TerrestriaItemTags.STRIPPED_WOOD);
+
+
+		// dirt type tags
+		copy(TerrestriaBlockTags.DIRT, TerrestriaItemTags.DIRT);
+
+		// sand type tags
+		copy(TerrestriaBlockTags.SAND, TerrestriaItemTags.SAND);
 
 		// stone type tags
 		copy(TerrestriaBlockTags.BASALT, TerrestriaItemTags.BASALT);
@@ -123,63 +131,14 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		addWood(TerrestriaItems.YUCCA_PALM);
 	}
 
-	private void addDirt(DirtBlocks dirtBlock) {
-		getOrCreateTagBuilder(ItemTags.DIRT)
-			.add(dirtBlock.getDirt().asItem())
-			.add(dirtBlock.getGrassBlock().asItem())
-			.add(dirtBlock.getPodzol().asItem());
-	}
-
-	private void addSand(BlockItem sandItem) {
-		getOrCreateTagBuilder(ItemTags.SAND).add(sandItem);
-	}
 
 	@SuppressWarnings("SameParameterValue")
-	private void addStone(TagKey<Item> stoneTag, StoneItems stoneItem) {
-		ObjectBuilder<Item> stoneBuilder = getOrCreateTagBuilder(stoneTag);
-		if (stoneItem.bricks != null) {
-			stoneBuilder
-				.add(stoneItem.bricks.full)
-
-				.add(stoneItem.chiseledBricks)
-				.add(stoneItem.crackedBricks);
-
-			addStoneVariant(stoneItem.bricks);
-			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.bricks.full);
-			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.chiseledBricks);
-			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.crackedBricks);
-		}
+	private void addStone(StoneItems stoneItem) {
 		if (stoneItem.cobblestone != null) {
-			stoneBuilder.add(stoneItem.cobblestone.full);
-			addStoneVariant(stoneItem.cobblestone);
-
 			// Add any cobble variant to vanilla crafting tags.
 			getOrCreateTagBuilder(ItemTags.STONE_CRAFTING_MATERIALS).add(stoneItem.cobblestone.full);
 			getOrCreateTagBuilder(ItemTags.STONE_TOOL_MATERIALS).add(stoneItem.cobblestone.full);
-			getOrCreateTagBuilder(TerrestriaItemTags.COBBLESTONE).add(stoneItem.cobblestone.full);
 		}
-		if (stoneItem.mossyBricks != null) {
-			stoneBuilder.add(stoneItem.mossyBricks.full);
-			addStoneVariant(stoneItem.mossyBricks);
-			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.mossyBricks.full);
-		}
-		if (stoneItem.mossyCobblestone != null) {
-			stoneBuilder.add(stoneItem.mossyCobblestone.full);
-			addStoneVariant(stoneItem.mossyCobblestone);
-		}
-		if (stoneItem.plain != null) {
-			stoneBuilder.add(stoneItem.plain.full);
-			addStoneVariant(stoneItem.plain);
-			getOrCreateTagBuilder(TerrestriaItemTags.STONE).add(stoneItem.plain.full);
-		}
-		if (stoneItem.smooth != null) {
-			stoneBuilder.add(stoneItem.smooth.full);
-			addStoneVariant(stoneItem.smooth);
-			getOrCreateTagBuilder(TerrestriaItemTags.STONE).add(stoneItem.smooth.full);
-		}
-
-		getOrCreateTagBuilder(ItemTags.BUTTONS).add(stoneItem.button);
-		// There is no item tag for stone pressure plates...
 	}
 
 	private void addStoneVariant(StoneVariantItems stoneVariantItem) {
@@ -188,28 +147,7 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 		getOrCreateTagBuilder(ItemTags.WALLS).add(stoneVariantItem.wall);
 	}
 
-	private void addWood(TagKey<Item> logTag, WoodItems woodItem) {
-		ObjectBuilder<Item> woodBuilder = getOrCreateTagBuilder(logTag);
-		woodBuilder
-			.add(woodItem.log)
-			.add(woodItem.strippedLog);
-		getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_LOGS).add(woodItem.strippedLog);
-
-		if (woodItem.strippedWood != null) {
-			woodBuilder.add(woodItem.strippedWood);
-			getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_WOOD).add(woodItem.strippedWood);
-		}
-		if (woodItem.wood != null) {
-			woodBuilder.add(woodItem.wood);
-		}
-
-		if (woodItem instanceof QuarteredWoodItems quarteredWoodItems) {
-			woodBuilder
-				.add(quarteredWoodItems.quarterLog)
-				.add(quarteredWoodItems.strippedQuarterLog);
-			getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_LOGS).add(quarteredWoodItems.strippedQuarterLog);
-		}
-
+	private void addWood(WoodItems woodItem) {
 		// Add boats if they exist via the WoodItem.
 		if (woodItem.boat != null) {
 			getOrCreateTagBuilder(ItemTags.BOATS).add(woodItem.boat);
@@ -218,18 +156,5 @@ public class TerrestriaItemTagProvider extends ItemTagProvider {
 			getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(woodItem.chestBoat);
 		}
 
-		// There is no item tag for fence gates...
-		getOrCreateTagBuilder(ItemTags.LEAVES).add(woodItem.leaves);
-		getOrCreateTagBuilder(ItemTags.PLANKS).add(woodItem.planks);
-		getOrCreateTagBuilder(ItemTags.SLABS).add(woodItem.slab);
-		getOrCreateTagBuilder(ItemTags.STAIRS).add(woodItem.stairs);
-		getOrCreateTagBuilder(ItemTags.SIGNS).add(woodItem.sign);
-		getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS).add(woodItem.button);
-		getOrCreateTagBuilder(ItemTags.WOODEN_DOORS).add(woodItem.door);
-		getOrCreateTagBuilder(ItemTags.WOODEN_FENCES).add(woodItem.fence);
-		getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES).add(woodItem.pressurePlate);
-		getOrCreateTagBuilder(ItemTags.WOODEN_SLABS).add(woodItem.slab);
-		getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS).add(woodItem.stairs);
-		getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(woodItem.trapdoor);
 	}
 }

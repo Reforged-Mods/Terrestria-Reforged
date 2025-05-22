@@ -71,6 +71,9 @@ dependencies {
 	modImplementation include("dev.trinsdar:terraform-tree-api-v1:${project.terraform_version}")
 	modImplementation include("dev.trinsdar:terraform-wood-api-v1:${project.terraform_version}")
 	modImplementation include("dev.trinsdar:terraform-utils-v1:${project.terraform_version}")
+
+	// Biolith and TerraBlender for the worldgen API modules
+	modImplementation include("com.terraformersmc:biolith-forge:${biolith_version}")
 	modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 }
 

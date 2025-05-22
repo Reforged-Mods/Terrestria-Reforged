@@ -29,7 +29,7 @@ public class SmallLogSphereFoliagePlacer extends SmallFoliagePlacer {
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
 
 		// Add 0.25 to make it not a square and also not a single block
 		Shapes.ellipsoid(radius + 0.25,radius + 0.25,radius + 0.25)

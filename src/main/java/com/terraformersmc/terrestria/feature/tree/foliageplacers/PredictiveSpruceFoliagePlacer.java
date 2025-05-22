@@ -83,12 +83,10 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	private static BlockState withDistance(BlockState state, int distance) {
-		if (state.getBlock() instanceof ExtendedLeavesBlock) {
-			return state.with(LeavesBlock.DISTANCE, Math.min(distance, ExtendedLeavesBlock.MAX_DISTANCE));
-		} else if (state.contains(LeavesBlock.DISTANCE)) {
-			return state.with(LeavesBlock.DISTANCE, Math.min(distance, LeavesBlock.MAX_DISTANCE));
+		if (!state.contains(ExtendedLeavesBlock.EXTENDED_DISTANCE)) {
+			distance = Math.min(distance, LeavesBlock.MAX_DISTANCE);
 		}
 
-		return state;
+		return ExtendedLeavesBlock.setExtendedDistance(state, distance);
 	}
 }

@@ -44,15 +44,15 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryKey<PlacedFeature> CATTAILS_WARM = createRegistryKey("cattails_warm");
 	public static final RegistryKey<PlacedFeature> SPARSE_OAK_SHRUBS = createRegistryKey("sparse_oak_shrubs");
 	public static final RegistryKey<PlacedFeature> PATCH_LUSH_FERNS = createRegistryKey("patch_lush_ferns");
-	private static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_volcanic_island_grass");
+	static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_volcanic_island_grass");
 	public static final RegistryKey<PlacedFeature> PATCH_VOLCANIC_ISLAND_GRASS = createRegistryKey("patch_volcanic_island_grass");
-	private static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_DEAD_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_dead_grass");
+	static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_DEAD_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_dead_grass");
 	public static final RegistryKey<PlacedFeature> PATCH_DEAD_GRASS = createRegistryKey("patch_dead_grass");
-	private static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_OUTBACK_BUSHLAND_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_outback_bushland_grass");
+	static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_OUTBACK_BUSHLAND_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_outback_bushland_grass");
 	public static final RegistryKey<PlacedFeature> PATCH_OUTBACK_BUSHLAND_GRASS = createRegistryKey("patch_outback_bushland_grass");
-	private static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_OASIS_VEGETATION_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_oasis_vegetation");
+	static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_OASIS_VEGETATION_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_oasis_vegetation");
 	public static final RegistryKey<PlacedFeature> PATCH_OASIS_VEGETATION = createRegistryKey("patch_oasis_vegetation");
-	private static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_LUSH_DESERT_VEGETATION_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_lush_desert_vegetation");
+	static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_LUSH_DESERT_VEGETATION_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("patch_lush_desert_vegetation");
 	public static final RegistryKey<PlacedFeature> PATCH_LUSH_DESERT_VEGETATION = createRegistryKey("patch_lush_desert_vegetation");
 	public static final RegistryKey<PlacedFeature> SPARSE_FALLEN_HEMLOCK_LOGS = createRegistryKey("sparse_fallen_hemlock_logs");
 	public static final RegistryKey<PlacedFeature> SPARSE_FALLEN_REDWOOD_LOGS = createRegistryKey("sparse_fallen_redwood_logs");
@@ -131,68 +131,35 @@ public class TerrestriaPlacedFeatures {
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT)));
 
-		entries.add(PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
-			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-					new WeightedBlockStateProvider(createStatePoolBuilder()
-							.add(Blocks.GRASS.getDefaultState(), 1)
-							.add(Blocks.FERN.getDefaultState(), 1)
-							.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
-							.add(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
-							.build())),
-					BlockPredicate.IS_AIR))));
+
 		entries.register(PATCH_VOLCANIC_ISLAND_GRASS, placeFeature(entries, PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED,
 			CountPlacementModifier.of(12),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT)));
 
-		entries.add(PATCH_DEAD_GRASS_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
-			new RandomPatchFeatureConfig(4, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-					BlockStateProvider.of(TerrestriaBlocks.DEAD_GRASS.getDefaultState())),
-					BlockPredicate.IS_AIR))));
+
 		entries.register(PATCH_DEAD_GRASS, placeFeature(entries, PATCH_DEAD_GRASS_CONFIGURED,
 			CountPlacementModifier.of(12),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(PATCH_OUTBACK_BUSHLAND_GRASS_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
-			new RandomPatchFeatureConfig(4, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-							new WeightedBlockStateProvider(createStatePoolBuilder()
-									.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
-									.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
-									.build())),
-					BlockPredicate.IS_AIR))));
+
 		entries.register(PATCH_OUTBACK_BUSHLAND_GRASS, placeFeature(entries, PATCH_OUTBACK_BUSHLAND_GRASS_CONFIGURED,
 			CountPlacementModifier.of(12),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(PATCH_OASIS_VEGETATION_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
-			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-							new WeightedBlockStateProvider(createStatePoolBuilder()
-									.add(Blocks.FERN.getDefaultState(), 1)
-									.add(Blocks.GRASS.getDefaultState(), 2)
-									.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-									.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
-									.add(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)
-									.build())),
-					BlockPredicate.IS_AIR))));
+
 		entries.register(PATCH_OASIS_VEGETATION, placeFeature(entries, PATCH_OASIS_VEGETATION_CONFIGURED,
 			CountPlacementModifier.of(6),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(PATCH_LUSH_DESERT_VEGETATION_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
-			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-							new WeightedBlockStateProvider(createStatePoolBuilder()
-									.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
-									.add(Blocks.DEAD_BUSH.getDefaultState(), 1)
-									.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-									.build())),
-					BlockPredicate.IS_AIR))));
+
 		entries.register(PATCH_LUSH_DESERT_VEGETATION, placeFeature(entries, PATCH_LUSH_DESERT_VEGETATION_CONFIGURED,
 			CountPlacementModifier.of(4),
 			SquarePlacementModifier.of(),
@@ -340,7 +307,7 @@ public class TerrestriaPlacedFeatures {
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 	}
 
-	private static DataPool.Builder<BlockState> createStatePoolBuilder() {
+	static DataPool.Builder<BlockState> createStatePoolBuilder() {
 		return DataPool.builder();
 	}
 

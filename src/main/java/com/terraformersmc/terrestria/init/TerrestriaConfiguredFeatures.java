@@ -35,26 +35,31 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.ProbabilityConfig;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.feature.RandomFeatureEntry;
+import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreePlacedFeatures;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
 
-import static com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures.OUTBACK_BUSHLAND_TREES_CONFIGURED;
-import static com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures.OUTBACK_YUCCA_PALM;
+import static com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures.*;
 
 @SuppressWarnings("UnstableApiUsage")
 public class TerrestriaConfiguredFeatures {
@@ -109,6 +114,49 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 2))
 				.ignoreVines()
 				.build()));
+
+		entries.register(PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
+			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
+					new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(Blocks.GRASS.getDefaultState(), 1)
+						.add(Blocks.FERN.getDefaultState(), 1)
+						.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
+						.add(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
+						.build())),
+				BlockPredicate.IS_AIR))));
+
+		entries.register(PATCH_DEAD_GRASS_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
+			new RandomPatchFeatureConfig(4, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
+					BlockStateProvider.of(TerrestriaBlocks.DEAD_GRASS.getDefaultState())),
+				BlockPredicate.IS_AIR))));
+
+		entries.register(PATCH_OUTBACK_BUSHLAND_GRASS_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
+			new RandomPatchFeatureConfig(4, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
+					new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
+						.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
+						.build())),
+				BlockPredicate.IS_AIR))));
+
+		entries.register(PATCH_OASIS_VEGETATION_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
+			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
+					new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(Blocks.FERN.getDefaultState(), 1)
+						.add(Blocks.GRASS.getDefaultState(), 2)
+						.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
+						.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
+						.add(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)
+						.build())),
+				BlockPredicate.IS_AIR))));
+
+		entries.register(PATCH_LUSH_DESERT_VEGETATION_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
+			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
+					new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
+						.add(Blocks.DEAD_BUSH.getDefaultState(), 1)
+						.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
+						.build())),
+				BlockPredicate.IS_AIR))));
 
 		entries.register(SMALL_HEMLOCK_TREE, configureFeature(Feature.TREE, spruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState())));
 		entries.register(SMALL_REDWOOD_TREE, configureFeature(Feature.TREE, spruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState())));

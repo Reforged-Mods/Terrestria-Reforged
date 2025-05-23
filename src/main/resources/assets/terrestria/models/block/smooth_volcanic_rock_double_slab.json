@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "terrestria:block/smooth_volcanic_rock",
+    "side": "terrestria:block/smooth_volcanic_rock_slab_side"
+  }
+}

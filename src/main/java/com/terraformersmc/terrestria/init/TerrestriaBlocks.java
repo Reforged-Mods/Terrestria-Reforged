@@ -7,15 +7,10 @@ import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import com.terraformersmc.terraform.tree.block.TerraformDesertSaplingBlock;
 import com.terraformersmc.terraform.dirt.DirtBlocks;
 import com.terraformersmc.terraform.dirt.TerraformDirtRegistry;
-import com.terraformersmc.terraform.dirt.block.TerraformDirtPathBlock;
 import com.terraformersmc.terraform.dirt.block.TerraformFarmlandBlock;
 import com.terraformersmc.terraform.dirt.block.TerraformSnowyBlock;
-import com.terraformersmc.terraform.leaves.block.LeafPileBlock;
-import com.terraformersmc.terraform.tree.block.TerraformDesertSaplingBlock;
 import com.terraformersmc.terraform.utils.TerraformBlockSettings;
 import com.terraformersmc.terraform.utils.TerraformFlammableBlockRegistry;
-import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
-import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
 import com.terraformersmc.terrestria.block.PricklyDesertPlantBlock;
@@ -46,7 +41,6 @@ import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ShovelItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -108,7 +102,7 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_YUCCA_PALM_SAPLING;
 
 	// Volcanic Island blocks
-	public static SandBlock BLACK_SAND;
+	public static SandBlock VOLCANIC_SAND;
 	public static DirtBlocks ANDISOL;
 	public static StoneBlocks VOLCANIC_ROCK;
 	public static PlantBlock INDIAN_PAINTBRUSH;
@@ -173,17 +167,17 @@ public class TerrestriaBlocks {
 
 		// Volcanic Island blocks
 
-		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, TerraformBlockSettings.copy(Blocks.SAND).mapColor(MapColor.BLACK)));
-
-		Block andisolDirt = TerrestriaRegistry.register("basalt_dirt", new Block(TerraformBlockSettings.copy(Blocks.DIRT).mapColor(MapColor.BLACK)));
+		Block andisolDirt = TerrestriaRegistry.register("andisol", new Block(TerraformBlockSettings.copy(Blocks.DIRT).mapColor(MapColor.BLACK)));
 		ANDISOL = TerraformDirtRegistry.register(new DirtBlocks (
 			andisolDirt,
-			TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(andisolDirt, () -> ANDISOL.getDirtPath(), TerraformBlockSettings.copy(Blocks.GRASS_BLOCK))),
-			TerrestriaRegistry.register("basalt_grass_path", new TerraformDirtPathBlock(andisolDirt, TerraformBlockSettings.copy(Blocks.DIRT_PATH))),
-			TerrestriaRegistry.register("basalt_podzol", new TerraformSnowyBlock(TerraformBlockSettings.copy(Blocks.PODZOL))),
+			TerrestriaRegistry.register("andisol_grass_block", new BasaltGrassBlock(andisolDirt, () -> ANDISOL.getDirtPath(), TerraformBlockSettings.copy(Blocks.GRASS_BLOCK))),
+			TerrestriaRegistry.register("andisol_grass_path", new TerraformDirtPathBlock(andisolDirt, TerraformBlockSettings.copy(Blocks.DIRT_PATH))),
+			TerrestriaRegistry.register("andisol_podzol", new TerraformSnowyBlock(TerraformBlockSettings.copy(Blocks.PODZOL))),
 			TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(TerraformBlockSettings.copy(Blocks.FARMLAND).mapColor(MapColor.BLACK)))
 		));
-		VOLCANIC_ROCK = StoneBlocks.register("basalt", MapColor.BLACK);
+
+		VOLCANIC_ROCK = StoneBlocks.register("volcanic_rock", MapColor.BLACK);
+		VOLCANIC_SAND = TerrestriaRegistry.register("volcanic_sand", new SandBlock(0x202020, TerraformBlockSettings.copy(Blocks.SAND).mapColor(MapColor.BLACK)));
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 4, Settings.copy(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, Settings.copy(Blocks.TALL_GRASS)));

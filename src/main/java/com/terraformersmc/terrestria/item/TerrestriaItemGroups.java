@@ -12,17 +12,13 @@ import net.minecraft.item.ItemGroup.StackVisibility;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class TerrestriaItemGroups {
 
@@ -75,7 +71,7 @@ public class TerrestriaItemGroups {
 		addGroupEntry(TerrestriaBlocks.SMALL_OAK_LOG, ItemGroups.NATURAL, Items.OAK_LOG);
 
 		// Sand and Sandstone
-		addGroupEntry(TerrestriaBlocks.BLACK_SAND, ItemGroups.NATURAL, NATURAL_SAND);
+		addGroupEntry(TerrestriaBlocks.VOLCANIC_SAND, ItemGroups.NATURAL, NATURAL_SAND);
 
 		// Leaves
 		addGroupEntry(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, ItemGroups.NATURAL, NATURAL_LEAVES);

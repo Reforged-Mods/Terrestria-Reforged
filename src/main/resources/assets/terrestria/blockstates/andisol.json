@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terrestria:block/andisol"
+      },
+      {
+        "model": "terrestria:block/andisol",
+        "y": 90
+      },
+      {
+        "model": "terrestria:block/andisol",
+        "y": 180
+      },
+      {
+        "model": "terrestria:block/andisol",
+        "y": 270
+      }
+    ]
+  }
+}

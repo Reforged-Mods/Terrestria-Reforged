@@ -20,7 +20,7 @@ public class MixinSugarCaneBlock {
 	private void terrestria$canPlaceAt(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
 		BlockPos downPos = pos.down();
 
-		if (world.getBlockState(downPos).isOf(TerrestriaBlocks.BLACK_SAND)) {
+		if (world.getBlockState(downPos).isOf(TerrestriaBlocks.VOLCANIC_SAND)) {
 			for(Direction direction: Direction.Type.HORIZONTAL) {
 				BlockState candidateState = world.getBlockState(downPos.offset(direction));
 				FluidState fluidState = world.getFluidState(downPos.offset(direction));

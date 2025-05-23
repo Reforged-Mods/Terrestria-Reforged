@@ -10,7 +10,6 @@ import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SandBlock;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataOutput;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.BlockTags;
@@ -97,7 +96,7 @@ public class TerrestriaBlockTagProvider extends BlockTagsProvider {
 
 
 		getOrCreateTagBuilder(TerrestriaBlockTags.BLACK_SAND)
-			.add(TerrestriaBlocks.BLACK_SAND);
+			.add(TerrestriaBlocks.VOLCANIC_SAND);
 
 		getOrCreateTagBuilder(TerrestriaBlockTags.SMALL_OAK_LOGS)
 			.add(TerrestriaBlocks.SMALL_OAK_LOG)
@@ -114,7 +113,7 @@ public class TerrestriaBlockTagProvider extends BlockTagsProvider {
 		addDirt(TerrestriaBlocks.ANDISOL);
 
 		// custom sand block tags
-		addSand(TerrestriaBlocks.BLACK_SAND);
+		addSand(TerrestriaBlocks.VOLCANIC_SAND);
 
 		// stone building block tags
 		addStone(TerrestriaBlockTags.BASALT, TerrestriaBlocks.VOLCANIC_ROCK);

@@ -1,0 +1,8 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "terrestria:block/smooth_volcanic_rock",
+    "top": "terrestria:block/smooth_volcanic_rock",
+    "side": "terrestria:block/smooth_volcanic_rock"
+  }
+}

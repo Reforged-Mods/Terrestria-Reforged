@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "terrestria:block/smooth_volcanic_rock",
+    "top": "terrestria:block/smooth_volcanic_rock",
+    "side": "terrestria:block/smooth_volcanic_rock_slab_side"
+  }
+}

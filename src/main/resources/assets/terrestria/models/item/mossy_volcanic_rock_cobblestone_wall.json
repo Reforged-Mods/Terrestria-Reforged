@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "terrestria:block/mossy_volcanic_rock_cobblestone"
+  }
+}

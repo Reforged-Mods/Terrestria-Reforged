@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "terrestria:block/volcanic_rock_slab"
+    },
+    "type=top": {
+      "model": "terrestria:block/volcanic_rock_slab_top"
+    },
+    "type=double": {
+      "model": "terrestria:block/volcanic_rock"
+    }
+  }
+}

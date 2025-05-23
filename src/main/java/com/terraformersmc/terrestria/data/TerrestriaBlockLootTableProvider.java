@@ -10,12 +10,10 @@ import net.minecraft.block.SaplingBlock;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Item;
 import net.minecraft.loot.condition.TableBonusLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
-import net.minecraft.resource.featuretoggle.FeatureSet;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class TerrestriaBlockLootTableProvider extends BlockLootTableGenerator {
 		// simple blocks
 		addDrop(TerrestriaBlocks.AGAVE);
 		addDrop(TerrestriaBlocks.ALOE_VERA);
-		addDrop(TerrestriaBlocks.BLACK_SAND);
+		addDrop(TerrestriaBlocks.VOLCANIC_SAND);
 		addDrop(TerrestriaBlocks.BRYCE_SAPLING);
 		addDrop(TerrestriaBlocks.CATTAIL, VanillaBlockLootTableGenerator::dropsWithShears);
 		addDrop(TerrestriaBlocks.CYPRESS_SAPLING);

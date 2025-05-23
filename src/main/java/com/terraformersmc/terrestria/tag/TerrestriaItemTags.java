@@ -10,7 +10,10 @@ public final class TerrestriaItemTags {
 	public static final TagKey<Item> BASALT = TerrestriaItemTags.of(Identifier.of("forge", "basalt"));
 	public static final TagKey<Item> BLACK_SAND = TerrestriaItemTags.of(Identifier.of("forge", "sand/black"));
 	public static final TagKey<Item> COBBLESTONE = TerrestriaItemTags.of(Identifier.of("forge", "cobblestone"));
+	public static final TagKey<Item> DIRT = TerrestriaItemTags.of(Identifier.of("forge", "dirt"));
+	public static final TagKey<Item> GRAVEL = TerrestriaItemTags.of(Identifier.of("forge", "gravel"));
 	public static final TagKey<Item> PLANKS_THAT_BURN = TerrestriaItemTags.of(Identifier.of("forge", "planks_that_burn"));
+	public static final TagKey<Item> SAND = TerrestriaItemTags.of(Identifier.of("forge", "sand"));
 	public static final TagKey<Item> STONE = TerrestriaItemTags.of(Identifier.of("forge", "stone"));
 	public static final TagKey<Item> STRIPPED_LOGS = TerrestriaItemTags.of(Identifier.of("forge", "stripped_logs"));
 	public static final TagKey<Item> STRIPPED_WOOD = TerrestriaItemTags.of(Identifier.of("forge", "stripped_wood"));

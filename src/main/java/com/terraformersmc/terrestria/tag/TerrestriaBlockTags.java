@@ -10,7 +10,10 @@ public final class TerrestriaBlockTags {
 	public static final TagKey<Block> BASALT = TerrestriaBlockTags.of(new Identifier("forge", "basalt"));
 	public static final TagKey<Block> BLACK_SAND = TerrestriaBlockTags.of(new Identifier("forge", "sand/black"));
 	public static final TagKey<Block> COBBLESTONE = TerrestriaBlockTags.of(new Identifier("forge", "cobblestone"));
+	public static final TagKey<Block> DIRT = TerrestriaBlockTags.of(Identifier.of("forge", "dirt"));
+	public static final TagKey<Block> GRAVEL = TerrestriaBlockTags.of(Identifier.of("forge", "gravel"));
 	public static final TagKey<Block> PLANKS_THAT_BURN = TerrestriaBlockTags.of(Identifier.of("forge", "planks_that_burn"));
+	public static final TagKey<Block> SAND = TerrestriaBlockTags.of(Identifier.of("forge", "sand"));
 	public static final TagKey<Block> STONE = TerrestriaBlockTags.of(new Identifier("forge", "stone"));
 	public static final TagKey<Block> STRIPPED_LOGS = TerrestriaBlockTags.of(new Identifier("forge", "stripped_logs"));
 	public static final TagKey<Block> STRIPPED_WOOD = TerrestriaBlockTags.of(new Identifier("forge", "stripped_wood"));

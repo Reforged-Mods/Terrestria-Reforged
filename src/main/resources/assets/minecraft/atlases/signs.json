@@ -50,11 +50,11 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "terrestria:entity/signs/rsakura"
+      "resource": "terrestria:entity/signs/sakura"
     },
     {
       "type": "minecraft:single",
-      "resource": "terrestria:entity/signs/hanging/rsakura"
+      "resource": "terrestria:entity/signs/hanging/sakura"
     },
     {
       "type": "minecraft:single",

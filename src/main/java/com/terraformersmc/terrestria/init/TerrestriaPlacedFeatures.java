@@ -3,9 +3,9 @@ package com.terraformersmc.terrestria.init;
 import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.SurfaceLevelFilterPlacementModifier;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
@@ -24,6 +24,7 @@ import net.minecraft.world.gen.feature.RandomFeatureEntry;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
+import net.minecraft.world.gen.feature.TreePlacedFeatures;
 import net.minecraft.world.gen.feature.VegetationConfiguredFeatures;
 import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
 import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
@@ -96,8 +97,8 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryKey<PlacedFeature> DENSE_RUBBER_TREES = createRegistryKey("dense_rubber_trees");
 	public static final RegistryKey<PlacedFeature> MEGA_CYPRESS_TREES = createRegistryKey("mega_cypress_trees");
 	public static final RegistryKey<PlacedFeature> SPARSE_WILLOW_TREES = createRegistryKey("sparse_willow_trees");
-	private static final RegistryKey<PlacedFeature> OUTBACK_YUCCA_PALM = createRegistryKey("outback_yucca_palm");
-	private static final RegistryKey<ConfiguredFeature<?, ?>> OUTBACK_BUSHLAND_TREES_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("outback_bushland_trees");
+	static final RegistryKey<PlacedFeature> OUTBACK_YUCCA_PALM = createRegistryKey("outback_yucca_palm");
+	static final RegistryKey<ConfiguredFeature<?, ?>> OUTBACK_BUSHLAND_TREES_CONFIGURED = TerrestriaConfiguredFeatures.createRegistryKey("outback_bushland_trees");
 	public static final RegistryKey<PlacedFeature> OUTBACK_BUSHLAND_TREES = createRegistryKey("outback_bushland_trees");
 	public static final RegistryKey<PlacedFeature> RARE_YUCCA_PALM_TREES = createRegistryKey("yucca_palm_trees");
 	public static final RegistryKey<PlacedFeature> ACACIA_DOT_SHRUBS = createRegistryKey("acacia_dot_shrubs");
@@ -105,26 +106,26 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryKey<PlacedFeature> SAGUARO_CACTUSES = createRegistryKey("saguaro_cactuses");
 	public static final RegistryKey<PlacedFeature> RARE_BRYCE_TREES = createRegistryKey("rare_bryce_trees");
 
-	public static void populate(FabricDynamicRegistryProvider.Entries entries) {
+	public static void populate(Registerable<PlacedFeature> entries) {
 		final BlockPredicate ON_DIRT = BlockPredicate.matchingBlockTag(Direction.DOWN.getVector(), BlockTags.DIRT);
 		final BlockPredicate ON_SAND = BlockPredicate.matchingBlockTag(Direction.DOWN.getVector(), BlockTags.SAND);
 		final BlockPredicate ON_DIRT_OR_SAND = BlockPredicate.eitherOf(ON_DIRT, ON_SAND);
 
 		// Terrestria Decorated Features
 
-		entries.add(CATTAILS_WARM, placeFeature(entries, TerrestriaConfiguredFeatures.CATTAIL,
+		entries.register(CATTAILS_WARM, placeFeature(entries, TerrestriaConfiguredFeatures.CATTAIL,
 			CountPlacementModifier.of(80),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(SPARSE_OAK_SHRUBS, placeFeatureWithoutBiomeFilter(entries, TerrestriaConfiguredFeatures.OAK_SHRUB,
+		entries.register(SPARSE_OAK_SHRUBS, placeFeatureWithoutBiomeFilter(entries, TerrestriaConfiguredFeatures.OAK_SHRUB,
 			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT)));
 
-		entries.add(PATCH_LUSH_FERNS, placeFeature(entries, VegetationConfiguredFeatures.PATCH_TAIGA_GRASS,
+		entries.register(PATCH_LUSH_FERNS, placeFeature(entries, VegetationConfiguredFeatures.PATCH_TAIGA_GRASS,
 			CountPlacementModifier.of(16),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
@@ -139,7 +140,7 @@ public class TerrestriaPlacedFeatures {
 							.add(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
 							.build())),
 					BlockPredicate.IS_AIR))));
-		entries.add(PATCH_VOLCANIC_ISLAND_GRASS, placeFeature(entries, PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED,
+		entries.register(PATCH_VOLCANIC_ISLAND_GRASS, placeFeature(entries, PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED,
 			CountPlacementModifier.of(12),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
@@ -149,7 +150,7 @@ public class TerrestriaPlacedFeatures {
 			new RandomPatchFeatureConfig(4, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 					BlockStateProvider.of(TerrestriaBlocks.DEAD_GRASS.getDefaultState())),
 					BlockPredicate.IS_AIR))));
-		entries.add(PATCH_DEAD_GRASS, placeFeature(entries, PATCH_DEAD_GRASS_CONFIGURED,
+		entries.register(PATCH_DEAD_GRASS, placeFeature(entries, PATCH_DEAD_GRASS_CONFIGURED,
 			CountPlacementModifier.of(12),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
@@ -162,7 +163,7 @@ public class TerrestriaPlacedFeatures {
 									.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
 									.build())),
 					BlockPredicate.IS_AIR))));
-		entries.add(PATCH_OUTBACK_BUSHLAND_GRASS, placeFeature(entries, PATCH_OUTBACK_BUSHLAND_GRASS_CONFIGURED,
+		entries.register(PATCH_OUTBACK_BUSHLAND_GRASS, placeFeature(entries, PATCH_OUTBACK_BUSHLAND_GRASS_CONFIGURED,
 			CountPlacementModifier.of(12),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
@@ -178,7 +179,7 @@ public class TerrestriaPlacedFeatures {
 									.add(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)
 									.build())),
 					BlockPredicate.IS_AIR))));
-		entries.add(PATCH_OASIS_VEGETATION, placeFeature(entries, PATCH_OASIS_VEGETATION_CONFIGURED,
+		entries.register(PATCH_OASIS_VEGETATION, placeFeature(entries, PATCH_OASIS_VEGETATION_CONFIGURED,
 			CountPlacementModifier.of(6),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
@@ -192,152 +193,146 @@ public class TerrestriaPlacedFeatures {
 									.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
 									.build())),
 					BlockPredicate.IS_AIR))));
-		entries.add(PATCH_LUSH_DESERT_VEGETATION, placeFeature(entries, PATCH_LUSH_DESERT_VEGETATION_CONFIGURED,
+		entries.register(PATCH_LUSH_DESERT_VEGETATION, placeFeature(entries, PATCH_LUSH_DESERT_VEGETATION_CONFIGURED,
 			CountPlacementModifier.of(4),
 			SquarePlacementModifier.of(),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(SPARSE_FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
+		entries.register(SPARSE_FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
 
-		entries.add(SPARSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
+		entries.register(SPARSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
 
-		entries.add(FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
+		entries.register(FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
 
-		entries.add(FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
+		entries.register(FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
 
-		entries.add(DENSE_FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
+		entries.register(DENSE_FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
 
-		entries.add(DENSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
+		entries.register(DENSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
 
-		entries.add(SPARSE_SMALL_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE));
+		entries.register(SPARSE_SMALL_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE));
 
-		entries.add(SPARSE_SMALL_REDWOOD_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE));
+		entries.register(SPARSE_SMALL_REDWOOD_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE));
 
-		entries.add(CALDERA_SMALL_HEMLOCK_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE,
+		entries.register(CALDERA_SMALL_HEMLOCK_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE,
 			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT)));
 
-		entries.add(CALDERA_SMALL_REDWOOD_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE,
+		entries.register(CALDERA_SMALL_REDWOOD_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE,
 			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT)));
 
-		entries.add(SMALL_HEMLOCK_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE));
+		entries.register(SMALL_HEMLOCK_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE));
 
-		entries.add(SMALL_REDWOOD_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE));
+		entries.register(SMALL_REDWOOD_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE));
 
-		entries.add(SPARSE_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
+		entries.register(SPARSE_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
 
-		entries.add(SPARSE_REDWOOD_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
+		entries.register(SPARSE_REDWOOD_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
 
-		entries.add(CALDERA_HEMLOCK_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.HEMLOCK_TREE,
+		entries.register(CALDERA_HEMLOCK_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.HEMLOCK_TREE,
 			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 64, 100),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT)));
 
-		entries.add(CALDERA_REDWOOD_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.REDWOOD_TREE,
+		entries.register(CALDERA_REDWOOD_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.REDWOOD_TREE,
 			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 64, 100),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT)));
 
-		entries.add(HEMLOCK_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
+		entries.register(HEMLOCK_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
 
-		entries.add(REDWOOD_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
+		entries.register(REDWOOD_TREES, placeTreeFeature(entries, 2, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
 
-		entries.add(DENSE_HEMLOCK_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
+		entries.register(DENSE_HEMLOCK_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
 
-		entries.add(DENSE_REDWOOD_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
+		entries.register(DENSE_REDWOOD_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
 
-		entries.add(DENSEST_HEMLOCK_TREES, placeTreeFeature(entries, 8, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
+		entries.register(DENSEST_HEMLOCK_TREES, placeTreeFeature(entries, 8, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE));
 
-		entries.add(DENSEST_REDWOOD_TREES, placeTreeFeature(entries, 6, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
+		entries.register(DENSEST_REDWOOD_TREES, placeTreeFeature(entries, 6, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE));
 
-		entries.add(SPARSE_MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
+		entries.register(SPARSE_MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
 
-		entries.add(SPARSE_MEGA_REDWOOD_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE));
+		entries.register(SPARSE_MEGA_REDWOOD_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE));
 
-		entries.add(MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
+		entries.register(MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
 
-		entries.add(MEGA_REDWOOD_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE));
+		entries.register(MEGA_REDWOOD_TREES, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE));
 
-		entries.add(DENSEST_MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 8, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
+		entries.register(DENSEST_MEGA_HEMLOCK_TREES, placeTreeFeature(entries, 8, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE));
 
-		entries.add(DENSEST_MEGA_REDWOOD_TREES, placeTreeFeature(entries, 7, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE));
+		entries.register(DENSEST_MEGA_REDWOOD_TREES, placeTreeFeature(entries, 7, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE));
 
-		entries.add(DENSE_FANCY_OAK_TREES, placeTreeFeature(entries, 3, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK));
+		entries.register(DENSE_FANCY_OAK_TREES, placeTreeFeature(entries, 3, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK));
 
-		entries.add(DENSER_FANCY_OAK_TREES, placeTreeFeature(entries, 5, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK));
+		entries.register(DENSER_FANCY_OAK_TREES, placeTreeFeature(entries, 5, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK));
 
-		entries.add(DENSEST_FANCY_OAK_TREES, placeTreeFeature(entries, 7, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK));
+		entries.register(DENSEST_FANCY_OAK_TREES, placeTreeFeature(entries, 7, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK));
 
-		entries.add(JUNGLE_PALM_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
+		entries.register(JUNGLE_PALM_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
 			PlacedFeatures.createCountExtraModifier(2, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 62, 71),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(DENSER_JUNGLE_PALM_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
+		entries.register(DENSER_JUNGLE_PALM_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
 			PlacedFeatures.createCountExtraModifier(5, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 72, 320),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(RARE_DUM_DUM_HEADS, placeFeature(entries, TerrestriaConfiguredFeatures.DUM_DUM_HEAD,
+		entries.register(RARE_DUM_DUM_HEADS, placeFeature(entries, TerrestriaConfiguredFeatures.DUM_DUM_HEAD,
 			PlacedFeatures.createCountExtraModifier(0, 0.1f, 1),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 62, 64),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND)));
 
-		entries.add(DENSE_JAPANESE_MAPLE_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE));
+		entries.register(DENSE_JAPANESE_MAPLE_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE));
 
-		entries.add(DENSE_DARK_JAPANESE_MAPLE_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE));
+		entries.register(DENSE_DARK_JAPANESE_MAPLE_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE));
 
-		entries.add(DENSE_JAPANESE_MAPLE_SHRUBS, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB));
+		entries.register(DENSE_JAPANESE_MAPLE_SHRUBS, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB));
 
-		entries.add(DENSER_SAKURA_TREES, placeTreeFeature(entries, 6, ON_DIRT, TerrestriaConfiguredFeatures.SAKURA_TREE));
+		entries.register(DENSER_SAKURA_TREES, placeTreeFeature(entries, 6, ON_DIRT, TerrestriaConfiguredFeatures.SAKURA_TREE));
 
-		entries.add(DENSEST_CYPRESS_TREES, placeTreeFeature(entries, 9, ON_DIRT, TerrestriaConfiguredFeatures.CYPRESS_TREE));
+		entries.register(DENSEST_CYPRESS_TREES, placeTreeFeature(entries, 9, ON_DIRT, TerrestriaConfiguredFeatures.CYPRESS_TREE));
 
-		entries.add(DENSER_RAINBOW_EUCALYPTUS_TREES, placeTreeFeature(entries, 5, 3, ON_DIRT, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE));
+		entries.register(DENSER_RAINBOW_EUCALYPTUS_TREES, placeTreeFeature(entries, 5, 3, ON_DIRT, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE));
 
-		entries.add(DENSE_RUBBER_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.RUBBER_TREE));
+		entries.register(DENSE_RUBBER_TREES, placeTreeFeature(entries, 3, ON_DIRT, TerrestriaConfiguredFeatures.RUBBER_TREE));
 
-		entries.add(MEGA_CYPRESS_TREES, placeTreeFeature(entries, 2, 6, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE));
+		entries.register(MEGA_CYPRESS_TREES, placeTreeFeature(entries, 2, 6, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE));
 
-		entries.add(SPARSE_WILLOW_TREES, placeTreeFeature(entries, 1, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.WILLOW_TREE));
+		entries.register(SPARSE_WILLOW_TREES, placeTreeFeature(entries, 1, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.WILLOW_TREE));
 
-		entries.add(OUTBACK_YUCCA_PALM, placeFeatureWithoutBiomeFilter(entries, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE));
-		entries.add(OUTBACK_BUSHLAND_TREES_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_SELECTOR,
-			new RandomFeatureConfig(
-					ImmutableList.of(
-							new RandomFeatureEntry(entries.ref(TreePlacedFeatures.ACACIA_CHECKED), 0.95F),
-							new RandomFeatureEntry(entries.ref(OUTBACK_YUCCA_PALM), 0.75F)
-					),
-					entries.ref(TreePlacedFeatures.FANCY_OAK_CHECKED))));
-		entries.add(OUTBACK_BUSHLAND_TREES, placeTreeFeature(entries, 2, ON_DIRT_OR_SAND, OUTBACK_BUSHLAND_TREES_CONFIGURED));
+		entries.register(OUTBACK_YUCCA_PALM, placeFeatureWithoutBiomeFilter(entries, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE));
 
-		entries.add(RARE_YUCCA_PALM_TREES, placeTreeFeature(entries, 0, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE));
+		entries.register(OUTBACK_BUSHLAND_TREES, placeTreeFeature(entries, 2, ON_DIRT_OR_SAND, OUTBACK_BUSHLAND_TREES_CONFIGURED));
 
-		entries.add(ACACIA_DOT_SHRUBS, placeTreeFeature(entries, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB));
+		entries.register(RARE_YUCCA_PALM_TREES, placeTreeFeature(entries, 0, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE));
 
-		entries.add(OAK_DOT_SHRUBS, placeTreeFeature(entries, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.OAK_DOT_SHRUB));
+		entries.register(ACACIA_DOT_SHRUBS, placeTreeFeature(entries, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB));
 
-		entries.add(SAGUARO_CACTUSES, placeTreeFeature(entries, 2, ON_SAND, TerrestriaConfiguredFeatures.SAGUARO_CACTUS));
+		entries.register(OAK_DOT_SHRUBS, placeTreeFeature(entries, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.OAK_DOT_SHRUB));
 
-		entries.add(RARE_BRYCE_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.BRYCE_TREE,
+		entries.register(SAGUARO_CACTUSES, placeTreeFeature(entries, 2, ON_SAND, TerrestriaConfiguredFeatures.SAGUARO_CACTUS));
+
+		entries.register(RARE_BRYCE_TREES, placeFeature(entries, TerrestriaConfiguredFeatures.BRYCE_TREE,
 			RarityFilterPlacementModifier.of(2),
 			SquarePlacementModifier.of(),
 			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
@@ -353,7 +348,7 @@ public class TerrestriaPlacedFeatures {
 		return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(Terrestria.MOD_ID, name));
 	}
 
-	public static PlacedFeature placeTreeFeature(FabricDynamicRegistryProvider.Entries entries, int count, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
+	public static PlacedFeature placeTreeFeature(Registerable<PlacedFeature> entries, int count, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
 		return placeFeature(entries, feature,
 				PlacedFeatures.createCountExtraModifier(count, 0.1f, 1),
 				SquarePlacementModifier.of(),
@@ -361,7 +356,7 @@ public class TerrestriaPlacedFeatures {
 				BlockFilterPlacementModifier.of(predicate));
 	}
 
-	public static PlacedFeature placeTreeFeature(FabricDynamicRegistryProvider.Entries entries, int count, int maxWaterDepth, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
+	public static PlacedFeature placeTreeFeature(Registerable<PlacedFeature> entries, int count, int maxWaterDepth, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
 		return placeFeature(entries, feature,
 				PlacedFeatures.createCountExtraModifier(count, 0.1f, 1),
 				SquarePlacementModifier.of(),
@@ -370,19 +365,19 @@ public class TerrestriaPlacedFeatures {
 				BlockFilterPlacementModifier.of(predicate));
 	}
 
-	private static PlacedFeature placeFeature(FabricDynamicRegistryProvider.Entries entries, RegistryKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {
+	private static PlacedFeature placeFeature(Registerable<PlacedFeature> entries, RegistryKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {
 		List<PlacementModifier> list = new ArrayList<>(List.of(placementModifiers));
 		list.add(BiomePlacementModifier.of());
 		return placeFeature(entries, feature, list);
 	}
 
-	private static PlacedFeature placeFeatureWithoutBiomeFilter(FabricDynamicRegistryProvider.Entries entries, RegistryKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {
+	private static PlacedFeature placeFeatureWithoutBiomeFilter(Registerable<PlacedFeature> entries, RegistryKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {
 		List<PlacementModifier> list = new ArrayList<>(List.of(placementModifiers));
 		return placeFeature(entries, feature, list);
 	}
 
-	private static PlacedFeature placeFeature(FabricDynamicRegistryProvider.Entries entries, RegistryKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> list) {
-		return new PlacedFeature(entries.ref(feature), list);
+	private static PlacedFeature placeFeature(Registerable<PlacedFeature> entries, RegistryKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> list) {
+		return new PlacedFeature(entries.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE).getOrThrow(feature), list);
 	}
 
 	public static void init() {

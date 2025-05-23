@@ -31,11 +31,6 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public class TerrestriaClient {
 	@SuppressWarnings("unused")
-	private static final RenderLayer LEAVES_ITEM_LAYER = TexturedRenderLayers.getEntityCutout();
-	private static final RenderLayer GRASS_BLOCK_LAYER = RenderLayer.getCutoutMipped();
-	private static final RenderLayer PLANT_BLOCK_LAYER = RenderLayer.getCutout();
-	private static final RenderLayer DOOR_BLOCK_LAYER = RenderLayer.getCutout();
-
 	private static final Map<Block, BlockColorProvider> COLOR_PROVIDERS = new LinkedHashMap<>();
 	private static final Map<Item, ItemColorProvider> ITEM_COLOR_PROVIDERS = new LinkedHashMap<>();
 
@@ -98,7 +93,7 @@ public class TerrestriaClient {
 		RenderLayers.setRenderLayer(TerrestriaBlocks.SAKURA.leafPile, RenderLayer.getCutoutMipped());
 
 		addArrayToLayer(
-				DOOR_BLOCK_LAYER,
+				RenderLayer.getCutout(),
 				TerrestriaBlocks.REDWOOD.door,
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.door,
 				TerrestriaBlocks.CYPRESS.door,
@@ -110,7 +105,7 @@ public class TerrestriaClient {
 		);
 
 		addArrayToLayer(
-				PLANT_BLOCK_LAYER,
+				RenderLayer.getCutout(),
 				// Needs to be transparent because of the log cutout part.
 				// TODO: Edit the model so that it can be conditionally transparent like actual leaves!
 				// Currently they will always be transparent.
@@ -145,7 +140,7 @@ public class TerrestriaClient {
 		);
 
 		addArrayToLayer(
-				PLANT_BLOCK_LAYER,
+				RenderLayer.getCutout(),
 				TerrestriaBlocks.POTTED_BRYCE_SAPLING,
 				TerrestriaBlocks.POTTED_REDWOOD_SAPLING,
 				TerrestriaBlocks.POTTED_HEMLOCK_SAPLING,
@@ -167,7 +162,7 @@ public class TerrestriaClient {
 				TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING
 		);
 
-		RenderLayers.setRenderLayer(TerrestriaBlocks.ANDISOL.getGrassBlock(), GRASS_BLOCK_LAYER);
+		RenderLayers.setRenderLayer(TerrestriaBlocks.ANDISOL.getGrassBlock(), RenderLayer.getCutoutMipped());
 
 		addWoodTypes(
 			TerrestriaBlocks.REDWOOD,

@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.utils.mixin.VillagerTypeAccessor;
 import com.terraformersmc.terrestria.Terrestria;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.village.VillagerType;
 import net.minecraft.world.biome.Biome;
 

@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.utils.TerraformFuelRegistry;
-import com.terraformersmc.terrestria.init.helpers.QuarteredWoodItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
@@ -136,7 +135,6 @@ public class TerrestriaItems {
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DARK_JAPANESE_MAPLE_LEAVES, LEAVES_CHANCE);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(JAPANESE_MAPLE_SHRUB_LEAVES, LEAVES_CHANCE);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(JUNGLE_PALM_LEAVES, LEAVES_CHANCE);
-		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(SAKURA_LEAF_PILE, LEAVES_CHANCE);
 
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(SAGUARO_CACTUS, CACTUS_CHANCE);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(TINY_CACTUS, CACTUS_CHANCE);

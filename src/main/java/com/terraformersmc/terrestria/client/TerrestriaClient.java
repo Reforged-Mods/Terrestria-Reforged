@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
+import com.terraformersmc.terrestria.item.TerrestriaItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
@@ -52,6 +53,7 @@ public class TerrestriaClient {
 		eventBus.addListener(TerrestriaClient::onItemColorHandler);
 		eventBus.addListener(TerrestriaClient::onBlockColorHandler);
 		eventBus.addListener(this::clientSetup);
+		eventBus.addListener(TerrestriaItemGroups::onCreativeTabPopulate);
 		registerEntityRenderers();
 	}
 

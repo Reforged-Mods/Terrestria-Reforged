@@ -12,7 +12,6 @@ import com.terraformersmc.terraform.wood.StrippableBlockRegistry;
 import com.terraformersmc.terraform.wood.block.PillarLogHelper;
 import com.terraformersmc.terraform.wood.block.QuarterLogBlock;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
-import com.terraformersmc.terraform.wood.block.StrippableLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.block.TerrestriaOptiLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
@@ -30,9 +29,6 @@ import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WoodType;
-import net.minecraft.block.WoodenButtonBlock;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.SignType;
 
 public class WoodBlocks {
 	private final String NAME;

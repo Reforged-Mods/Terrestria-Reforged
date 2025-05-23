@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.StructurePiecesCollector;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.Heightmap;

@@ -82,8 +82,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 	public static void onTerraBlenderInitialized() {
 		// We can't do registration stuff until both Terrestria and TerraBlender are ready.
 		// The run() method below will be called when Terrestria is done initializing.
-		Terrestria.callbackWhenInitialized(TerrestriaSurfaceBuilders::init);
-		Terrestria.callbackWhenInitialized(this);
+		Terrestria.callbackWhenInitialized(new TerrestriaTerraBlenderGeneration());
 	}
 
 	// Initialize TerraBlender as our biome placement provider.

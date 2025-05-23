@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.worldgen;
 
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.biomegen.TerrestriaBiolithGeneration;
 import com.terraformersmc.terrestria.biomegen.TerrestriaTerraBlenderGeneration;
 import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;
 import net.minecraftforge.fml.ModList;
@@ -15,11 +16,11 @@ public class TerrestriaWorldgen {
 	public void onInitialize() {
 		Terrestria.callbackWhenInitialized(TerrestriaSurfaceBuilders::init);
 
-		if (ModList.get().isLoaded("terrablender")) {
-			Terrestria.LOGGER.info("Enabling Terrestria's TerraBlender worldgen module.");
-			TerrestriaTerraBlenderGeneration.onTerraBlenderInitialized();
+		if (ModList.get().isLoaded("biolith")) {
+			Terrestria.LOGGER.info("Enabling Terrestria's Biolith worldgen module.");
+			Terrestria.callbackWhenInitialized(new TerrestriaBiolithGeneration());
 		} else {
-			Terrestria.LOGGER.warn("Terrestria world generation disabled; TerraBlender is not present.");
+			Terrestria.LOGGER.warn("Terrestria world generation disabled; Biolith is not present.");
 		}
 	}
 }

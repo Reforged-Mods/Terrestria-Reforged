@@ -16,16 +16,11 @@ import com.terraformersmc.terrestria.init.TerrestriaVillagerTypes;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
 import com.terraformersmc.terrestria.worldgen.TerrestriaWorldgen;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -53,24 +48,8 @@ public class Terrestria {
 		eventBus.addListener(this::commonLoad);
 		eventBus.register(this);
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> TerrestriaClient::new);
+		MinecraftForge.EVENT_BUS.addListener(TerrestriaBlocks::onToolUse);
 		new TerrestriaWorldgen();
-		itemGroup = new ItemGroup(MOD_ID + ".items") {
-
-			@Override
-			public void appendStacks(DefaultedList<ItemStack> stacks) {
-				super.appendStacks(stacks);
-				Registry.ITEM.forEach(item -> {
-					if (Registry.ITEM.getId(item).getNamespace().equals(MOD_ID)) {
-						item.appendStacks(item.getGroup(), stacks);
-					}
-				});
-			}
-
-			@Override
-			public ItemStack createIcon() {
-				return new ItemStack(TerrestriaItems.RUBBER_SAPLING);
-			}
-		};
 	}
 
 	private static void register() {

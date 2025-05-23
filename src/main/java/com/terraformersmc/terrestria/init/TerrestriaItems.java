@@ -147,7 +147,6 @@ public class TerrestriaItems {
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(INDIAN_PAINTBRUSH, FLOWER_CHANCE);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(MONSTERAS, FERN_CHANCE);
 
-		// TODO: Consider if there's a reasonable way to make WoodItems do this.
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BRYCE_SAPLING, SAPLING_CHANCE);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(CYPRESS_SAPLING, SAPLING_CHANCE);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DARK_JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
@@ -165,7 +164,6 @@ public class TerrestriaItems {
 	}
 
 	private static void addFuels() {
-
 		TerraformFuelRegistry.addFuel(DEAD_GRASS, 100);
 		TerraformFuelRegistry.addFuel(LOG_TURNER, 300);
 	}

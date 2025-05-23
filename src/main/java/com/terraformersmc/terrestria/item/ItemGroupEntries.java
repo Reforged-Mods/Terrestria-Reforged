@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public record ItemGroupEntries(@Nullable ItemConvertible relativeItem, ArrayList<ItemStack> items) {
 	ItemGroupEntries(ArrayList<ItemStack> items) {
@@ -28,7 +29,7 @@ public record ItemGroupEntries(@Nullable ItemConvertible relativeItem, ArrayList
 		addItem(new ItemStack(item));
 	}
 
-	Collection<ItemStack> getCollection() {
+	List<ItemStack> getCollection() {
 		return items;
 	}
 }

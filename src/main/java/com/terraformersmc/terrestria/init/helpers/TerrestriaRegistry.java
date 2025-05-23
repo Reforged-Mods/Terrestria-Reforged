@@ -14,6 +14,7 @@ import java.util.List;
 
 public class TerrestriaRegistry {
 	public static final List<Block> BLOCKS = new ArrayList<>();
+	public static final List<Item> ITEMS = new ArrayList<>();
 
 	public static BlockItem registerBlockItem(String name, Block block) {
 		BlockItem item = new BlockItem(block, new Item.Settings());
@@ -25,6 +26,7 @@ public class TerrestriaRegistry {
 			blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
 		}
 		ForgeRegistries.ITEMS.register(new Identifier(Terrestria.MOD_ID, name), item);
+		ITEMS.add(item);
 		return item;
 	}
 

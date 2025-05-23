@@ -14,6 +14,7 @@ import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import com.terraformersmc.terrestria.init.TerrestriaVillagerTypes;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
+import com.terraformersmc.terrestria.item.TerrestriaItemGroups;
 import com.terraformersmc.terrestria.worldgen.TerrestriaWorldgen;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.api.distmarker.Dist;
@@ -68,6 +69,7 @@ public class Terrestria {
 		TerrestriaStructures.init();
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
+		TerrestriaItemGroups.register();
 
 		// This must be after TerrestriaBiomes.init()
 		CONFIG_MANAGER.getBiomeConfig();

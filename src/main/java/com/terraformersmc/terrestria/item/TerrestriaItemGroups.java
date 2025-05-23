@@ -5,10 +5,10 @@ import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
+import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
+import net.minecraft.item.ItemGroup.StackVisibility;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -16,6 +16,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -24,7 +25,15 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class TerrestriaItemGroups {
-	private static final RegistryKey<ItemGroup> ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(Terrestria.MOD_ID, "items"));
+
+	public static ItemGroup TERRESTRIA_ITEM_GROUP = ItemGroup.builder()
+		.displayName(Text.translatable("itemGroup.terrestria.items"))
+		.icon(() -> new ItemStack(TerrestriaItems.RUBBER_SAPLING))
+		.entries((displayContext, entries) -> {
+			entries.addAll(TerrestriaRegistry.ITEMS.stream().map(ItemStack::new).toList());
+		}).build();
+
+
 	private static final HashMap<RegistryKey<ItemGroup>, HashMap<ItemConvertible, ItemGroupEntries>> ITEM_GROUP_ENTRY_MAPS;
 
 	/*
@@ -153,47 +162,36 @@ public class TerrestriaItemGroups {
 		addWoodEntries(TerrestriaItems.SAKURA);
 		addWoodEntries(TerrestriaItems.WILLOW);
 		addWoodEntries(TerrestriaItems.YUCCA_PALM);
+	}
 
+	public static void register() {
+		Registry.register(Registries.ITEM_GROUP, Identifier.of(Terrestria.MOD_ID, "items"), TERRESTRIA_ITEM_GROUP);
+	}
 
-		/*
-		 * Add the items configured above to the Vanilla item groups.
-		 */
-		for (RegistryKey<ItemGroup> group : ITEM_GROUP_ENTRY_MAPS.keySet()) {
-			ItemGroupEvents.modifyEntriesEvent(group).register((content) -> {
-				FeatureSet featureSet = content.getEnabledFeatures();
-				HashMap<ItemConvertible, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.get(group);
+	/*
+	 * Add the items configured above to the Vanilla item groups.
+	 */
+	public static void onCreativeTabPopulate(BuildCreativeModeTabContentsEvent event){
+		if (ITEM_GROUP_ENTRY_MAPS.containsKey(event.getTabKey())){
+			HashMap<ItemConvertible, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.get(event.getTabKey());
+			FeatureSet featureSet = event.getFlags();
 
-				for (ItemConvertible relative : entryMap.keySet()) {
-					ItemGroupEntries entries = entryMap.get(relative);
+			for (ItemConvertible relative : entryMap.keySet()) {
+				ItemGroupEntries entries = entryMap.get(relative);
 
-					// FAPI does not give us a way to add at a feature-flag-disabled location.
-					// So, below we have to adjust for any items which may be disabled.
-					if (relative == null) {
-						// Target the end of the Item Group
-						content.addAll(entries.getCollection());
-					} else {
-						//Terrestria.LOGGER.warn("About to add to Vanilla Item Group '{}' after Item '{}': '{}'", group.getId(), relative, entries.getCollection().stream().map(ItemStack::getItem).collect(Collectors.toList()));
-						content.addAfter(relative, entries.getCollection());
+				// FORGE does not give us a way to add at a feature-flag-disabled location.
+				// So, below we have to adjust for any items which may be disabled.
+				if (relative == null) {
+					// Target the end of the Item Group
+					event.addAll(entries.getCollection());
+				} else {
+					ItemStack key = new ItemStack(relative);
+					for (int i = entries.getCollection().size() - 1; i >= 0; i--) {
+						event.getEntries().putAfter(key, entries.getCollection().get(i), StackVisibility.PARENT_AND_SEARCH_TABS);
 					}
 				}
-			});
+			}
 		}
-
-
-		/*
-		 * Also add all the items to Terrestria's own item group.
-		 */
-		Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder()
-				.displayName(Text.literal("Terrestria"))
-				.icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultStack())
-				.entries((context, entries) -> {
-					ITEM_GROUP_ENTRY_MAPS.values().stream()
-							.map(HashMap::values).flatMap(Collection::stream)
-							.map(ItemGroupEntries::getCollection).flatMap(Collection::stream)
-							.collect(Collectors.groupingByConcurrent(ItemStack::getItem)).keySet().stream()
-							.sorted(Comparator.comparing((item) -> item.getName().getString())).forEach(entries::add);
-				}).build()
-		);
 	}
 
 	private static void addDirtEntries(DirtBlocks blocks) {
@@ -321,6 +319,4 @@ public class TerrestriaItemGroups {
 		ItemGroupEntries entries = entryMap.computeIfAbsent(relative, ItemGroupEntries::empty);
 		entries.addItem(item);
 	}
-
-	public static void init() { }
 }
